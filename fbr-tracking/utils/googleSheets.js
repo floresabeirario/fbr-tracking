@@ -26,6 +26,16 @@ export async function getEncomendaById(id) {
       id: encomenda.id,
       nome_encomenda: encomenda.nome_encomenda,
       fase: encomenda.fase,
-      m
+      mensagem: encomenda.mensagem,
+      ultima_atualizacao: encomenda.ultima_atualizacao,
+      data_entrega: encomenda.data_entrega
+    };
+
+  } catch (error) {
+    console.error('Erro ao ler Google Sheets:', error);
+    return null;
+  }
+}
+
 
 
