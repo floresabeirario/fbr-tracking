@@ -1,27 +1,37 @@
-const { GoogleSpreadsheet } = require('google-spreadsheet');
-const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+// utils/googleSheets.js
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import creds from '../service-account.json';  // certifica-te que o ficheiro está na pasta raiz do projeto
 
-const doc = new GoogleSpreadsheet('1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI');
+// Substitui pelo ID do teu Google Sheet
+const SPREADSHEET_ID = '1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI';
 
-async function getEncomendaById(id) {
-  await doc.useServiceAccountAuth(creds);
-  await doc.loadInfo();
+export async function getRows() {
+  try {
+    // inicializa o Sheet
+    const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
-  const sheet = doc.sheetsByIndex[0]; // primeira folha
-  const rows = await sheet.getRows();
+    // autentica com o ficheiro JSON
+    await doc.useServiceAccountAuth(creds);
 
-  const row = rows.find(r => r.id === id);
-  if (!row) return null;
+    // carrega as informações do Sheet
+    await doc.loadInfo();
 
-  return {
-    id: row.id,
-    nome_encomenda: row.nome_encomenda,
-    fase: row.fase,
-    mensagem: row.mensagem,
-    ultima_atualizacao: row.ultima_atualizacao,
-    data_entrega: row.data_entrega
-  };
+    // pega a primeira aba
+    const sheet = doc.sheetsByIndex[0];
+
+    // lê todas as linhas
+    const rows = await sheet.getRows();
+
+    // retorna apenas as linhas que têm ID (ignora linhas vazias)
+    return rows.filter(r => r.id);
+  } catch (error) {
+    console.error('Erro a ler o Sheet:', error);
+    throw new Error('Não foi possível ler o Google Sheet.');
+  }
 }
 
-module.exports = { getEncomendaById };
-
+// função auxiliar para buscar uma encomenda por ID
+export async function getEncomendaById(id) {
+  const rows = await getRows();
+  return rows.find(r => r.id === id);
+}
