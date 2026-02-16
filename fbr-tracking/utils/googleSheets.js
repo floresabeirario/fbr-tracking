@@ -1,7 +1,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
-const doc = new GoogleSpreadsheet('[ID_DO_SEU_SHEET]');
+const doc = new GoogleSpreadsheet('1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI');
 
 async function getEncomendaById(id) {
   await doc.useServiceAccountAuth(creds);
@@ -24,3 +24,4 @@ async function getEncomendaById(id) {
 }
 
 module.exports = { getEncomendaById };
+
