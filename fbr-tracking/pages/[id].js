@@ -1,9 +1,8 @@
 import { getEncomendaById } from '../utils/googleSheets';
 
 export default function Tracking({ encomenda }) {
-
   if (!encomenda) {
-    return <h1>Encomenda não encontrada</h1>;
+    return <h1 style={{ padding: 40, fontFamily: 'Arial' }}>Encomenda não encontrada</h1>;
   }
 
   return (
@@ -27,3 +26,5 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+
