@@ -1,17 +1,5 @@
 import { getEncomendaById } from '../utils/googleSheets';
 
-const fases = [
-  "Entrega das flores agendada / Flower delivery scheduled",
-  "Flores recebidas / Flowers received",
-  "Flores na prensa / Flowers in the press",
-  "A compor o design do quadro / Designing the artwork",
-  "A aguardar aprovação da composição / Awaiting design approval",
-  "A ser emoldurado / Being framed",
-  "Quadro pronto / Artwork ready",
-  "Quadro enviado / Artwork shipped",
-  "Quadro recebido / Artwork received",
-];
-
 export default function Tracking({ encomenda }) {
   if (!encomenda) {
     return (
@@ -20,12 +8,6 @@ export default function Tracking({ encomenda }) {
       </h1>
     );
   }
-
-  const currentFaseIndex = fases.indexOf(encomenda.fase);
-
-  const passadas = fases.slice(Math.max(0, currentFaseIndex - 1), currentFaseIndex);
-  const atual = fases[currentFaseIndex];
-  const proximas = fases.slice(currentFaseIndex + 1, currentFaseIndex + 2);
 
   return (
     <div style={{
@@ -36,43 +18,33 @@ export default function Tracking({ encomenda }) {
       lineHeight: 1.6
     }}>
       
-      {/* Mensagem principal */}
-      <h2 style={{ marginBottom: 30, fontSize: 22, textAlign: 'center' }}>
-        {encomenda.mensagem}
-      </h2>
+      {/* Cabeçalho: nome da encomenda */}
+      <h1 style={{ marginBottom: 30, textAlign: 'center' }}>
+        {encomenda.nome_encomenda}
+      </h1>
 
-      {/* Data de entrega estimada */}
-      <p style={{ textAlign: 'center', fontSize: 16, marginBottom: 40 }}>
+      {/* Caixa da fase */}
+      <div style={{
+        padding: 20,
+        backgroundColor: '#f7f7f7',
+        borderRadius: 8,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginBottom: 30
+      }}>
+        {encomenda.fase}
+      </div>
+
+      {/* Mensagem */}
+      <p style={{ fontSize: 16, textAlign: 'center', marginBottom: 30 }}>
+        {encomenda.mensagem}
+      </p>
+
+      {/* Data de entrega estimada do quadro */}
+      <p style={{ textAlign: 'center', fontSize: 16, marginBottom: 50 }}>
         <strong>Data de entrega estimada do quadro / Estimated delivery date:</strong><br />
         {encomenda.data_entrega}
       </p>
-
-      {/* Barra horizontal simplificada */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 50
-      }}>
-        {/* Passadas */}
-        {passadas.length > 0 && passadas.map((fase, idx) => (
-          <span key={idx} style={{ color: '#999', fontSize: 14 }}>
-            {fase}
-          </span>
-        ))}
-
-        {/* Atual */}
-        <span style={{ fontWeight: 'bold', color: '#333', fontSize: 16 }}>
-          {atual}
-        </span>
-
-        {/* Próximas */}
-        {proximas.length > 0 && proximas.map((fase, idx) => (
-          <span key={idx} style={{ color: '#ccc', fontSize: 14 }}>
-            {fase}
-          </span>
-        ))}
-      </div>
 
       {/* Última atualização */}
       <p style={{ textAlign: 'center', fontSize: 14, color: '#777', marginBottom: 50 }}>
@@ -90,6 +62,7 @@ export default function Tracking({ encomenda }) {
         fontStyle: 'italic',
         lineHeight: 1.8
       }}>
+        <p>✿</p>
         <p>
           Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
         </p>
