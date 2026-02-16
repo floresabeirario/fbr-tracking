@@ -34,7 +34,7 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        {/* Importação das Fontes (incluindo peso 700 para destaque) */}
+        {/* Importação das Fontes */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
@@ -43,7 +43,7 @@ export default function Tracking({ encomenda }) {
         {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-            {/* Marca agora MAIOR */}
+            {/* Marca GRANDE (46px) */}
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
           <div style={styles.taglineContainer}>
@@ -53,13 +53,13 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Intro (Consistente) */}
+          {/* Intro */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente (Agora ligeiramente menor que a marca) */}
+          {/* Nome do Cliente (AGORA MAIS PEQUENO - 30px) */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
           {/* STATUS BOX */}
@@ -68,7 +68,6 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
 
-            {/* Verde Musgo Profundo */}
             <div style={styles.statusMainText}>
               {encomenda.fase}
             </div>
@@ -86,11 +85,11 @@ export default function Tracking({ encomenda }) {
             </div>
           </div>
 
-          {/* DATA ENTREGA - LABELS MAIORES */}
+          {/* DATA ENTREGA - Texto Atualizado */}
           <div style={styles.deliveryContainer}>
             <div style={styles.deliveryContent}>
-              <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
-              <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
+              <span style={styles.deliveryLabel}>Entrega estimada da sua encomenda</span>
+              <span style={styles.deliveryLabelEn}>Estimated delivery of your order</span>
               <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
             </div>
           </div>
@@ -98,7 +97,7 @@ export default function Tracking({ encomenda }) {
           {/* BOTÕES DE AÇÃO */}
           <div style={styles.actionSection}>
             
-            {/* WhatsApp - Verde Musgo */}
+            {/* WhatsApp */}
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
@@ -106,7 +105,7 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site - Com Borda e Texto Verde Musgo + FLOR */}
+            {/* Site */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -150,7 +149,7 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS REFINADOS ---
+// --- ESTILOS FINAIS ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -177,7 +176,7 @@ const styles = {
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '46px', // AUMENTADO: O maior elemento da página
+    fontSize: '46px', // GRANDE
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -225,8 +224,8 @@ const styles = {
   // NOME CLIENTE
   clientName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '38px', // REDUZIDO: Ligeiramente menor que a marca
-    color: '#2F3E32', // Verde Musgo
+    fontSize: '30px', // PEQUENO (Hierarquia correta)
+    color: '#2F3E32', 
     margin: '0 0 35px 0',
     fontWeight: '400',
     lineHeight: '1.1',
@@ -280,7 +279,7 @@ const styles = {
     boxShadow: '0 2px 5px rgba(0,0,0,0.03)',
   },
 
-  // ENTREGA (Labels aumentadas)
+  // ENTREGA
   deliveryContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -292,14 +291,14 @@ const styles = {
   },
   deliveryLabel: {
     display: 'block',
-    fontSize: '16px', // AUMENTADO: Muito mais visível
-    fontWeight: '700', // Mais peso
+    fontSize: '16px', // Visível
+    fontWeight: '700', 
     color: '#1D1D1F',
     marginBottom: '4px',
   },
   deliveryLabelEn: {
     display: 'block',
-    fontSize: '14px', // AUMENTADO
+    fontSize: '14px',
     fontWeight: '500',
     color: '#86868B',
     marginBottom: '8px',
