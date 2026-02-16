@@ -12,8 +12,8 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          {/* Nova Fonte Intemporal: PRATA (Títulos) + Montserrat (Corpo) */}
-          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet" />
+          {/* Nova Fonte: Rosarivo (Elegância Intemporal) + Montserrat (Leitura) */}
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingError}>Encomenda não encontrada</h1>
@@ -34,7 +34,7 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
@@ -44,7 +44,6 @@ export default function Tracking({ encomenda }) {
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
-          {/* Tagline Atualizada */}
           <div style={styles.taglineContainer}>
             <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
             <p style={styles.taglineEN}>Flower preservation specialists</p>
@@ -52,7 +51,7 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Intro Atualizada */}
+          {/* Intro */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
@@ -61,7 +60,7 @@ export default function Tracking({ encomenda }) {
           {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* STATUS BOX (Estrutura Intocada) */}
+          {/* STATUS BOX */}
           <div style={styles.statusBox}>
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
@@ -76,6 +75,7 @@ export default function Tracking({ encomenda }) {
             </p>
 
             <div style={styles.updateBadge}>
+              {/* Ícone relógio simples */}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 6, opacity: 0.6}}>
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
@@ -104,14 +104,9 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site COM FLOR */}
+            {/* Site - COM O ÍCONE PEDIDO ✿ */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 8}}>
-                <path d="M12 22c4.97 0 9-4.03 9-9 0-4.97-9-13-9-13S3 8.03 3 13c0 4.97 4.03 9 9 9z" />
-                <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                <path d="M12 9V3" />
-                <path d="M12 22v-9" />
-              </svg>
+              <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
             </a>
           </div>
@@ -153,11 +148,12 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS (Mantidos da versão "Apple" com Nova Fonte) ---
+// --- ESTILOS ---
 const styles = {
+  // Fundo Stone/Bege claro
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F3F2F0', // Fundo Stone
+    backgroundColor: '#F3F2F0', 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -179,12 +175,11 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Prata", serif', // NOVA FONTE
+    fontFamily: '"Rosarivo", serif', // NOVA FONTE
     fontSize: '34px',
     color: '#1D1D1F',
     margin: '0',
-    fontWeight: '400',
-    letterSpacing: '-0.02em',
+    fontWeight: '400', // Normal para ser elegante
   },
   taglineContainer: {
     marginTop: '6px',
@@ -223,7 +218,7 @@ const styles = {
 
   // NOME CLIENTE
   clientName: {
-    fontFamily: '"Prata", serif', // NOVA FONTE
+    fontFamily: '"Rosarivo", serif', // NOVA FONTE
     fontSize: '32px',
     color: '#1D1D1F',
     margin: '0 0 30px 0',
@@ -252,7 +247,7 @@ const styles = {
     color: '#86868B',
   },
   statusMainText: {
-    fontFamily: '"Prata", serif', // NOVA FONTE
+    fontFamily: '"Rosarivo", serif', // NOVA FONTE
     fontSize: '28px',
     fontWeight: '400',
     color: '#1D1D1F',
@@ -301,7 +296,8 @@ const styles = {
     marginBottom: '8px',
   },
   deliveryDate: {
-    fontFamily: '"Prata", serif', // NOVA FONTE
+    fontFamily: '"Rosarivo", serif', // NOVA FONTE
+    fontStyle: 'italic',
     fontSize: '28px',
     fontWeight: '400',
     color: '#1D1D1F',
@@ -329,7 +325,7 @@ const styles = {
     transition: 'background 0.2s',
   },
   buttonSite: {
-    display: 'flex', // Flex para alinhar icon e texto
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
@@ -377,7 +373,7 @@ const styles = {
   },
 
   // ERRO
-  headingError: { fontFamily: '"Prata", serif', fontSize: '30px', color: '#1D1D1F', marginBottom: '10px' },
+  headingError: { fontFamily: '"Rosarivo", serif', fontSize: '30px', color: '#1D1D1F', marginBottom: '10px' },
   textSecondary: { color: '#86868B', fontSize: '14px' },
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
