@@ -18,7 +18,7 @@ export default function Home() {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        {/* Mesmas fontes da página [id] */}
+        {/* Fontes: Instrument Serif + Outfit */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
@@ -36,10 +36,10 @@ export default function Home() {
         </header>
 
         <main>
-          {/* Mensagem de Boas-vindas Bilingue */}
+          {/* Intro Section - TÍTULOS ALTERADOS AQUI */}
           <div style={styles.welcomeSection}>
-            <h2 style={styles.headingTitle}>Bem-vindo ao Atelier</h2>
-            <h3 style={styles.headingSubtitle}>Welcome to the Atelier</h3>
+            <h2 style={styles.headingTitle}>A viagem das suas flores</h2>
+            <h3 style={styles.headingSubtitle}>Your flowers' journey</h3>
             
             <div style={styles.textBlock}>
               <p style={styles.welcomeText}>
@@ -65,7 +65,7 @@ export default function Home() {
             </button>
           </form>
 
-          {/* Botão Site (Agora com a flor incluída) */}
+          {/* Botão Site com Flor */}
           <div style={styles.actionSection}>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
@@ -104,7 +104,7 @@ export default function Home() {
   );
 }
 
-// --- ESTILOS (Sincronizados com o [id].js) ---
+// --- ESTILOS (Sincronizados com o ID) ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -171,7 +171,7 @@ const styles = {
   headingSubtitle: {
     fontFamily: '"Instrument Serif", serif',
     fontSize: '24px',
-    color: '#86868B', // Cinza suave para o inglês
+    color: '#86868B', // Cinza suave
     margin: '0 0 25px 0',
     fontWeight: '400',
     fontStyle: 'italic',
