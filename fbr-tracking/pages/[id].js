@@ -12,8 +12,8 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          {/* Fontes Intemporais: Cormorant Garamond (Clássico) + Montserrat (Leitura) */}
-          <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          {/* Nova Fonte Intemporal: PRATA (Títulos) + Montserrat (Corpo) */}
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingError}>Encomenda não encontrada</h1>
@@ -34,7 +34,7 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
@@ -44,24 +44,27 @@ export default function Tracking({ encomenda }) {
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
-          <p style={styles.tagline}>PRESERVATION ATELIER</p>
+          {/* Tagline Atualizada */}
+          <div style={styles.taglineContainer}>
+            <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
+            <p style={styles.taglineEN}>Flower preservation specialists</p>
+          </div>
         </header>
 
         <main>
-          {/* Intro */}
+          {/* Intro Atualizada */}
           <div style={styles.introContainer}>
-            <p style={styles.introText}>Estado da Preservação</p>
-            <p style={styles.introTranslation}>Preservation Status</p>
+            <p style={styles.introText}>Acompanhe a sua preservação</p>
+            <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
           {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* STATUS BOX (Igual à imagem) */}
+          {/* STATUS BOX (Estrutura Intocada) */}
           <div style={styles.statusBox}>
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
-              {/* Bola verde removida aqui */}
             </div>
 
             <div style={styles.statusMainText}>
@@ -72,7 +75,6 @@ export default function Tracking({ encomenda }) {
               {encomenda.mensagem}
             </p>
 
-            {/* Pill de Atualização (Igual à imagem) */}
             <div style={styles.updateBadge}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 6, opacity: 0.6}}>
                 <circle cx="12" cy="12" r="10"></circle>
@@ -82,12 +84,11 @@ export default function Tracking({ encomenda }) {
             </div>
           </div>
 
-          {/* DATA ENTREGA (Centrado e Tipografia Clássica) */}
+          {/* DATA ENTREGA */}
           <div style={styles.deliveryContainer}>
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
               <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
-              {/* A data em Cormorant Italic dá aquele toque de luxo final */}
               <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
             </div>
           </div>
@@ -95,7 +96,7 @@ export default function Tracking({ encomenda }) {
           {/* BOTÕES DE AÇÃO */}
           <div style={styles.actionSection}>
             
-            {/* WhatsApp (Preto Clássico) */}
+            {/* WhatsApp */}
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
@@ -103,8 +104,14 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site */}
+            {/* Site COM FLOR */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 8}}>
+                <path d="M12 22c4.97 0 9-4.03 9-9 0-4.97-9-13-9-13S3 8.03 3 13c0 4.97 4.03 9 9 9z" />
+                <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                <path d="M12 9V3" />
+                <path d="M12 22v-9" />
+              </svg>
               Visitar Site / Visit Website
             </a>
           </div>
@@ -146,12 +153,11 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS "INTEMPORAL" ---
+// --- ESTILOS (Mantidos da versão "Apple" com Nova Fonte) ---
 const styles = {
-  // Fundo Stone/Bege claro (Igual à imagem)
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F3F2F0', 
+    backgroundColor: '#F3F2F0', // Fundo Stone
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -173,20 +179,31 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Cormorant Garamond", serif', // Intemporal
+    fontFamily: '"Prata", serif', // NOVA FONTE
     fontSize: '34px',
     color: '#1D1D1F',
     margin: '0',
-    fontWeight: '600',
+    fontWeight: '400',
     letterSpacing: '-0.02em',
   },
-  tagline: {
-    fontSize: '11px',
-    letterSpacing: '0.25em',
-    textTransform: 'uppercase',
-    color: '#86868B',
+  taglineContainer: {
     marginTop: '6px',
+  },
+  taglinePT: {
+    fontSize: '11px',
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: '#666',
     fontWeight: '600',
+    margin: '0 0 2px 0',
+  },
+  taglineEN: {
+    fontSize: '9px',
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: '#999',
+    fontWeight: '500',
+    margin: 0,
   },
 
   // INTRO
@@ -206,14 +223,14 @@ const styles = {
 
   // NOME CLIENTE
   clientName: {
-    fontFamily: '"Cormorant Garamond", serif', // Intemporal
+    fontFamily: '"Prata", serif', // NOVA FONTE
     fontSize: '32px',
     color: '#1D1D1F',
     margin: '0 0 30px 0',
-    fontWeight: '500',
+    fontWeight: '400',
   },
 
-  // STATUS BOX (Fundo cinza claro igual à imagem)
+  // STATUS BOX
   statusBox: {
     backgroundColor: '#F5F5F7',
     padding: '30px 25px',
@@ -235,12 +252,12 @@ const styles = {
     color: '#86868B',
   },
   statusMainText: {
-    fontFamily: '"Cormorant Garamond", serif', // Títulos em Serif para ser intemporal
+    fontFamily: '"Prata", serif', // NOVA FONTE
     fontSize: '28px',
-    fontWeight: '600',
+    fontWeight: '400',
     color: '#1D1D1F',
     marginBottom: '15px',
-    lineHeight: '1.1',
+    lineHeight: '1.2',
   },
   message: {
     fontSize: '15px',
@@ -248,7 +265,6 @@ const styles = {
     color: '#424245',
     marginBottom: '20px',
   },
-  // Pill de Atualização (Branca com sombra)
   updateBadge: {
     display: 'flex',
     alignItems: 'center',
@@ -256,7 +272,7 @@ const styles = {
     color: '#6E6E73',
     backgroundColor: '#FFFFFF',
     padding: '8px 12px',
-    borderRadius: '50px', // Pílula
+    borderRadius: '50px',
     width: 'fit-content',
     boxShadow: '0 2px 5px rgba(0,0,0,0.03)',
   },
@@ -285,10 +301,9 @@ const styles = {
     marginBottom: '8px',
   },
   deliveryDate: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontStyle: 'italic', // Itálico como na imagem do rodapé
+    fontFamily: '"Prata", serif', // NOVA FONTE
     fontSize: '28px',
-    fontWeight: '500',
+    fontWeight: '400',
     color: '#1D1D1F',
     margin: 0,
   },
@@ -304,7 +319,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#222', // Preto Intemporal
+    backgroundColor: '#222',
     color: '#FFFFFF',
     textDecoration: 'none',
     padding: '16px',
@@ -314,7 +329,9 @@ const styles = {
     transition: 'background 0.2s',
   },
   buttonSite: {
-    display: 'block',
+    display: 'flex', // Flex para alinhar icon e texto
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#FFFFFF',
     color: '#1D1D1F',
     textDecoration: 'none',
@@ -360,7 +377,7 @@ const styles = {
   },
 
   // ERRO
-  headingError: { fontFamily: '"Cormorant Garamond", serif', fontSize: '30px', color: '#1D1D1F', marginBottom: '10px' },
+  headingError: { fontFamily: '"Prata", serif', fontSize: '30px', color: '#1D1D1F', marginBottom: '10px' },
   textSecondary: { color: '#86868B', fontSize: '14px' },
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
