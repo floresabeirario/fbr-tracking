@@ -52,22 +52,22 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Intro */}
+          {/* Intro - AGORA CONSISTENTE */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente */}
+          {/* Nome do Cliente - AGORA MUITO MAIOR E COM COR */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* STATUS BOX (Com toque de cor suave) */}
+          {/* STATUS BOX */}
           <div style={styles.statusBox}>
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
 
-            {/* Cor Verde Musgo Profundo */}
+            {/* Verde Musgo Profundo */}
             <div style={styles.statusMainText}>
               {encomenda.fase}
             </div>
@@ -90,15 +90,15 @@ export default function Tracking({ encomenda }) {
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
               <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
-              {/* Data também em Verde Musgo */}
+              {/* Data em Verde Musgo */}
               <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
             </div>
           </div>
 
-          {/* BOTÕES DE AÇÃO (Não mexi, como pediste) */}
+          {/* BOTÕES DE AÇÃO - COM CORES DO TEMA */}
           <div style={styles.actionSection}>
             
-            {/* WhatsApp */}
+            {/* WhatsApp - Verde Musgo */}
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
@@ -106,7 +106,7 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site - COM O ÍCONE ✿ */}
+            {/* Site - Com Borda e Texto Verde Musgo */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -150,9 +150,9 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS COM NOVAS CORES E FONTES ---
+// --- ESTILOS REFINADOS (Hierarquia e Cores) ---
 const styles = {
-  // NOVA COR DE FUNDO: Eucalipto Pálido / Stone Greenish
+  // Fundo Eucalipto Pálido
   pageWrapper: {
     minHeight: '100vh',
     backgroundColor: '#F0F2F0', 
@@ -160,7 +160,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
-    // Corpo em OUTFIT (Moderno e Limpo)
     fontFamily: '"Outfit", sans-serif',
     color: '#1D1D1F',
   },
@@ -178,9 +177,8 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    // Títulos em INSTRUMENT SERIF
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '36px',
+    fontSize: '32px', // Ligeiramente menor que o nome do cliente
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -206,33 +204,36 @@ const styles = {
     margin: 0,
   },
 
-  // INTRO
+  // INTRO (Visualmente equilibrado)
   introContainer: { marginBottom: '25px' },
   introText: {
-    fontSize: '15px',
-    fontWeight: '500',
-    color: '#555',
-    margin: 0,
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#2F3E32', // Verde escuro para a principal
+    margin: '0 0 4px 0',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
   introTranslation: {
-    fontSize: '13px',
-    color: '#999',
+    fontSize: '12px',
+    fontWeight: '500',
+    color: '#889', // Cinza para a tradução
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
   },
 
-  // NOME CLIENTE
+  // NOME CLIENTE (O Destaque Principal)
   clientName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '34px',
-    color: '#1D1D1F',
-    margin: '0 0 30px 0',
+    fontSize: '42px', // Significativamente maior
+    color: '#2F3E32', // Verde Musgo Profundo
+    margin: '0 0 35px 0',
     fontWeight: '400',
+    lineHeight: '1.1',
   },
 
   // STATUS BOX
   statusBox: {
-    // Fundo muito suave com um toque de verde quase invisível
     backgroundColor: '#F7F9F8', 
     padding: '30px 25px',
     borderRadius: '20px',
@@ -257,8 +258,7 @@ const styles = {
     fontSize: '32px',
     fontWeight: '400',
     fontStyle: 'italic',
-    // COR DE DESTAQUE: Verde Musgo Profundo (Elegante)
-    color: '#2F3E32', 
+    color: '#2F3E32', // Verde Musgo Profundo
     marginBottom: '15px',
     lineHeight: '1.1',
   },
@@ -308,12 +308,11 @@ const styles = {
     fontStyle: 'italic',
     fontSize: '32px',
     fontWeight: '400',
-    // COR DE DESTAQUE: Verde Musgo Profundo
-    color: '#2F3E32', 
+    color: '#2F3E32', // Verde Musgo Profundo
     margin: 0,
   },
 
-  // BOTÕES (Mantidos a pedido)
+  // BOTÕES (Com as cores do tema)
   actionSection: {
     display: 'flex',
     flexDirection: 'column',
@@ -324,7 +323,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#222',
+    backgroundColor: '#2F3E32', // Verde Musgo Profundo
     color: '#FFFFFF',
     textDecoration: 'none',
     padding: '16px',
@@ -338,13 +337,13 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
-    color: '#1D1D1F',
+    color: '#2F3E32', // Texto Verde Musgo
     textDecoration: 'none',
     padding: '16px',
     borderRadius: '14px',
     fontSize: '15px',
-    fontWeight: '500',
-    border: '1px solid #E5E5EA',
+    fontWeight: '600',
+    border: '2px solid #2F3E32', // Borda Verde Musgo
   },
 
   // FOOTER
@@ -382,7 +381,7 @@ const styles = {
   },
 
   // ERRO
-  headingError: { fontFamily: '"Instrument Serif", serif', fontSize: '32px', color: '#1D1D1F', marginBottom: '10px' },
+  headingError: { fontFamily: '"Instrument Serif", serif', fontSize: '32px', color: '#2F3E32', marginBottom: '10px' },
   textSecondary: { color: '#86868B', fontSize: '14px' },
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
