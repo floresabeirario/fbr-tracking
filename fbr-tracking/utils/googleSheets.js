@@ -1,6 +1,5 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-// O ID da tua folha
 const doc = new GoogleSpreadsheet('1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI');
 
 let isAuth = false;
@@ -8,18 +7,27 @@ let isAuth = false;
 async function accessSheet() {
   if (!isAuth) {
     try {
-      // 1. Lemos a tua variável original (o JSON completo)
       if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-        throw new Error('A variável GOOGLE_SERVICE_ACCOUNT_JSON está em falta.');
+        throw new Error('A variável GOOGLE_SERVICE_ACCOUNT_JSON não foi encontrada.');
       }
 
       const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
-      // 2. A CORREÇÃO MÁGICA:
-      // Vamos buscar a private_key ao JSON e corrigir as quebras de linha manualmente.
-      const cleanPrivateKey = creds.private_key.replace(/\\n/g, '\n');
+      // --- BLOCO DE CORREÇÃO DA CHAVE ---
+      // 1. Garante que a chave existe
+      if (!creds.private_key) throw new Error('O JSON não tem o campo "private_key".');
 
-      // 3. Autenticamos usando o email do JSON e a chave corrigida
+      // 2. Limpeza Profunda:
+      // Remove aspas extras se existirem e converte os \n literais em quebras de linha reais
+      const cleanPrivateKey = creds.private_key
+        .replace(/\\n/g, '\n');
+
+      // 3. DEBUG (Isto vai aparecer nos logs da Vercel se falhar)
+      // Se a chave estiver correta, deve começar por "-----BEGIN" e ter >1500 caracteres
+      console.log('DEBUG AUTH - Email:', creds.client_email);
+      console.log('DEBUG AUTH - Key Start:', cleanPrivateKey.substring(0, 25) + '...');
+      console.log('DEBUG AUTH - Key Length:', cleanPrivateKey.length); 
+
       await doc.useServiceAccountAuth({
         client_email: creds.client_email,
         private_key: cleanPrivateKey,
@@ -27,8 +35,8 @@ async function accessSheet() {
 
       isAuth = true;
     } catch (err) {
-      console.error('Erro de autenticação:', err.message);
-      throw new Error('Falha na autenticação com Google Sheets');
+      console.error('ERRO CRÍTICO NA AUTENTICAÇÃO:', err.message);
+      throw new Error('Falha na autenticação com Google Sheets: ' + err.message);
     }
   }
   await doc.loadInfo();
@@ -54,7 +62,7 @@ export async function getEncomendaById(id) {
       data_entrega: encomenda.data_entrega
     };
   } catch (err) {
-    console.error('Erro ao acessar o Google Sheets:', err);
-    throw err;
+    console.error('Erro no getEncomendaById:', err);
+    throw err; 
   }
 }
