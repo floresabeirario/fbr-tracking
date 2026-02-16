@@ -12,8 +12,8 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          {/* Nova Fonte: Instrument Serif (Títulos) + Montserrat (Corpo) */}
-          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          {/* Instrument Serif (Títulos) + Outfit (Corpo Moderno) */}
+          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingError}>Encomenda não encontrada</h1>
@@ -34,7 +34,8 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        {/* Importação das Fontes */}
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
@@ -60,12 +61,13 @@ export default function Tracking({ encomenda }) {
           {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* STATUS BOX */}
+          {/* STATUS BOX (Com toque de cor suave) */}
           <div style={styles.statusBox}>
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
 
+            {/* Cor Verde Musgo Profundo */}
             <div style={styles.statusMainText}>
               {encomenda.fase}
             </div>
@@ -88,11 +90,12 @@ export default function Tracking({ encomenda }) {
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
               <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
+              {/* Data também em Verde Musgo */}
               <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
             </div>
           </div>
 
-          {/* BOTÕES DE AÇÃO */}
+          {/* BOTÕES DE AÇÃO (Não mexi, como pediste) */}
           <div style={styles.actionSection}>
             
             {/* WhatsApp */}
@@ -103,7 +106,7 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site - Com a flor ✿ */}
+            {/* Site - COM O ÍCONE ✿ */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -147,17 +150,18 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS ---
+// --- ESTILOS COM NOVAS CORES E FONTES ---
 const styles = {
-  // Fundo Stone/Bege claro
+  // NOVA COR DE FUNDO: Eucalipto Pálido / Stone Greenish
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F3F2F0', 
+    backgroundColor: '#F0F2F0', 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
-    fontFamily: '"Montserrat", sans-serif',
+    // Corpo em OUTFIT (Moderno e Limpo)
+    fontFamily: '"Outfit", sans-serif',
     color: '#1D1D1F',
   },
   card: {
@@ -174,8 +178,9 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
-    fontSize: '36px', // Aumentei um pouco pois Instrument Serif é alta e fina
+    // Títulos em INSTRUMENT SERIF
+    fontFamily: '"Instrument Serif", serif',
+    fontSize: '36px',
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -206,19 +211,19 @@ const styles = {
   introText: {
     fontSize: '15px',
     fontWeight: '500',
-    color: '#424245',
+    color: '#555',
     margin: 0,
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
   introTranslation: {
     fontSize: '13px',
-    color: '#86868B',
+    color: '#999',
   },
 
   // NOME CLIENTE
   clientName: {
-    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
+    fontFamily: '"Instrument Serif", serif',
     fontSize: '34px',
     color: '#1D1D1F',
     margin: '0 0 30px 0',
@@ -227,7 +232,8 @@ const styles = {
 
   // STATUS BOX
   statusBox: {
-    backgroundColor: '#F5F5F7',
+    // Fundo muito suave com um toque de verde quase invisível
+    backgroundColor: '#F7F9F8', 
     padding: '30px 25px',
     borderRadius: '20px',
     marginBottom: '30px',
@@ -247,11 +253,12 @@ const styles = {
     color: '#86868B',
   },
   statusMainText: {
-    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
-    fontSize: '32px', // Maior para destaque
+    fontFamily: '"Instrument Serif", serif',
+    fontSize: '32px',
     fontWeight: '400',
-    fontStyle: 'italic', // Instrument Serif em itálico é linda
-    color: '#1D1D1F',
+    fontStyle: 'italic',
+    // COR DE DESTAQUE: Verde Musgo Profundo (Elegante)
+    color: '#2F3E32', 
     marginBottom: '15px',
     lineHeight: '1.1',
   },
@@ -297,15 +304,16 @@ const styles = {
     marginBottom: '8px',
   },
   deliveryDate: {
-    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
+    fontFamily: '"Instrument Serif", serif',
     fontStyle: 'italic',
-    fontSize: '32px', // Um pouco maior
+    fontSize: '32px',
     fontWeight: '400',
-    color: '#1D1D1F',
+    // COR DE DESTAQUE: Verde Musgo Profundo
+    color: '#2F3E32', 
     margin: 0,
   },
 
-  // BOTÕES
+  // BOTÕES (Mantidos a pedido)
   actionSection: {
     display: 'flex',
     flexDirection: 'column',
