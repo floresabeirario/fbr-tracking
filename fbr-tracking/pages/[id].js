@@ -35,7 +35,7 @@ export default function Tracking({ encomenda }) {
         color: "#555",
         marginBottom: "40px"
       }}>
-        Track your order with <strong>Flores à Beira-Rio</strong> 💛
+        Track your order with <strong>Flores à Beira-Rio</strong>
       </p>
 
       {/* Nome do cliente */}
@@ -51,17 +51,17 @@ export default function Tracking({ encomenda }) {
 
       {/* Fase atual */}
       <div style={{
-        backgroundColor: "#fceef4",
+        backgroundColor: "#f5f5f5",
         padding: "20px",
-        borderRadius: "12px",
+        borderRadius: "10px",
         marginBottom: "30px",
         textAlign: "center",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+        boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
       }}>
-        <p style={{ fontSize: "18px", margin: "0 0 10px 0" }}>
-          ✨ <strong>Fase atual / Current stage:</strong>
+        <p style={{ fontSize: "18px", margin: "0 0 5px 0", fontWeight: "500" }}>
+          Fase atual / Current stage
         </p>
-        <p style={{ fontSize: "20px", fontWeight: "600", margin: "0", color: "#d6336c" }}>
+        <p style={{ fontSize: "20px", fontWeight: "600", margin: "0", color: "#2c2c2c" }}>
           {encomenda.fase}
         </p>
       </div>
@@ -72,15 +72,16 @@ export default function Tracking({ encomenda }) {
           <strong>Mensagem / Message:</strong><br />
           {encomenda.mensagem}
         </p>
+        <p style={{ fontSize: "16px", lineHeight: "1.8" }}>
+          <strong>Data de entrega estimada do quadro / Estimated delivery date of the artwork:</strong><br />
+          {encomenda.data_entrega}
+        </p>
         <p style={{ fontSize: "14px", color: "#888" }}>
           <strong>Última atualização / Last update:</strong> {encomenda.ultima_atualizacao}
         </p>
-        <p style={{ fontSize: "14px", color: "#888" }}>
-          <strong>Data de entrega / Delivery date:</strong> {encomenda.data_entrega}
-        </p>
       </div>
 
-      {/* Bloco emocional fofo */}
+      {/* Bloco emocional no rodapé */}
       <div style={{
         marginTop: "50px",
         paddingTop: "30px",
@@ -91,14 +92,15 @@ export default function Tracking({ encomenda }) {
         fontStyle: "italic",
         lineHeight: "1.8"
       }}>
-        <p>🌸</p>
         <p>
           Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
         </p>
         <p>
           Thank you for trusting <strong>Flores à Beira-Rio</strong> with the preservation of your bouquet.
         </p>
+
         <br />
+
         <p>
           Cada flor está a ser cuidada com tempo, delicadeza e intenção.
         </p>
