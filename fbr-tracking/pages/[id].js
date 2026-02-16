@@ -4,7 +4,7 @@ export default function Tracking({ encomenda }) {
   if (!encomenda) {
     return (
       <h1 style={{ padding: 40, fontFamily: 'Arial' }}>
-        Encomenda não encontrada
+        Encomenda não encontrada / Order not found
       </h1>
     );
   }
@@ -17,16 +17,32 @@ export default function Tracking({ encomenda }) {
       margin: '0 auto',
       lineHeight: '1.6'
     }}>
+      
       <h1 style={{ marginBottom: '20px' }}>
         {encomenda.nome_encomenda}
       </h1>
 
-      <p><strong>Fase:</strong> {encomenda.fase}</p>
-      <p><strong>Mensagem:</strong> {encomenda.mensagem}</p>
-      <p><strong>Última atualização:</strong> {encomenda.ultima_atualizacao}</p>
-      <p><strong>Data de entrega:</strong> {encomenda.data_entrega}</p>
+      <p>
+        <strong>Fase / Stage:</strong><br />
+        {encomenda.fase}
+      </p>
 
-      {/* Bloco emocional */}
+      <p>
+        <strong>Mensagem / Message:</strong><br />
+        {encomenda.mensagem}
+      </p>
+
+      <p>
+        <strong>Última atualização / Last update:</strong><br />
+        {encomenda.ultima_atualizacao}
+      </p>
+
+      <p>
+        <strong>Data de entrega / Delivery date:</strong><br />
+        {encomenda.data_entrega}
+      </p>
+
+      {/* Bloco emocional bilingue */}
       <div style={{
         marginTop: "50px",
         paddingTop: "30px",
@@ -38,11 +54,21 @@ export default function Tracking({ encomenda }) {
         lineHeight: "1.8"
       }}>
         <p>✿</p>
+
         <p>
           Obrigada por confiares à <strong>Flores à Beira-Rio</strong> a preservação do teu bouquet.
         </p>
         <p>
+          Thank you for trusting <strong>Flores à Beira-Rio</strong> with the preservation of your bouquet.
+        </p>
+
+        <br />
+
+        <p>
           Cada flor está a ser cuidada com tempo, delicadeza e intenção.
+        </p>
+        <p>
+          Each flower is being cared for with time, delicacy and intention.
         </p>
       </div>
 
@@ -60,6 +86,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-
-
