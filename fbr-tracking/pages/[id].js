@@ -2,22 +2,28 @@ import Head from 'next/head';
 import { getEncomendaById } from '../utils/googleSheets';
 
 export default function Tracking({ encomenda }) {
-  // --- PÁGINA DE ERRO ---
+  // --- MENSAGEM WHATSAPP ---
+  // A mensagem já vai escrita quando clicam
+  const whatsappNumber = "351934680300";
+  const whatsappMessage = `Olá! Gostaria de saber mais detalhes sobre a minha encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  // --- PÁGINA DE ERRO (Dark Mode) ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingSerif}>Encomenda não encontrada</h1>
           <p style={styles.textSecondary}>Order not found</p>
           <div style={styles.divider}></div>
           <p style={styles.textBody}>
-            Não encontramos esta encomenda. Por favor, confirme o número.
+            Não encontramos este número. Por favor, verifique o link.
           </p>
-          <a href="mailto:info@floresabeirario.pt" style={styles.mainButton}>
-            Fale connosco
+          <a href={whatsappUrl} style={styles.buttonPrimary}>
+            Fale connosco no WhatsApp
           </a>
         </div>
       </div>
@@ -30,13 +36,13 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        {/* Playfair (Sofisticado) + Quicksand (Arredondado/Fofo) */}
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        {/* FONTES: Italiana (Luxo) + Montserrat (Moderno) */}
+        <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
         
-        {/* Cabeçalho (Agora clicável para o site) */}
+        {/* Cabeçalho */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
@@ -45,99 +51,78 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Introdução */}
-          <div style={styles.introBox}>
-            <p style={styles.introText}>Olá! Estamos a cuidar das suas flores.</p>
-            <p style={styles.introTranslation}>Hello! We are taking care of your flowers.</p>
-          </div>
+          <p style={styles.introText}>
+            A preservar memórias.<br />
+            <span style={styles.introTranslation}>Preserving memories.</span>
+          </p>
 
-          {/* Nome da Encomenda */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* Status Principal */}
+          {/* STATUS PRINCIPAL */}
           <div style={styles.statusContainer}>
-            <div style={styles.statusHeader}>
-              <span style={styles.statusLabel}>Fase Atual / Current Stage</span>
-            </div>
+            <span style={styles.statusLabel}>Fase Atual / Current Stage</span>
             
             <div style={styles.statusMain}>
               {encomenda.fase}
             </div>
 
-            {/* Linha decorativa ondulada (SVG) para ser mais fofo */}
-            <div style={styles.waveLine}>
-               <svg width="40" height="6" viewBox="0 0 40 6" fill="none">
-                 <path d="M0 3C2.5 0.5 5 0.5 7.5 3C10 5.5 12.5 5.5 15 3C17.5 0.5 20 0.5 22.5 3C25 5.5 27.5 5.5 30 3C32.5 0.5 35 0.5 37.5 3" stroke="#D4C5B0" strokeWidth="1.5" strokeLinecap="round"/>
-               </svg>
-            </div>
+            <div style={styles.goldDivider}></div>
 
             <p style={styles.message}>
-              "{encomenda.mensagem}"
+              {encomenda.mensagem}
             </p>
           </div>
 
-          {/* Data de Entrega (Craft style) */}
-          <div style={styles.deliveryBox}>
-            <span style={styles.deliveryLabel}>Entrega estimada do quadro</span>
-            <span style={styles.deliveryLabelEn}>Estimated delivery (frame)</span>
-            <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
+          {/* ÚLTIMA ATUALIZAÇÃO (Destaque maior) */}
+          <div style={styles.updateRow}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 8}}>
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <p style={styles.updateText}>
+              <span style={{color: '#D4AF37', fontWeight: 600}}>Última atualização:</span> {encomenda.ultima_atualizacao}
+            </p>
           </div>
+
+          {/* DATA DE ENTREGA (Centrado) */}
+          <div style={styles.deliveryWrapper}>
+            <div style={styles.deliveryBox}>
+              <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
+              <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
+              <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
+            </div>
+          </div>
+
+          {/* BOTÕES DE AÇÃO */}
+          <div style={styles.actionButtons}>
+            
+            {/* WhatsApp (Botão Principal) */}
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonWhatsApp}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              </svg>
+              Enviar Mensagem WhatsApp
+            </a>
+
+            {/* Site */}
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+              Visitar Site / Visit Website
+            </a>
+          </div>
+
         </main>
 
-        {/* Contactos */}
-        <div style={styles.contactSection}>
-          <p style={styles.contactTitle}>Dúvidas? / Questions?</p>
-          <div style={styles.contactLinks}>
-            <a href="mailto:info@floresabeirario.pt" style={styles.contactLink}>
-              info@floresabeirario.pt
-            </a>
-            <a href="tel:+351934680300" style={styles.contactLink}>
-              +351 934 680 300
-            </a>
-          </div>
-        </div>
-
-        {/* Rodapé Social & Site */}
+        {/* Rodapé Social */}
         <footer style={styles.footer}>
           
-          {/* Botão para o Site Principal */}
-          <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.siteButton}>
-            Visitar o nosso Site
-          </a>
-
-          {/* Ícones Sociais (Redondos e Fofos) */}
           <div style={styles.socialIcons}>
-            
-            {/* Instagram */}
-            <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-
-            {/* Facebook */}
-            <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Facebook">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-
-            {/* Google Reviews */}
-            <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Google Reviews">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-              </svg>
-            </a>
-
+            <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.iconLink}>IG</a>
+            <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.iconLink}>FB</a>
+            <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" style={styles.iconLink}>G+</a>
           </div>
 
           <p style={styles.location}>Coimbra, Portugal</p>
-          <div style={styles.lastUpdate}>
-            <small>Atualizado em: {encomenda.ultima_atualizacao}</small>
-          </div>
-          
+          <p style={styles.copyright}>© Flores à Beira-Rio</p>
         </footer>
 
       </div>
@@ -152,227 +137,235 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS MOBILE-FIRST (Boutique & Cute) ---
+// --- ESTILOS DARK PREMIUM ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#FDFCF8', // Branco pérola quente
+    backgroundColor: '#121212', // Fundo da página quase preto
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '15px',
-    fontFamily: '"Quicksand", sans-serif',
-    color: '#555',
+    padding: '20px',
+    fontFamily: '"Montserrat", sans-serif',
+    color: '#E0E0E0',
   },
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1E1E1E', // Cartão cinza escuro
     width: '100%',
-    maxWidth: '450px', // Largura ideal para telemóvel
+    maxWidth: '450px',
     padding: '40px 25px',
-    boxShadow: '0 15px 35px rgba(212, 197, 176, 0.15)', // Sombra "quente"
-    borderRadius: '24px', // Cantos muito arredondados (Cute)
+    boxShadow: '0 25px 50px rgba(0,0,0,0.5)', // Sombra dramática
+    borderRadius: '8px', // Cantos menos arredondados = mais premium
     textAlign: 'center',
-    position: 'relative',
-    border: '1px solid #FAF5F0',
+    border: '1px solid #333', // Borda subtil
   },
 
   // HEADER
   header: { marginBottom: '30px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Playfair Display", serif',
-    fontSize: '30px',
-    color: '#4A4A4A',
+    fontFamily: '"Italiana", serif', // Fonte de Luxo
+    fontSize: '32px',
+    color: '#F2F0E9', // Branco Pérola
     margin: '0',
-    fontWeight: '600',
-    letterSpacing: '-0.02em',
-    transition: 'color 0.2s',
+    fontWeight: '400',
+    letterSpacing: '0.02em',
   },
   tagline: {
     fontSize: '10px',
-    letterSpacing: '0.25em',
+    letterSpacing: '0.3em',
     textTransform: 'uppercase',
-    color: '#AAB3A8', // Verde acinzentado
+    color: '#D4AF37', // Dourado
     marginTop: '8px',
-    fontWeight: '700',
   },
 
   // INTRO
-  introBox: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
-    color: '#7D8C7A', // Verde Sage
-    fontWeight: '600',
-    marginBottom: '2px',
+    color: '#AAA',
+    marginBottom: '30px',
+    lineHeight: '1.4',
   },
   introTranslation: {
     fontSize: '12px',
-    color: '#C0C0C0',
+    color: '#666',
     fontStyle: 'italic',
   },
 
-  // NOME
+  // CLIENTE
   clientName: {
-    fontFamily: '"Playfair Display", serif',
-    fontSize: '26px',
-    color: '#333',
-    margin: '0 0 25px 0',
+    fontFamily: '"Italiana", serif',
+    fontSize: '30px',
+    color: '#FFFFFF',
+    margin: '0 0 30px 0',
     fontWeight: '400',
-    lineHeight: '1.2',
   },
 
-  // STATUS (Design Limpo)
+  // STATUS
   statusContainer: {
-    backgroundColor: '#F4F7F5', // Verde menta quase branco
+    backgroundColor: '#252525', // Ligeiramente mais claro que o cartão
     padding: '30px 20px',
-    borderRadius: '16px',
-    marginBottom: '30px',
-    position: 'relative',
+    borderRadius: '4px',
+    border: '1px solid #333',
+    marginBottom: '25px',
   },
   statusLabel: {
     display: 'block',
     fontSize: '10px',
     textTransform: 'uppercase',
-    letterSpacing: '0.1em',
-    color: '#8CA090',
-    fontWeight: '700',
+    letterSpacing: '0.15em',
+    color: '#888',
     marginBottom: '15px',
   },
   statusMain: {
-    fontFamily: '"Playfair Display", serif',
-    fontSize: '24px',
-    color: '#4A5D4F', // Verde floresta suave
-    fontWeight: '500',
-    marginBottom: '10px',
+    fontFamily: '"Italiana", serif',
+    fontSize: '26px',
+    color: '#D4AF37', // Texto da fase em Dourado
+    marginBottom: '15px',
   },
-  waveLine: {
-    margin: '10px auto 15px auto',
-    opacity: 0.6,
+  goldDivider: {
+    width: '40px',
+    height: '1px',
+    backgroundColor: '#D4AF37',
+    margin: '0 auto 15px auto',
+    opacity: 0.5,
   },
   message: {
-    fontSize: '14px',
-    lineHeight: '1.6',
-    color: '#666',
-    fontStyle: 'italic',
+    fontSize: '15px',
+    lineHeight: '1.7',
+    color: '#DDD', // Branco suave para leitura
+    fontWeight: '300',
   },
 
-  // DATA (Estilo Selo/Craft)
-  deliveryBox: {
+  // ÚLTIMA ATUALIZAÇÃO (Destaque)
+  updateRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: '35px',
-    padding: '15px 10px',
-    border: '1.5px dashed #E0D8D0', // Tracejado bege
-    borderRadius: '12px',
-    backgroundColor: '#FFFCFA',
-    display: 'inline-block',
+    backgroundColor: '#2A2A2A',
+    padding: '10px',
+    borderRadius: '50px',
+    display: 'inline-flex', // Para se ajustar ao conteúdo
+    paddingLeft: '20px',
+    paddingRight: '20px',
+  },
+  updateText: {
+    fontSize: '13px',
+    color: '#EEE',
+    margin: 0,
+  },
+
+  // DATA (CORREÇÃO DE CENTRAMENTO)
+  deliveryWrapper: {
+    display: 'flex', // Flexbox para centrar
+    justifyContent: 'center',
     width: '100%',
+    marginBottom: '40px',
+  },
+  deliveryBox: {
+    padding: '15px 30px',
+    border: '1px solid #444', 
+    borderRadius: '4px',
+    backgroundColor: '#1E1E1E',
+    textAlign: 'center',
   },
   deliveryLabel: {
     display: 'block',
     fontSize: '12px',
     fontWeight: '600',
-    color: '#555',
+    color: '#BBB',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
   },
   deliveryLabelEn: {
     display: 'block',
     fontSize: '10px',
-    color: '#AAA',
+    color: '#666',
     marginBottom: '5px',
   },
   deliveryDate: {
-    fontFamily: '"Playfair Display", serif',
-    fontSize: '20px',
-    color: '#333',
-    marginTop: '2px',
+    fontFamily: '"Italiana", serif',
+    fontSize: '22px',
+    color: '#FFF',
+    marginTop: '5px',
   },
 
-  // CONTACTOS
-  contactSection: {
-    paddingTop: '25px',
-    borderTop: '1px solid #F6F6F6',
-  },
-  contactTitle: {
-    fontSize: '12px',
-    fontWeight: '600',
-    marginBottom: '12px',
-    color: '#999',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-  },
-  contactLinks: {
+  // BOTÕES
+  actionButtons: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px',
+    gap: '15px',
+    marginBottom: '30px',
   },
-  contactLink: {
-    textDecoration: 'none',
-    color: '#8A9A8C', // Verde suave
-    fontSize: '15px', // Letra grande para toque fácil
-    fontWeight: '600',
-  },
-
-  // FOOTER & SOCIALS
-  footer: { marginTop: '30px' },
-  
-  // Botão do Site (Elegante)
-  siteButton: {
-    display: 'inline-block',
-    textDecoration: 'none',
-    color: '#FFFFFF',
-    backgroundColor: '#B5A595', // Castanho "Taupe" suave
-    padding: '10px 25px',
-    borderRadius: '50px', // Pílula
-    fontSize: '13px',
-    fontWeight: '600',
-    marginBottom: '25px',
-    boxShadow: '0 4px 10px rgba(181, 165, 149, 0.3)',
-    transition: 'transform 0.1s',
-  },
-  
-  // Container dos Ícones
-  socialIcons: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '20px',
-    marginBottom: '25px',
-  },
-  iconLink: {
+  buttonWhatsApp: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%', // Bolinhas
-    backgroundColor: '#F7F7F7',
-    color: '#555',
-    transition: 'background 0.2s',
+    backgroundColor: '#25D366', // Verde WhatsApp
+    color: 'white',
+    padding: '14px',
+    borderRadius: '4px',
+    textDecoration: 'none',
+    fontWeight: '600',
+    fontSize: '14px',
+    boxShadow: '0 4px 10px rgba(37, 211, 102, 0.2)',
+    transition: 'opacity 0.2s',
   },
-
+  buttonSite: {
+    display: 'block',
+    backgroundColor: 'transparent',
+    border: '1px solid #555',
+    color: '#AAA',
+    padding: '14px',
+    borderRadius: '4px',
+    textDecoration: 'none',
+    fontWeight: '500',
+    fontSize: '13px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+  },
+  
+  // FOOTER
+  footer: {
+    borderTop: '1px solid #333',
+    paddingTop: '30px',
+  },
+  socialIcons: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '15px',
+    marginBottom: '20px',
+  },
+  iconLink: {
+    color: '#888',
+    textDecoration: 'none',
+    fontSize: '12px',
+    border: '1px solid #444',
+    width: '35px',
+    height: '35px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+    transition: 'all 0.2s',
+  },
   location: {
     fontSize: '11px',
     textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    color: '#444',
-    fontWeight: '700',
-    marginBottom: '5px',
+    letterSpacing: '0.2em',
+    color: '#666',
+    marginBottom: '10px',
   },
-  lastUpdate: {
-    fontSize: '9px',
-    color: '#CCC',
+  copyright: {
+    fontSize: '10px',
+    color: '#444',
   },
 
   // ERRO
-  headingSerif: { fontFamily: '"Playfair Display", serif', color: '#D4A5A5', fontSize: '28px' },
-  textSecondary: { color: '#999', fontSize: '14px', fontStyle: 'italic' },
-  textBody: { marginBottom: '25px', lineHeight: '1.6', fontSize: '14px' },
-  mainButton: {
-    display: 'inline-block',
-    textDecoration: 'none',
-    backgroundColor: '#D4A5A5',
-    color: 'white',
-    padding: '12px 30px',
-    borderRadius: '50px',
-    fontSize: '14px',
-    fontWeight: '600',
-  },
-  divider: { height: '1px', backgroundColor: '#EEE', margin: '20px auto', width: '40px' }
+  headingSerif: { fontFamily: '"Italiana", serif', color: '#D4AF37', fontSize: '28px' },
+  textSecondary: { color: '#888', fontStyle: 'italic' },
+  textBody: { marginBottom: '25px', color: '#CCC' },
+  buttonPrimary: { display: 'inline-block', backgroundColor: '#D4AF37', color: '#111', padding: '12px 30px', borderRadius: '4px', textDecoration: 'none', fontWeight: '600' },
+  divider: { height: '1px', backgroundColor: '#333', margin: '20px auto', width: '50px' }
 };
