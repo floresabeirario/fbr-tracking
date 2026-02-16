@@ -14,7 +14,6 @@ export async function getEncomendaById(id) {
     const rows = await sheet.getRows();
 
     const encomenda = rows.find(r => r.id === id);
-
     return encomenda || null;
 
   } catch (error) {
