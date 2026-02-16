@@ -2,19 +2,23 @@ import Head from 'next/head';
 import { getEncomendaById } from '../utils/googleSheets';
 
 export default function Tracking({ encomenda }) {
-  // --- PÁGINA DE ERRO (Design Minimalista) ---
+  // --- PÁGINA DE ERRO ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-           {/* Carregar Poppins e Bodoni Moda (Alternativa visual à The Seasons) */}
-          <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet" />
         </Head>
-        <div style={styles.errorCard}>
-          <h1 style={styles.heading}>Encomenda não encontrada</h1>
+        <div style={styles.card}>
+          <h1 style={styles.headingSerif}>Encomenda não encontrada</h1>
           <p style={styles.textSecondary}>Order not found</p>
           <div style={styles.divider}></div>
-          <p style={styles.textSmall}>Por favor, verifique o número da encomenda.</p>
+          <p style={styles.textBody}>
+            Não encontramos esta encomenda. Por favor, confirme o número.
+          </p>
+          <a href="mailto:info@floresabeirario.pt" style={styles.mainButton}>
+            Fale connosco
+          </a>
         </div>
       </div>
     );
@@ -25,77 +29,117 @@ export default function Tracking({ encomenda }) {
     <div style={styles.pageWrapper}>
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        {/* Playfair (Sofisticado) + Quicksand (Arredondado/Fofo) */}
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
         
-        {/* Cabeçalho da Marca */}
+        {/* Cabeçalho (Agora clicável para o site) */}
         <header style={styles.header}>
-          <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
-          <div style={styles.taglineContainer}>
-            <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
-            <p style={styles.taglineEN}>Flower preservation specialists</p>
-          </div>
+          <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+            <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
+          </a>
+          <p style={styles.tagline}>PRESERVATION ATELIER</p>
         </header>
 
-        {/* Conteúdo Principal */}
-        <main style={styles.mainContent}>
-          
-          {/* Frase de Introdução */}
-          <div style={styles.introSection}>
-            <p style={styles.introText}>Acompanhe a preservação das suas flores</p>
-            <p style={styles.introTranslation}>Track your flowers preservation journey</p>
+        <main>
+          {/* Introdução */}
+          <div style={styles.introBox}>
+            <p style={styles.introText}>Olá! Estamos a cuidar das suas flores.</p>
+            <p style={styles.introTranslation}>Hello! We are taking care of your flowers.</p>
           </div>
 
-          {/* Nome da Encomenda (Destaque) */}
-          <h2 style={styles.orderName}>{encomenda.nome_encomenda}</h2>
+          {/* Nome da Encomenda */}
+          <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* Bloco de Status */}
-          <div style={styles.statusBox}>
-            <span style={styles.label}>Fase Atual / Current Stage</span>
-            
-            <div style={styles.phaseName}>
-              {encomenda.fase}
+          {/* Status Principal */}
+          <div style={styles.statusContainer}>
+            <div style={styles.statusHeader}>
+              <span style={styles.statusLabel}>Fase Atual / Current Stage</span>
             </div>
             
-            {/* A Barra: Agora é um separador elegante dourado */}
-            <div style={styles.separatorLine}></div>
+            <div style={styles.statusMain}>
+              {encomenda.fase}
+            </div>
+
+            {/* Linha decorativa ondulada (SVG) para ser mais fofo */}
+            <div style={styles.waveLine}>
+               <svg width="40" height="6" viewBox="0 0 40 6" fill="none">
+                 <path d="M0 3C2.5 0.5 5 0.5 7.5 3C10 5.5 12.5 5.5 15 3C17.5 0.5 20 0.5 22.5 3C25 5.5 27.5 5.5 30 3C32.5 0.5 35 0.5 37.5 3" stroke="#D4C5B0" strokeWidth="1.5" strokeLinecap="round"/>
+               </svg>
+            </div>
 
             <p style={styles.message}>
-              {encomenda.mensagem}
+              "{encomenda.mensagem}"
             </p>
           </div>
 
-          {/* Data de Entrega (Destaque Único) */}
-          <div style={styles.deliverySection}>
-            <span style={styles.label}>Data de entrega estimada (do quadro)</span>
-            <span style={styles.labelTranslation}>Estimated delivery date (frame)</span>
+          {/* Data de Entrega (Craft style) */}
+          <div style={styles.deliveryBox}>
+            <span style={styles.deliveryLabel}>Entrega estimada do quadro</span>
+            <span style={styles.deliveryLabelEn}>Estimated delivery (frame)</span>
             <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
           </div>
-
         </main>
 
-        {/* Rodapé */}
+        {/* Contactos */}
+        <div style={styles.contactSection}>
+          <p style={styles.contactTitle}>Dúvidas? / Questions?</p>
+          <div style={styles.contactLinks}>
+            <a href="mailto:info@floresabeirario.pt" style={styles.contactLink}>
+              info@floresabeirario.pt
+            </a>
+            <a href="tel:+351934680300" style={styles.contactLink}>
+              +351 934 680 300
+            </a>
+          </div>
+        </div>
+
+        {/* Rodapé Social & Site */}
         <footer style={styles.footer}>
           
-          {/* Detalhe menos relevante (Última atualização) */}
-          <p style={styles.lastUpdate}>
-            Atualizado em / Updated on: {encomenda.ultima_atualizacao}
-          </p>
+          {/* Botão para o Site Principal */}
+          <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.siteButton}>
+            Visitar o nosso Site
+          </a>
 
-          <div style={styles.footerIcon}>
-             {/* Ícone Folha (Verde Sálvia) */}
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#586c5c" strokeWidth="1.5">
-              <path d="M12 21C12 21 17 14 17 8C17 4.68629 14.3137 2 11 2C7.68629 2 5 4.68629 5 8C5 14 12 21 12 21Z" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 21V11" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 7C12 7 14 9 14 11" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+          {/* Ícones Sociais (Redondos e Fofos) */}
+          <div style={styles.socialIcons}>
+            
+            {/* Instagram */}
+            <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+
+            {/* Facebook */}
+            <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+
+            {/* Google Reviews */}
+            <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" rel="noopener noreferrer" style={styles.iconLink} aria-label="Google Reviews">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+            </a>
+
           </div>
 
-          <p style={styles.footerBrand}>© Flores à Beira-Rio</p>
+          <p style={styles.location}>Coimbra, Portugal</p>
+          <div style={styles.lastUpdate}>
+            <small>Atualizado em: {encomenda.ultima_atualizacao}</small>
+          </div>
+          
         </footer>
+
       </div>
     </div>
   );
@@ -105,205 +149,230 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
   const encomenda = await getEncomendaById(id);
 
-  return {
-    props: { encomenda },
-  };
+  return { props: { encomenda } };
 }
 
-// --- ESTILOS (CSS-in-JS) ---
+// --- ESTILOS MOBILE-FIRST (Boutique & Cute) ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F7F6F2', // "Linen" - um bege muito claro e natural
+    backgroundColor: '#FDFCF8', // Branco pérola quente
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '20px',
-    fontFamily: '"Poppins", sans-serif',
-    color: '#444',
+    padding: '15px',
+    fontFamily: '"Quicksand", sans-serif',
+    color: '#555',
   },
   card: {
     backgroundColor: '#FFFFFF',
     width: '100%',
-    maxWidth: '500px',
-    padding: '50px 40px',
-    boxShadow: '0 20px 40px rgba(90, 90, 80, 0.08)', // Sombra com subtom esverdeado
-    borderRadius: '0px', // Cantos retos para ser mais "Editorial"
+    maxWidth: '450px', // Largura ideal para telemóvel
+    padding: '40px 25px',
+    boxShadow: '0 15px 35px rgba(212, 197, 176, 0.15)', // Sombra "quente"
+    borderRadius: '24px', // Cantos muito arredondados (Cute)
+    textAlign: 'center',
     position: 'relative',
-    border: '1px solid #EAEAEA', // Borda muito subtil
+    border: '1px solid #FAF5F0',
   },
 
   // HEADER
-  header: {
-    textAlign: 'center',
-    marginBottom: '40px',
-    borderBottom: '1px solid #F0F0F0',
-    paddingBottom: '25px',
-  },
+  header: { marginBottom: '30px' },
+  brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    // Tenta usar a 'The Seasons', se não tiver, usa 'Bodoni Moda'
-    fontFamily: '"The Seasons", "Bodoni Moda", serif', 
-    fontSize: '34px',
-    fontWeight: '500', // Peso médio para elegância
-    color: '#2A332C', // Verde Floresta quase preto
-    margin: '0 0 10px 0',
+    fontFamily: '"Playfair Display", serif',
+    fontSize: '30px',
+    color: '#4A4A4A',
+    margin: '0',
+    fontWeight: '600',
     letterSpacing: '-0.02em',
+    transition: 'color 0.2s',
   },
-  taglineContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '2px',
-  },
-  taglinePT: {
-    fontSize: '11px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    color: '#586c5c', // Verde Sálvia
-    fontWeight: '500',
-    margin: 0,
-  },
-  taglineEN: {
+  tagline: {
     fontSize: '10px',
+    letterSpacing: '0.25em',
     textTransform: 'uppercase',
-    letterSpacing: '0.1em',
-    color: '#9CA69D', // Verde acinzentado claro
-    margin: 0,
+    color: '#AAB3A8', // Verde acinzentado
+    marginTop: '8px',
+    fontWeight: '700',
   },
 
   // INTRO
-  introSection: {
-    textAlign: 'center',
-    marginBottom: '30px',
-  },
+  introBox: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
-    color: '#555',
+    color: '#7D8C7A', // Verde Sage
+    fontWeight: '600',
     marginBottom: '2px',
   },
   introTranslation: {
     fontSize: '12px',
-    color: '#999',
+    color: '#C0C0C0',
     fontStyle: 'italic',
-    fontWeight: '300',
   },
 
-  // CONTEÚDO PRINCIPAL
-  mainContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  orderName: {
-    fontFamily: '"The Seasons", "Bodoni Moda", serif',
-    fontSize: '32px',
-    textAlign: 'center',
-    color: '#111',
-    margin: '0 0 35px 0',
+  // NOME
+  clientName: {
+    fontFamily: '"Playfair Display", serif',
+    fontSize: '26px',
+    color: '#333',
+    margin: '0 0 25px 0',
     fontWeight: '400',
     lineHeight: '1.2',
   },
 
-  // CAIXA DE STATUS
-  statusBox: {
-    width: '100%',
-    backgroundColor: '#F9FAF9', // Fundo esverdeado ultra claro
-    padding: '35px 20px',
-    textAlign: 'center',
-    border: '1px solid #EEF0EE',
-    marginBottom: '40px',
+  // STATUS (Design Limpo)
+  statusContainer: {
+    backgroundColor: '#F4F7F5', // Verde menta quase branco
+    padding: '30px 20px',
+    borderRadius: '16px',
+    marginBottom: '30px',
+    position: 'relative',
   },
-  label: {
+  statusLabel: {
     display: 'block',
     fontSize: '10px',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
-    color: '#888',
+    color: '#8CA090',
+    fontWeight: '700',
+    marginBottom: '15px',
+  },
+  statusMain: {
+    fontFamily: '"Playfair Display", serif',
+    fontSize: '24px',
+    color: '#4A5D4F', // Verde floresta suave
+    fontWeight: '500',
     marginBottom: '10px',
   },
-  labelTranslation: {
-    display: 'block',
-    fontSize: '9px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    color: '#AAA',
-    marginBottom: '5px',
-    marginTop: '-8px', // Aproxima do label PT
-  },
-  phaseName: {
-    fontFamily: '"The Seasons", "Bodoni Moda", serif',
-    fontSize: '24px',
-    color: '#2A332C',
-    marginBottom: '20px',
-  },
-  // A BARRA (Design Refinado)
-  separatorLine: {
-    width: '40px',
-    height: '1px',
-    backgroundColor: '#C5A059', // Dourado Matte
-    margin: '0 auto 20px auto',
+  waveLine: {
+    margin: '10px auto 15px auto',
+    opacity: 0.6,
   },
   message: {
     fontSize: '14px',
-    lineHeight: '1.7',
-    color: '#555',
-    maxWidth: '90%',
-    margin: '0 auto',
+    lineHeight: '1.6',
+    color: '#666',
     fontStyle: 'italic',
   },
 
-  // SECÇÃO DE ENTREGA
-  deliverySection: {
-    textAlign: 'center',
-    marginBottom: '20px',
+  // DATA (Estilo Selo/Craft)
+  deliveryBox: {
+    marginBottom: '35px',
+    padding: '15px 10px',
+    border: '1.5px dashed #E0D8D0', // Tracejado bege
+    borderRadius: '12px',
+    backgroundColor: '#FFFCFA',
+    display: 'inline-block',
+    width: '100%',
+  },
+  deliveryLabel: {
+    display: 'block',
+    fontSize: '12px',
+    fontWeight: '600',
+    color: '#555',
+  },
+  deliveryLabelEn: {
+    display: 'block',
+    fontSize: '10px',
+    color: '#AAA',
+    marginBottom: '5px',
   },
   deliveryDate: {
-    fontFamily: '"The Seasons", "Bodoni Moda", serif',
-    fontSize: '22px',
-    color: '#586c5c', // Destaque em Verde Sálvia
-    marginTop: '10px',
-    borderBottom: '1px solid #E0E0E0',
-    paddingBottom: '5px',
-    display: 'inline-block',
+    fontFamily: '"Playfair Display", serif',
+    fontSize: '20px',
+    color: '#333',
+    marginTop: '2px',
   },
 
-  // FOOTER
-  footer: {
-    marginTop: '50px',
-    textAlign: 'center',
-    borderTop: '1px solid #F5F5F5',
-    paddingTop: '30px',
+  // CONTACTOS
+  contactSection: {
+    paddingTop: '25px',
+    borderTop: '1px solid #F6F6F6',
+  },
+  contactTitle: {
+    fontSize: '12px',
+    fontWeight: '600',
+    marginBottom: '12px',
+    color: '#999',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+  },
+  contactLinks: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+  },
+  contactLink: {
+    textDecoration: 'none',
+    color: '#8A9A8C', // Verde suave
+    fontSize: '15px', // Letra grande para toque fácil
+    fontWeight: '600',
+  },
+
+  // FOOTER & SOCIALS
+  footer: { marginTop: '30px' },
+  
+  // Botão do Site (Elegante)
+  siteButton: {
+    display: 'inline-block',
+    textDecoration: 'none',
+    color: '#FFFFFF',
+    backgroundColor: '#B5A595', // Castanho "Taupe" suave
+    padding: '10px 25px',
+    borderRadius: '50px', // Pílula
+    fontSize: '13px',
+    fontWeight: '600',
+    marginBottom: '25px',
+    boxShadow: '0 4px 10px rgba(181, 165, 149, 0.3)',
+    transition: 'transform 0.1s',
+  },
+  
+  // Container dos Ícones
+  socialIcons: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '20px',
+    marginBottom: '25px',
+  },
+  iconLink: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%', // Bolinhas
+    backgroundColor: '#F7F7F7',
+    color: '#555',
+    transition: 'background 0.2s',
+  },
+
+  location: {
+    fontSize: '11px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.15em',
+    color: '#444',
+    fontWeight: '700',
+    marginBottom: '5px',
   },
   lastUpdate: {
-    fontSize: '10px',
-    color: '#BBB', // Muito discreto
-    marginBottom: '20px',
-  },
-  footerIcon: {
-    marginBottom: '10px',
-    opacity: 0.8,
-  },
-  footerBrand: {
-    fontSize: '10px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.1em',
+    fontSize: '9px',
     color: '#CCC',
   },
 
   // ERRO
-  errorCard: {
-    textAlign: 'center',
-    backgroundColor: 'white',
-    padding: '40px',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+  headingSerif: { fontFamily: '"Playfair Display", serif', color: '#D4A5A5', fontSize: '28px' },
+  textSecondary: { color: '#999', fontSize: '14px', fontStyle: 'italic' },
+  textBody: { marginBottom: '25px', lineHeight: '1.6', fontSize: '14px' },
+  mainButton: {
+    display: 'inline-block',
+    textDecoration: 'none',
+    backgroundColor: '#D4A5A5',
+    color: 'white',
+    padding: '12px 30px',
+    borderRadius: '50px',
+    fontSize: '14px',
+    fontWeight: '600',
   },
-  heading: {
-    fontFamily: '"The Seasons", "Bodoni Moda", serif',
-    fontSize: '28px',
-    marginBottom: '10px',
-  },
-  textSecondary: { color: '#999', fontStyle: 'italic' },
-  textSmall: { fontSize: '12px', color: '#666' },
-  divider: {
-    width: '30px', height: '1px', backgroundColor: '#ddd', margin: '20px auto'
-  }
+  divider: { height: '1px', backgroundColor: '#EEE', margin: '20px auto', width: '40px' }
 };
