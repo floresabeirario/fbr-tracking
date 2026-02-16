@@ -34,6 +34,10 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    
+     {/* 2. AQUI LIGAS O ÍCONE (Se usares um PNG chamado 'icon.png' na pasta public) */}
+  <link rel="icon" href="/icon.png" type="image/png" />
+    
         {/* Importação das Fontes */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
@@ -388,4 +392,5 @@ const styles = {
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
 };
+
 
