@@ -56,7 +56,7 @@ export default function Tracking({ encomenda }) {
         <p>✿</p>
 
         <p>
-          Obrigada por confiares à <strong>Flores à Beira-Rio</strong> a preservação do teu bouquet.
+          Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
         </p>
         <p>
           Thank you for trusting <strong>Flores à Beira-Rio</strong> with the preservation of your bouquet.
@@ -86,3 +86,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
