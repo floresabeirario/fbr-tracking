@@ -2,316 +2,308 @@ import Head from 'next/head';
 import { getEncomendaById } from '../utils/googleSheets';
 
 export default function Tracking({ encomenda }) {
-  // --- DESIGN: Página de Erro (Caso o ID não exista) ---
+  // --- PÁGINA DE ERRO (Design Minimalista) ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-           {/* Importar fontes elegantes */}
-          <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+           {/* Carregar Poppins e Bodoni Moda (Alternativa visual à The Seasons) */}
+          <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.errorCard}>
-          <h1 style={styles.errorTitle}>Encomenda não encontrada</h1>
+          <h1 style={styles.heading}>Encomenda não encontrada</h1>
           <p style={styles.textSecondary}>Order not found</p>
           <div style={styles.divider}></div>
-          <p style={styles.textSmall}>Verifique se o código está correto ou contacte-nos.</p>
+          <p style={styles.textSmall}>Por favor, verifique o número da encomenda.</p>
         </div>
       </div>
     );
   }
 
-  // --- DESIGN: Página Principal de Tracking ---
+  // --- PÁGINA PRINCIPAL ---
   return (
     <div style={styles.pageWrapper}>
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* Fontes: Cormorant (Serifa para Títulos) e Montserrat (Sans para Leitura) */}
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
-        {/* Topo Decorativo */}
-        <div style={styles.topBar}></div>
-
-        {/* Cabeçalho */}
+        
+        {/* Cabeçalho da Marca */}
         <header style={styles.header}>
           <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
-          <p style={styles.tagline}>PRESERVATION ATELIER</p>
+          <div style={styles.taglineContainer}>
+            <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
+            <p style={styles.taglineEN}>Flower preservation specialists</p>
+          </div>
         </header>
 
         {/* Conteúdo Principal */}
-        <main>
-          <div style={styles.welcomeSection}>
-            <p style={styles.welcomeText}>Acompanhe a preservação da sua memória</p>
-            <p style={styles.translation}>Tracking your memory preservation</p>
+        <main style={styles.mainContent}>
+          
+          {/* Frase de Introdução */}
+          <div style={styles.introSection}>
+            <p style={styles.introText}>Acompanhe a preservação das suas flores</p>
+            <p style={styles.introTranslation}>Track your flowers preservation journey</p>
           </div>
 
+          {/* Nome da Encomenda (Destaque) */}
           <h2 style={styles.orderName}>{encomenda.nome_encomenda}</h2>
 
-          {/* Estado da Encomenda (Destaque) */}
-          <div style={styles.statusContainer}>
-            <span style={styles.statusLabel}>Fase Atual / Current Stage</span>
-            <div style={styles.statusMain}>
+          {/* Bloco de Status */}
+          <div style={styles.statusBox}>
+            <span style={styles.label}>Fase Atual / Current Stage</span>
+            
+            <div style={styles.phaseName}>
               {encomenda.fase}
             </div>
             
-            {/* Linha decorativa animada */}
-            <div style={styles.progressLine}>
-              <div style={styles.progressFill}></div>
-            </div>
+            {/* A Barra: Agora é um separador elegante dourado */}
+            <div style={styles.separatorLine}></div>
 
             <p style={styles.message}>
-              “{encomenda.mensagem}”
+              {encomenda.mensagem}
             </p>
           </div>
 
-          {/* Grid de Informações */}
-          <div style={styles.infoGrid}>
-            <div style={styles.infoItem}>
-              <span style={styles.infoLabel}>Entrega Prevista / Estimated</span>
-              <span style={styles.infoValue}>{encomenda.data_entrega}</span>
-            </div>
-            <div style={styles.infoItem}>
-              <span style={styles.infoLabel}>Última Atualização / Updated</span>
-              <span style={styles.infoValue}>{encomenda.ultima_atualizacao}</span>
-            </div>
+          {/* Data de Entrega (Destaque Único) */}
+          <div style={styles.deliverySection}>
+            <span style={styles.label}>Data de entrega estimada (do quadro)</span>
+            <span style={styles.labelTranslation}>Estimated delivery date (frame)</span>
+            <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
           </div>
+
         </main>
 
         {/* Rodapé */}
         <footer style={styles.footer}>
-          <div style={styles.flowerIcon}>
-            {/* Ícone SVG Floral Minimalista */}
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D4A5A5" strokeWidth="1">
-              <path d="M12 22C12 22 12 14 12 11C12 8 9 5 9 5C9 5 12 7 12 11C12 7 15 5 15 5C15 5 12 8 12 11" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 11C12 11 9 10 7 8C7 8 10 12 12 14C14 12 17 8 17 8C17 8 14 10 12 11Z" strokeLinecap="round" strokeLinejoin="round"/>
+          
+          {/* Detalhe menos relevante (Última atualização) */}
+          <p style={styles.lastUpdate}>
+            Atualizado em / Updated on: {encomenda.ultima_atualizacao}
+          </p>
+
+          <div style={styles.footerIcon}>
+             {/* Ícone Folha (Verde Sálvia) */}
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#586c5c" strokeWidth="1.5">
+              <path d="M12 21C12 21 17 14 17 8C17 4.68629 14.3137 2 11 2C7.68629 2 5 4.68629 5 8C5 14 12 21 12 21Z" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 21V11" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 7C12 7 14 9 14 11" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <p style={styles.footerText}>
-            Cada flor é tratada com tempo e intenção.<br />
-            <span style={styles.footerTranslation}>Each flower is treated with time and intention.</span>
-          </p>
-          <p style={styles.copyright}>© Flores à Beira-Rio</p>
+
+          <p style={styles.footerBrand}>© Flores à Beira-Rio</p>
         </footer>
       </div>
     </div>
   );
 }
 
-// --- Lógica do Servidor (Mantida do teu original) ---
 export async function getServerSideProps(context) {
   const { id } = context.params;
-  
-  // Nota: Certifica-te que o caminho '../utils/googleSheets' está correto
-  // Se a pasta for 'lib', muda para '../lib/googleSheets'
   const encomenda = await getEncomendaById(id);
 
   return {
-    props: {
-      encomenda,
-    },
+    props: { encomenda },
   };
 }
 
-// --- ESTILOS CSS-IN-JS (Design Premium) ---
+// --- ESTILOS (CSS-in-JS) ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F9F7F2', // Creme muito suave (Papel antigo)
+    backgroundColor: '#F7F6F2', // "Linen" - um bege muito claro e natural
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
-    fontFamily: '"Montserrat", sans-serif',
-    color: '#4A4A4A',
+    fontFamily: '"Poppins", sans-serif',
+    color: '#444',
   },
   card: {
     backgroundColor: '#FFFFFF',
     width: '100%',
-    maxWidth: '550px',
-    padding: '0 0 40px 0', // Padding bottom
-    boxShadow: '0 15px 35px rgba(0,0,0,0.05)', // Sombra difusa e elegante
-    borderRadius: '4px',
-    overflow: 'hidden',
+    maxWidth: '500px',
+    padding: '50px 40px',
+    boxShadow: '0 20px 40px rgba(90, 90, 80, 0.08)', // Sombra com subtom esverdeado
+    borderRadius: '0px', // Cantos retos para ser mais "Editorial"
     position: 'relative',
+    border: '1px solid #EAEAEA', // Borda muito subtil
   },
-  // Barra colorida no topo
-  topBar: {
-    height: '6px',
-    width: '100%',
-    backgroundColor: '#D4A5A5', // Rosa "Dusty Rose"
-  },
+
+  // HEADER
   header: {
-    padding: '40px 40px 20px 40px',
     textAlign: 'center',
+    marginBottom: '40px',
     borderBottom: '1px solid #F0F0F0',
+    paddingBottom: '25px',
   },
   brandName: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontSize: '32px',
-    fontWeight: '400',
-    color: '#2C2C2C',
-    margin: '0',
-    letterSpacing: '0.02em',
+    // Tenta usar a 'The Seasons', se não tiver, usa 'Bodoni Moda'
+    fontFamily: '"The Seasons", "Bodoni Moda", serif', 
+    fontSize: '34px',
+    fontWeight: '500', // Peso médio para elegância
+    color: '#2A332C', // Verde Floresta quase preto
+    margin: '0 0 10px 0',
+    letterSpacing: '-0.02em',
   },
-  tagline: {
+  taglineContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2px',
+  },
+  taglinePT: {
+    fontSize: '11px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.15em',
+    color: '#586c5c', // Verde Sálvia
+    fontWeight: '500',
+    margin: 0,
+  },
+  taglineEN: {
     fontSize: '10px',
     textTransform: 'uppercase',
-    letterSpacing: '0.25em',
-    color: '#999',
-    marginTop: '8px',
+    letterSpacing: '0.1em',
+    color: '#9CA69D', // Verde acinzentado claro
+    margin: 0,
   },
-  welcomeSection: {
+
+  // INTRO
+  introSection: {
     textAlign: 'center',
-    marginTop: '30px',
-    marginBottom: '10px',
+    marginBottom: '30px',
   },
-  welcomeText: {
-    fontSize: '13px',
+  introText: {
+    fontSize: '14px',
+    color: '#555',
+    marginBottom: '2px',
+  },
+  introTranslation: {
+    fontSize: '12px',
+    color: '#999',
+    fontStyle: 'italic',
+    fontWeight: '300',
+  },
+
+  // CONTEÚDO PRINCIPAL
+  mainContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  orderName: {
+    fontFamily: '"The Seasons", "Bodoni Moda", serif',
+    fontSize: '32px',
+    textAlign: 'center',
+    color: '#111',
+    margin: '0 0 35px 0',
+    fontWeight: '400',
+    lineHeight: '1.2',
+  },
+
+  // CAIXA DE STATUS
+  statusBox: {
+    width: '100%',
+    backgroundColor: '#F9FAF9', // Fundo esverdeado ultra claro
+    padding: '35px 20px',
+    textAlign: 'center',
+    border: '1px solid #EEF0EE',
+    marginBottom: '40px',
+  },
+  label: {
+    display: 'block',
+    fontSize: '10px',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     color: '#888',
-    marginBottom: '4px',
+    marginBottom: '10px',
   },
-  translation: {
-    fontSize: '11px',
-    fontStyle: 'italic',
-    color: '#AAA',
-    fontFamily: '"Cormorant Garamond", serif',
-  },
-  orderName: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontSize: '38px',
-    textAlign: 'center',
-    color: '#1a1a1a',
-    margin: '10px 0 30px 0',
-    fontWeight: '500',
-    lineHeight: '1.2',
-    padding: '0 20px',
-  },
-  // Área de Status
-  statusContainer: {
-    backgroundColor: '#FAF8F8', // Fundo subtil
-    margin: '0 30px 30px 30px',
-    padding: '30px',
-    borderRadius: '2px',
-    border: '1px solid #EFEFEF',
-    textAlign: 'center',
-  },
-  statusLabel: {
-    fontSize: '10px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    color: '#B08D9B', // Mauve
-    fontWeight: '600',
+  labelTranslation: {
     display: 'block',
-    marginBottom: '15px',
+    fontSize: '9px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    color: '#AAA',
+    marginBottom: '5px',
+    marginTop: '-8px', // Aproxima do label PT
   },
-  statusMain: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontSize: '28px',
-    color: '#333',
+  phaseName: {
+    fontFamily: '"The Seasons", "Bodoni Moda", serif',
+    fontSize: '24px',
+    color: '#2A332C',
     marginBottom: '20px',
   },
-  progressLine: {
-    height: '2px',
-    width: '60px',
-    backgroundColor: '#E0E0E0',
+  // A BARRA (Design Refinado)
+  separatorLine: {
+    width: '40px',
+    height: '1px',
+    backgroundColor: '#C5A059', // Dourado Matte
     margin: '0 auto 20px auto',
-    position: 'relative',
-  },
-  progressFill: {
-    height: '100%',
-    width: '60%', // Simulação de progresso
-    backgroundColor: '#D4A5A5',
   },
   message: {
-    fontSize: '15px',
-    lineHeight: '1.6',
+    fontSize: '14px',
+    lineHeight: '1.7',
     color: '#555',
+    maxWidth: '90%',
+    margin: '0 auto',
     fontStyle: 'italic',
-    fontFamily: '"Cormorant Garamond", serif',
   },
-  // Grid de Detalhes
-  infoGrid: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0 40px',
-    marginBottom: '40px',
-  },
-  infoItem: {
+
+  // SECÇÃO DE ENTREGA
+  deliverySection: {
     textAlign: 'center',
-    width: '45%',
+    marginBottom: '20px',
   },
-  infoLabel: {
-    display: 'block',
-    fontSize: '10px',
-    textTransform: 'uppercase',
-    letterSpacing: '0.1em',
-    color: '#999',
-    marginBottom: '5px',
+  deliveryDate: {
+    fontFamily: '"The Seasons", "Bodoni Moda", serif',
+    fontSize: '22px',
+    color: '#586c5c', // Destaque em Verde Sálvia
+    marginTop: '10px',
+    borderBottom: '1px solid #E0E0E0',
+    paddingBottom: '5px',
+    display: 'inline-block',
   },
-  infoValue: {
-    fontSize: '14px',
-    fontWeight: '500',
-    color: '#333',
-  },
-  // Footer
+
+  // FOOTER
   footer: {
+    marginTop: '50px',
     textAlign: 'center',
-    paddingTop: '20px',
-    borderTop: '1px solid #F9F9F9',
+    borderTop: '1px solid #F5F5F5',
+    paddingTop: '30px',
   },
-  flowerIcon: {
-    marginBottom: '15px',
-  },
-  footerText: {
-    fontSize: '14px',
-    color: '#666',
-    fontFamily: '"Cormorant Garamond", serif',
-    fontStyle: 'italic',
-  },
-  footerTranslation: {
-    fontSize: '12px',
-    color: '#999',
-    display: 'block',
-    marginTop: '2px',
-  },
-  copyright: {
+  lastUpdate: {
     fontSize: '10px',
-    color: '#CCC',
-    marginTop: '30px',
+    color: '#BBB', // Muito discreto
+    marginBottom: '20px',
+  },
+  footerIcon: {
+    marginBottom: '10px',
+    opacity: 0.8,
+  },
+  footerBrand: {
+    fontSize: '10px',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
+    color: '#CCC',
   },
-  // Estilos de Erro
+
+  // ERRO
   errorCard: {
     textAlign: 'center',
     backgroundColor: 'white',
-    padding: '50px',
-    borderRadius: '4px',
-    boxShadow: '0 10px 25px rgba(0,0,0,0.05)',
+    padding: '40px',
+    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
   },
-  errorTitle: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontSize: '30px',
-    color: '#D4A5A5',
-    marginBottom: '5px',
+  heading: {
+    fontFamily: '"The Seasons", "Bodoni Moda", serif',
+    fontSize: '28px',
+    marginBottom: '10px',
   },
-  textSecondary: {
-    color: '#999',
-    fontSize: '14px',
-    fontStyle: 'italic',
-  },
-  textSmall: {
-    fontSize: '12px',
-    color: '#666',
-  },
+  textSecondary: { color: '#999', fontStyle: 'italic' },
+  textSmall: { fontSize: '12px', color: '#666' },
   divider: {
-    width: '30px',
-    height: '1px',
-    backgroundColor: '#EEE',
-    margin: '20px auto',
+    width: '30px', height: '1px', backgroundColor: '#ddd', margin: '20px auto'
   }
 };
