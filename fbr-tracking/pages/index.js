@@ -9,7 +9,6 @@ export default function Home() {
   const handleSearch = (e) => {
     e.preventDefault();
     if (orderId.trim()) {
-      // Redireciona para a página [id]
       router.push(`/${orderId.trim()}`);
     }
   };
@@ -25,7 +24,7 @@ export default function Home() {
 
       <div style={styles.card}>
         
-        {/* Header - Igual ao [id].js */}
+        {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
@@ -37,15 +36,19 @@ export default function Home() {
         </header>
 
         <main>
-          {/* Mensagem de Boas-vindas */}
+          {/* Mensagem de Boas-vindas Bilingue */}
           <div style={styles.welcomeSection}>
             <h2 style={styles.headingTitle}>Bem-vindo ao Atelier</h2>
-            <p style={styles.welcomeText}>
-              Utilize o link que recebeu por email para acompanhar o progresso da sua preservação, ou insira o código da encomenda abaixo.
-            </p>
-            <p style={styles.welcomeTranslation}>
-              Use the link received via email to track your preservation progress, or enter your order code below.
-            </p>
+            <h3 style={styles.headingSubtitle}>Welcome to the Atelier</h3>
+            
+            <div style={styles.textBlock}>
+              <p style={styles.welcomeText}>
+                Utilize o link que recebeu para acompanhar o progresso da sua preservação, ou insira o código da encomenda abaixo.
+              </p>
+              <p style={styles.welcomeTranslation}>
+                Use the link you received to track your preservation progress, or enter your order code below.
+              </p>
+            </div>
           </div>
 
           {/* Formulário de Busca */}
@@ -62,20 +65,16 @@ export default function Home() {
             </button>
           </form>
 
-          {/* Separador visual */}
-          <div style={styles.divider}>
-             <span style={{fontSize: '20px'}}>✿</span>
-          </div>
-
-          {/* Botão Site */}
+          {/* Botão Site (Agora com a flor incluída) */}
           <div style={styles.actionSection}>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+              <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
             </a>
           </div>
         </main>
 
-        {/* Footer - Igual ao [id].js */}
+        {/* Footer */}
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
@@ -105,7 +104,7 @@ export default function Home() {
   );
 }
 
-// --- ESTILOS (Mantendo a consistência com [id].js) ---
+// --- ESTILOS (Sincronizados com o [id].js) ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -157,16 +156,28 @@ const styles = {
     margin: 0,
   },
 
-  // CONTENT
+  // WELCOME SECTION
   welcomeSection: {
-    marginBottom: '30px',
+    marginBottom: '35px',
   },
   headingTitle: {
     fontFamily: '"Instrument Serif", serif',
     fontSize: '32px',
     color: '#2F3E32', // Verde Musgo
-    marginBottom: '15px',
+    margin: '0 0 5px 0',
     fontWeight: '400',
+    lineHeight: '1.1',
+  },
+  headingSubtitle: {
+    fontFamily: '"Instrument Serif", serif',
+    fontSize: '24px',
+    color: '#86868B', // Cinza suave para o inglês
+    margin: '0 0 25px 0',
+    fontWeight: '400',
+    fontStyle: 'italic',
+  },
+  textBlock: {
+    padding: '0 10px',
   },
   welcomeText: {
     fontSize: '15px',
@@ -186,7 +197,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',
-    marginBottom: '30px',
+    marginBottom: '40px',
   },
   input: {
     padding: '16px',
@@ -198,6 +209,7 @@ const styles = {
     outline: 'none',
     backgroundColor: '#F9F9F9',
     transition: 'border 0.2s',
+    color: '#1D1D1F',
   },
   buttonSearch: {
     backgroundColor: '#2F3E32', // Verde Musgo Profundo
@@ -212,21 +224,16 @@ const styles = {
     fontFamily: '"Outfit", sans-serif',
   },
 
-  // DIVIDER
-  divider: {
-    margin: '0 auto 30px auto',
-    color: '#2F3E32',
-    opacity: 0.5,
-  },
-
-  // ACTIONS
+  // ACTION BUTTONS
   actionSection: {
     display: 'flex',
     justifyContent: 'center',
     marginBottom: '40px',
   },
   buttonSite: {
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
     backgroundColor: '#FFFFFF',
     color: '#2F3E32',
@@ -236,9 +243,10 @@ const styles = {
     fontSize: '15px',
     fontWeight: '600',
     border: '2px solid #2F3E32',
+    cursor: 'pointer',
   },
 
-  // FOOTER (Igual)
+  // FOOTER
   footer: {
     borderTop: '1px solid #F5F5F7',
     paddingTop: '30px',
