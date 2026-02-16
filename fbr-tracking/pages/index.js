@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div style={styles.pageWrapper}>
       <Head>
-        <title>Rastreio | Flores à Beira-Rio</title>
+        <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         {/* Fontes: Instrument Serif + Outfit */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -280,3 +280,4 @@ const styles = {
     color: '#86868B',
   },
 };
+
