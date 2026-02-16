@@ -3,46 +3,84 @@ import { getEncomendaById } from '../utils/googleSheets';
 export default function Tracking({ encomenda }) {
   if (!encomenda) {
     return (
-      <h1 style={{ padding: 40, fontFamily: 'Arial' }}>
+      <h1 style={{ padding: 40, fontFamily: 'Poppins, sans-serif', textAlign: 'center' }}>
         Encomenda não encontrada / Order not found
       </h1>
     );
   }
 
   return (
-    <div style={{ 
-      padding: 40, 
-      fontFamily: 'Arial', 
-      maxWidth: '600px', 
-      margin: '0 auto',
-      lineHeight: '1.6'
+    <div style={{
+      fontFamily: "Poppins, sans-serif",
+      maxWidth: "650px",
+      margin: "0 auto",
+      padding: "40px",
+      lineHeight: "1.6",
+      color: "#333"
     }}>
-      
-      <h1 style={{ marginBottom: '20px' }}>
-        {encomenda.nome_encomenda}
+
+      {/* Título principal */}
+      <h1 style={{
+        fontFamily: "The Seasons, serif",
+        fontSize: "36px",
+        textAlign: "center",
+        marginBottom: "10px",
+        color: "#2c2c2c"
+      }}>
+        Acompanhamento da sua encomenda
       </h1>
-
-      <p>
-        <strong>Fase / Stage:</strong><br />
-        {encomenda.fase}
+      <p style={{
+        textAlign: "center",
+        fontSize: "16px",
+        color: "#555",
+        marginBottom: "40px"
+      }}>
+        Track your order with <strong>Flores à Beira-Rio</strong> 💛
       </p>
 
-      <p>
-        <strong>Mensagem / Message:</strong><br />
-        {encomenda.mensagem}
-      </p>
+      {/* Nome do cliente */}
+      <h2 style={{
+        fontFamily: "The Seasons, serif",
+        fontSize: "28px",
+        textAlign: "center",
+        color: "#444",
+        marginBottom: "30px"
+      }}>
+        {encomenda.nome_encomenda}
+      </h2>
 
-      <p>
-        <strong>Última atualização / Last update:</strong><br />
-        {encomenda.ultima_atualizacao}
-      </p>
+      {/* Fase atual */}
+      <div style={{
+        backgroundColor: "#fceef4",
+        padding: "20px",
+        borderRadius: "12px",
+        marginBottom: "30px",
+        textAlign: "center",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+      }}>
+        <p style={{ fontSize: "18px", margin: "0 0 10px 0" }}>
+          ✨ <strong>Fase atual / Current stage:</strong>
+        </p>
+        <p style={{ fontSize: "20px", fontWeight: "600", margin: "0", color: "#d6336c" }}>
+          {encomenda.fase}
+        </p>
+      </div>
 
-      <p>
-        <strong>Data de entrega / Delivery date:</strong><br />
-        {encomenda.data_entrega}
-      </p>
+      {/* Mensagem detalhada */}
+      <div style={{ marginBottom: "30px" }}>
+        <p style={{ fontSize: "16px", lineHeight: "1.8" }}>
+          <strong>Mensagem / Message:</strong><br />
+          {encomenda.mensagem}
+        </p>
+        <p style={{ fontSize: "14px", color: "#888" }}>
+          <strong>Última atualização / Last update:</strong> {encomenda.ultima_atualizacao}
+        </p>
+        <p style={{ fontSize: "14px", color: "#888" }}>
+          <strong>Data de entrega / Delivery date:</strong> {encomenda.data_entrega}
+        </p>
+      </div>
 
-      {/* Bloco emocional bilingue */}
+      {/* Bloco emocional fofo */}
       <div style={{
         marginTop: "50px",
         paddingTop: "30px",
@@ -53,17 +91,14 @@ export default function Tracking({ encomenda }) {
         fontStyle: "italic",
         lineHeight: "1.8"
       }}>
-        <p>✿</p>
-
+        <p>🌸</p>
         <p>
           Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
         </p>
         <p>
           Thank you for trusting <strong>Flores à Beira-Rio</strong> with the preservation of your bouquet.
         </p>
-
         <br />
-
         <p>
           Cada flor está a ser cuidada com tempo, delicadeza e intenção.
         </p>
@@ -86,4 +121,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
