@@ -13,7 +13,7 @@ export default function Tracking({ encomenda }) {
       <div style={styles.pageWrapper}>
         <Head>
           {/* Instrument Serif (Títulos) + Outfit (Corpo Moderno) */}
-          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingError}>Encomenda não encontrada</h1>
@@ -34,8 +34,8 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        {/* Importação das Fontes */}
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        {/* Importação das Fontes (incluindo peso 700 para destaque) */}
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
@@ -43,6 +43,7 @@ export default function Tracking({ encomenda }) {
         {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+            {/* Marca agora MAIOR */}
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
           <div style={styles.taglineContainer}>
@@ -52,13 +53,13 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Intro - AGORA CONSISTENTE */}
+          {/* Intro (Consistente) */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente - AGORA MUITO MAIOR E COM COR */}
+          {/* Nome do Cliente (Agora ligeiramente menor que a marca) */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
           {/* STATUS BOX */}
@@ -85,17 +86,16 @@ export default function Tracking({ encomenda }) {
             </div>
           </div>
 
-          {/* DATA ENTREGA */}
+          {/* DATA ENTREGA - LABELS MAIORES */}
           <div style={styles.deliveryContainer}>
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
               <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
-              {/* Data em Verde Musgo */}
               <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
             </div>
           </div>
 
-          {/* BOTÕES DE AÇÃO - COM CORES DO TEMA */}
+          {/* BOTÕES DE AÇÃO */}
           <div style={styles.actionSection}>
             
             {/* WhatsApp - Verde Musgo */}
@@ -106,7 +106,7 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site - Com Borda e Texto Verde Musgo */}
+            {/* Site - Com Borda e Texto Verde Musgo + FLOR */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -150,12 +150,11 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// --- ESTILOS REFINADOS (Hierarquia e Cores) ---
+// --- ESTILOS REFINADOS ---
 const styles = {
-  // Fundo Eucalipto Pálido
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F0F2F0', 
+    backgroundColor: '#F0F2F0', // Eucalipto Pálido
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -178,14 +177,15 @@ const styles = {
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '32px', // Ligeiramente menor que o nome do cliente
+    fontSize: '46px', // AUMENTADO: O maior elemento da página
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
     letterSpacing: '-0.01em',
+    lineHeight: '1',
   },
   taglineContainer: {
-    marginTop: '6px',
+    marginTop: '8px',
   },
   taglinePT: {
     fontSize: '11px',
@@ -204,12 +204,12 @@ const styles = {
     margin: 0,
   },
 
-  // INTRO (Visualmente equilibrado)
+  // INTRO
   introContainer: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
     fontWeight: '600',
-    color: '#2F3E32', // Verde escuro para a principal
+    color: '#2F3E32',
     margin: '0 0 4px 0',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
@@ -217,16 +217,16 @@ const styles = {
   introTranslation: {
     fontSize: '12px',
     fontWeight: '500',
-    color: '#889', // Cinza para a tradução
+    color: '#889',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
 
-  // NOME CLIENTE (O Destaque Principal)
+  // NOME CLIENTE
   clientName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '42px', // Significativamente maior
-    color: '#2F3E32', // Verde Musgo Profundo
+    fontSize: '38px', // REDUZIDO: Ligeiramente menor que a marca
+    color: '#2F3E32', // Verde Musgo
     margin: '0 0 35px 0',
     fontWeight: '400',
     lineHeight: '1.1',
@@ -258,7 +258,7 @@ const styles = {
     fontSize: '32px',
     fontWeight: '400',
     fontStyle: 'italic',
-    color: '#2F3E32', // Verde Musgo Profundo
+    color: '#2F3E32',
     marginBottom: '15px',
     lineHeight: '1.1',
   },
@@ -280,7 +280,7 @@ const styles = {
     boxShadow: '0 2px 5px rgba(0,0,0,0.03)',
   },
 
-  // ENTREGA
+  // ENTREGA (Labels aumentadas)
   deliveryContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -292,14 +292,15 @@ const styles = {
   },
   deliveryLabel: {
     display: 'block',
-    fontSize: '12px',
-    fontWeight: '600',
+    fontSize: '16px', // AUMENTADO: Muito mais visível
+    fontWeight: '700', // Mais peso
     color: '#1D1D1F',
-    marginBottom: '2px',
+    marginBottom: '4px',
   },
   deliveryLabelEn: {
     display: 'block',
-    fontSize: '11px',
+    fontSize: '14px', // AUMENTADO
+    fontWeight: '500',
     color: '#86868B',
     marginBottom: '8px',
   },
@@ -308,11 +309,11 @@ const styles = {
     fontStyle: 'italic',
     fontSize: '32px',
     fontWeight: '400',
-    color: '#2F3E32', // Verde Musgo Profundo
+    color: '#2F3E32',
     margin: 0,
   },
 
-  // BOTÕES (Com as cores do tema)
+  // BOTÕES
   actionSection: {
     display: 'flex',
     flexDirection: 'column',
@@ -323,7 +324,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2F3E32', // Verde Musgo Profundo
+    backgroundColor: '#2F3E32',
     color: '#FFFFFF',
     textDecoration: 'none',
     padding: '16px',
@@ -337,13 +338,13 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFFFFF',
-    color: '#2F3E32', // Texto Verde Musgo
+    color: '#2F3E32',
     textDecoration: 'none',
     padding: '16px',
     borderRadius: '14px',
     fontSize: '15px',
     fontWeight: '600',
-    border: '2px solid #2F3E32', // Borda Verde Musgo
+    border: '2px solid #2F3E32',
   },
 
   // FOOTER
