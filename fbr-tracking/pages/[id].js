@@ -59,7 +59,7 @@ export default function Tracking({ encomenda }) {
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente (AGORA MAIS PEQUENO - 30px) */}
+          {/* Nome do Cliente (30px) */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
           {/* STATUS BOX */}
@@ -81,11 +81,12 @@ export default function Tracking({ encomenda }) {
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              Atualizado em / Updated: <strong>{encomenda.ultima_atualizacao}</strong>
+              {/* ALTERADO AQUI */}
+              Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
             </div>
           </div>
 
-          {/* DATA ENTREGA - Texto Atualizado */}
+          {/* DATA ENTREGA */}
           <div style={styles.deliveryContainer}>
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada da sua encomenda</span>
@@ -146,10 +147,11 @@ export default function Tracking({ encomenda }) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const encomenda = await getEncomendaById(id);
+
   return { props: { encomenda } };
 }
 
-// --- ESTILOS FINAIS ---
+// --- ESTILOS ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -176,7 +178,7 @@ const styles = {
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '46px', // GRANDE
+    fontSize: '46px',
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -224,7 +226,7 @@ const styles = {
   // NOME CLIENTE
   clientName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '30px', // PEQUENO (Hierarquia correta)
+    fontSize: '30px',
     color: '#2F3E32', 
     margin: '0 0 35px 0',
     fontWeight: '400',
@@ -291,7 +293,7 @@ const styles = {
   },
   deliveryLabel: {
     display: 'block',
-    fontSize: '16px', // Visível
+    fontSize: '16px',
     fontWeight: '700', 
     color: '#1D1D1F',
     marginBottom: '4px',
