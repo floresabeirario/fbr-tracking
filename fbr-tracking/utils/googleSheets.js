@@ -2,40 +2,28 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 
 const doc = new GoogleSpreadsheet('1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI');
 
-// Função para autenticar e carregar informações da planilha
+let isAuth = false;
+
 async function accessSheet() {
-  try {
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-      throw new Error("Variável de ambiente GOOGLE_SERVICE_ACCOUNT_JSON não definida!");
+  if (!isAuth) {
+    try {
+      await doc.useServiceAccountAuth(JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON));
+      isAuth = true;
+    } catch (err) {
+      console.error('Erro de autenticação com a conta de serviço:', err);
+      throw new Error('Falha na autenticação com Google Sheets');
     }
-
-    const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-
-    await doc.useServiceAccountAuth(serviceAccount);
-    await doc.loadInfo(); // carrega informações do Sheet
-  } catch (err) {
-    console.error("Erro ao autenticar no Google Sheets:", err.message);
-    throw err; // relança o erro para aparecer no log da Vercel
   }
+  await doc.loadInfo();
 }
 
-// Função para buscar encomenda pelo ID
 export async function getEncomendaById(id) {
   try {
-    if (!id) {
-      throw new Error("ID da encomenda não fornecido!");
-    }
-
     await accessSheet();
-    const sheet = doc.sheetsByIndex[0]; // primeira aba
+    const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows();
-
-    const encomenda = rows.find(r => r.id.trim() === id.trim());
-
-    if (!encomenda) {
-      console.warn(`Encomenda com ID ${id} não encontrada!`);
-      return null;
-    }
+    const encomenda = rows.find(r => r.id?.trim() === id?.trim());
+    if (!encomenda) return null;
 
     return {
       id: encomenda.id,
@@ -43,10 +31,12 @@ export async function getEncomendaById(id) {
       fase: encomenda.fase,
       mensagem: encomenda.mensagem,
       ultima_atualizacao: encomenda.ultima_atualizacao,
-      data_entrega: encomenda.data_entrega,
+      data_entrega: encomenda.data_entrega
     };
   } catch (err) {
-    console.error("Erro ao buscar encomenda:", err.message);
-    throw err;
+    console.error('Erro ao acessar o Google Sheets:', err);
+    throw new Error('Erro ao acessar dados do Google Sheets');
   }
 }
+
+
