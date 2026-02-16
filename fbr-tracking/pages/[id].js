@@ -12,8 +12,8 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          {/* Nova Fonte: Rosarivo (Elegância Intemporal) + Montserrat (Leitura) */}
-          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet" />
+          {/* Nova Fonte: Instrument Serif (Títulos) + Montserrat (Corpo) */}
+          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
           <h1 style={styles.headingError}>Encomenda não encontrada</h1>
@@ -34,7 +34,7 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
@@ -75,7 +75,6 @@ export default function Tracking({ encomenda }) {
             </p>
 
             <div style={styles.updateBadge}>
-              {/* Ícone relógio simples */}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 6, opacity: 0.6}}>
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
@@ -104,7 +103,7 @@ export default function Tracking({ encomenda }) {
               Fale connosco / Chat with us
             </a>
 
-            {/* Site - COM O ÍCONE PEDIDO ✿ */}
+            {/* Site - Com a flor ✿ */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -175,11 +174,12 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Rosarivo", serif', // NOVA FONTE
-    fontSize: '34px',
+    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
+    fontSize: '36px', // Aumentei um pouco pois Instrument Serif é alta e fina
     color: '#1D1D1F',
     margin: '0',
-    fontWeight: '400', // Normal para ser elegante
+    fontWeight: '400',
+    letterSpacing: '-0.01em',
   },
   taglineContainer: {
     marginTop: '6px',
@@ -218,8 +218,8 @@ const styles = {
 
   // NOME CLIENTE
   clientName: {
-    fontFamily: '"Rosarivo", serif', // NOVA FONTE
-    fontSize: '32px',
+    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
+    fontSize: '34px',
     color: '#1D1D1F',
     margin: '0 0 30px 0',
     fontWeight: '400',
@@ -247,12 +247,13 @@ const styles = {
     color: '#86868B',
   },
   statusMainText: {
-    fontFamily: '"Rosarivo", serif', // NOVA FONTE
-    fontSize: '28px',
+    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
+    fontSize: '32px', // Maior para destaque
     fontWeight: '400',
+    fontStyle: 'italic', // Instrument Serif em itálico é linda
     color: '#1D1D1F',
     marginBottom: '15px',
-    lineHeight: '1.2',
+    lineHeight: '1.1',
   },
   message: {
     fontSize: '15px',
@@ -296,9 +297,9 @@ const styles = {
     marginBottom: '8px',
   },
   deliveryDate: {
-    fontFamily: '"Rosarivo", serif', // NOVA FONTE
+    fontFamily: '"Instrument Serif", serif', // NOVA FONTE
     fontStyle: 'italic',
-    fontSize: '28px',
+    fontSize: '32px', // Um pouco maior
     fontWeight: '400',
     color: '#1D1D1F',
     margin: 0,
@@ -373,7 +374,7 @@ const styles = {
   },
 
   // ERRO
-  headingError: { fontFamily: '"Rosarivo", serif', fontSize: '30px', color: '#1D1D1F', marginBottom: '10px' },
+  headingError: { fontFamily: '"Instrument Serif", serif', fontSize: '32px', color: '#1D1D1F', marginBottom: '10px' },
   textSecondary: { color: '#86868B', fontSize: '14px' },
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
