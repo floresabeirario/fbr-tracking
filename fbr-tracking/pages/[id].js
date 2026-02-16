@@ -23,74 +23,72 @@ export default function Tracking({ encomenda }) {
 
   const currentFaseIndex = fases.indexOf(encomenda.fase);
 
+  const passadas = fases.slice(Math.max(0, currentFaseIndex - 1), currentFaseIndex);
+  const atual = fases[currentFaseIndex];
+  const proximas = fases.slice(currentFaseIndex + 1, currentFaseIndex + 2);
+
   return (
-    <div style={{ 
-      padding: '40px 20px', 
-      fontFamily: 'Arial', 
-      maxWidth: '600px', 
-      margin: '0 auto', 
-      lineHeight: '1.6' 
+    <div style={{
+      padding: 40,
+      fontFamily: 'Arial',
+      maxWidth: '600px',
+      margin: '0 auto',
+      lineHeight: 1.6
     }}>
       
       {/* Mensagem principal */}
-      <h2 style={{ marginBottom: '20px', fontSize: '24px', textAlign: 'center' }}>
+      <h2 style={{ marginBottom: 30, fontSize: 22, textAlign: 'center' }}>
         {encomenda.mensagem}
       </h2>
 
       {/* Data de entrega estimada */}
-      <p style={{ textAlign: 'center', fontSize: '16px', marginBottom: '40px' }}>
+      <p style={{ textAlign: 'center', fontSize: 16, marginBottom: 40 }}>
         <strong>Data de entrega estimada do quadro / Estimated delivery date:</strong><br />
         {encomenda.data_entrega}
       </p>
 
-      {/* Timeline vertical */}
-      <div style={{ borderLeft: '2px solid #ccc', paddingLeft: '20px', marginBottom: '50px' }}>
-        {fases.map((fase, idx) => {
-          const isPast = idx < currentFaseIndex;
-          const isCurrent = idx === currentFaseIndex;
+      {/* Barra horizontal simplificada */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 50
+      }}>
+        {/* Passadas */}
+        {passadas.length > 0 && passadas.map((fase, idx) => (
+          <span key={idx} style={{ color: '#999', fontSize: 14 }}>
+            {fase}
+          </span>
+        ))}
 
-          return (
-            <div key={fase} style={{ marginBottom: '20px', position: 'relative' }}>
-              {/* Ponto da timeline */}
-              <div style={{
-                position: 'absolute',
-                left: '-11px',
-                top: '2px',
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                backgroundColor: isCurrent ? '#333' : (isPast ? '#999' : '#eee'),
-                border: '2px solid #ccc'
-              }}></div>
+        {/* Atual */}
+        <span style={{ fontWeight: 'bold', color: '#333', fontSize: 16 }}>
+          {atual}
+        </span>
 
-              {/* Texto da fase */}
-              <span style={{
-                fontWeight: isCurrent ? 'bold' : 'normal',
-                color: isCurrent ? '#333' : (isPast ? '#555' : '#888')
-              }}>
-                {fase}
-              </span>
-            </div>
-          );
-        })}
+        {/* Próximas */}
+        {proximas.length > 0 && proximas.map((fase, idx) => (
+          <span key={idx} style={{ color: '#ccc', fontSize: 14 }}>
+            {fase}
+          </span>
+        ))}
       </div>
 
       {/* Última atualização */}
-      <p style={{ textAlign: 'center', fontSize: '14px', color: '#777' }}>
+      <p style={{ textAlign: 'center', fontSize: 14, color: '#777', marginBottom: 50 }}>
         <strong>Última atualização / Last update:</strong><br />
         {encomenda.ultima_atualizacao}
       </p>
 
       {/* Rodapé emocional */}
       <div style={{
-        marginTop: '50px',
-        paddingTop: '30px',
+        paddingTop: 30,
         borderTop: '1px solid #f0f0f0',
         textAlign: 'center',
-        fontSize: '13px',
+        fontSize: 13,
         color: '#8a8a8a',
         fontStyle: 'italic',
-        lineHeight: '1.8'
+        lineHeight: 1.8
       }}>
         <p>
           Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
