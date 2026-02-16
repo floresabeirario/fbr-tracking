@@ -12,14 +12,14 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Tenor+Sans&display=swap" rel="stylesheet" />
+          {/* Alice (Títulos Fofos) + Lato (Leitura Limpa) */}
+          <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
-          <h1 style={styles.headingError}>Encomenda não encontrada</h1>
-          <p style={styles.textSecondary}>Order not found</p>
+          <h1 style={styles.headingFont}>Encomenda não encontrada</h1>
+          <p style={styles.textBody}>Não encontramos este número. Por favor verifique.</p>
           <div style={styles.divider}></div>
-          <p style={styles.textBody}>Verifique o número da encomenda.</p>
-          <a href={whatsappUrl} style={styles.buttonAction}>
+          <a href={whatsappUrl} style={styles.buttonPrimary}>
             Fale connosco
           </a>
         </div>
@@ -33,17 +33,13 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Rastreio | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        {/* NOVAS FONTES:
-            1. Tenor Sans -> Para o STATUS (Clean, Humanista, Fashion)
-            2. Cormorant Garamond -> Para Títulos (Luxo)
-            3. Inter -> Para botões e textos pequenos (Legibilidade)
-        */}
-        <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        {/* Apenas 2 fontes para evitar confusão */}
+        <link href="https://fonts.googleapis.com/css2?family=Alice&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div style={styles.card}>
         
-        {/* Header (Perfeito - Não mexi) */}
+        {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
@@ -52,7 +48,7 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* INTRODUÇÃO (DE VOLTA!) */}
+          {/* Intro */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
@@ -61,77 +57,79 @@ export default function Tracking({ encomenda }) {
           {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* --- NOVA CAIXA DE STATUS (Minimalista & Clean) --- */}
-          <div style={styles.statusMinimal}>
+          {/* CAIXA DE STATUS (Limpa e Simpática) */}
+          <div style={styles.statusBox}>
+            <span style={styles.label}>Fase Atual / Current Stage</span>
             
-            {/* Label discreta */}
-            <span style={styles.statusLabel}>Fase Atual / Current Stage</span>
-
-            {/* O Status em Tenor Sans (Grande e Limpo) */}
-            <div style={styles.statusMainText}>
+            <div style={styles.statusTitle}>
               {encomenda.fase}
             </div>
 
-            {/* Separador muito fino */}
-            <div style={styles.thinDivider}></div>
+            <div style={styles.dividerSmall}></div>
 
-            {/* Mensagem */}
             <p style={styles.message}>
               {encomenda.mensagem}
             </p>
 
-            {/* Data de Atualização (Pequena e técnica) */}
-            <p style={styles.updateDate}>
-              Atualizado em / Updated: {encomenda.ultima_atualizacao}
-            </p>
+            {/* Atualização discreta */}
+            <div style={styles.updateRow}>
+              <span>Atualizado em: <strong>{encomenda.ultima_atualizacao}</strong></span>
+            </div>
           </div>
 
           {/* DATA ENTREGA */}
           <div style={styles.deliveryContainer}>
-             <div style={styles.deliveryBox}>
-                <span style={styles.deliveryLabel}>Entrega estimada (Quadro)</span>
-                <span style={styles.deliveryLabelEn}>Estimated delivery (Frame)</span>
-                <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
-             </div>
+            <div style={styles.deliveryContent}>
+              <span style={styles.label}>Entrega estimada (Quadro)</span>
+              <span style={styles.labelEn}>Estimated delivery (Frame)</span>
+              <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
+            </div>
           </div>
 
-          {/* BOTÕES DE AÇÃO */}
-          <div style={styles.actionSection}>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
-              {/* Ícone WhatsApp */}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
+          {/* BOTÕES */}
+          <div style={styles.actions}>
+            
+            {/* WhatsApp (Verde Sálvia - Simpático) */}
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonPrimary}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 8}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
               </svg>
               Fale connosco / Chat with us
             </a>
 
-            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+            {/* Site (Branco) */}
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSecondary}>
               Visitar Site / Visit Website
             </a>
           </div>
         </main>
 
-        {/* Footer (Perfeito - Não mexi) */}
+        {/* Footer */}
         <footer style={styles.footer}>
+          
           <div style={styles.socialRow}>
-            <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
+             {/* Instagram */}
+             <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
+            {/* Facebook */}
             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
+            {/* Google */}
             <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" style={styles.socialIcon} aria-label="Google">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
               </svg>
             </a>
           </div>
+          
           <p style={styles.location}>Coimbra, Portugal</p>
           <p style={styles.copyright}>© Flores à Beira-Rio</p>
         </footer>
@@ -144,30 +142,30 @@ export default function Tracking({ encomenda }) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const encomenda = await getEncomendaById(id);
-
   return { props: { encomenda } };
 }
 
-// --- ESTILOS ---
+// --- ESTILOS SIMPLIFICADOS ---
 const styles = {
+  // Fundo Claro e Limpo (Branco Pérola)
   pageWrapper: {
     minHeight: '100vh',
-    // Fundo "Sage" (Verde Eucalipto Seco)
-    backgroundColor: '#AAB7B0', 
+    backgroundColor: '#F9F9F7', 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
-    fontFamily: '"Inter", sans-serif',
-    color: '#1D1D1F',
+    fontFamily: '"Lato", sans-serif',
+    color: '#4A4A4A',
   },
   card: {
     backgroundColor: '#FFFFFF',
     width: '100%',
     maxWidth: '460px',
-    padding: '50px 30px',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)', 
-    borderRadius: '16px', 
+    padding: '45px 30px',
+    // Sombra muito leve e elegante
+    boxShadow: '0 10px 30px rgba(0,0,0,0.03)', 
+    borderRadius: '20px', 
     textAlign: 'center',
   },
 
@@ -175,160 +173,139 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
-    fontFamily: '"Cormorant Garamond", serif',
-    fontSize: '34px',
-    color: '#1D1D1F',
+    fontFamily: '"Alice", serif', // Fonte Fofa/Romântica
+    fontSize: '32px',
+    color: '#333',
     margin: '0',
-    fontWeight: '500',
-    letterSpacing: '-0.02em',
   },
   tagline: {
-    fontSize: '11px',
-    letterSpacing: '0.25em',
+    fontSize: '10px',
+    letterSpacing: '0.2em',
     textTransform: 'uppercase',
-    color: '#9CA69D',
+    color: '#999',
     marginTop: '6px',
     fontWeight: '700',
   },
 
-  // INTRO (Agora no sítio certo)
+  // INTRO
   introContainer: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
-    fontWeight: '500', // Um pouco mais de peso para leitura
     color: '#666',
     margin: 0,
-    textTransform: 'uppercase', // Estilo editorial
-    letterSpacing: '0.05em',
+    fontWeight: '400',
   },
   introTranslation: {
     fontSize: '12px',
-    color: '#999',
+    color: '#AAA',
     marginTop: '2px',
   },
 
   // NOME
   clientName: {
-    fontFamily: '"Cormorant Garamond", serif',
+    fontFamily: '"Alice", serif',
     fontSize: '34px',
-    color: '#1D1D1F',
-    margin: '0 0 40px 0', // Mais espaço em branco
-    fontWeight: '500',
+    color: '#222',
+    margin: '0 0 35px 0',
+    fontWeight: '400',
   },
 
-  // --- NOVA STATUS BOX (Minimalista) ---
-  statusMinimal: {
+  // STATUS (Clean)
+  statusBox: {
     marginBottom: '40px',
-    textAlign: 'center',
-    // Sem fundo, sem borda lateral, apenas espaço puro
-    padding: '0 10px',
   },
-  statusLabel: {
+  label: {
     display: 'block',
     fontSize: '10px',
     textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    color: '#AAA', // Cinza muito suave
-    fontWeight: '600',
-    marginBottom: '10px',
+    letterSpacing: '0.1em',
+    color: '#999',
+    fontWeight: '700',
+    marginBottom: '8px',
   },
-  statusMainText: {
-    // A nova fonte Tenor Sans brilha aqui
-    fontFamily: '"Tenor Sans", sans-serif',
-    fontSize: '28px', // Grande e legível
-    color: '#2C3E30', // Verde Profundo
-    textTransform: 'uppercase',
-    letterSpacing: '0.02em',
-    marginBottom: '20px',
+  labelEn: {
+    display: 'block',
+    fontSize: '10px',
+    color: '#CCC',
+    marginBottom: '6px',
   },
-  thinDivider: {
-    width: '40px',
+  statusTitle: {
+    fontFamily: '"Alice", serif',
+    fontSize: '30px',
+    color: '#5E6D63', // Verde escuro muito subtil
+    marginBottom: '15px',
+  },
+  dividerSmall: {
+    width: '30px',
     height: '1px',
-    backgroundColor: '#E0E0E0', // Linha muito subtil
-    margin: '0 auto 20px auto',
+    backgroundColor: '#DDD',
+    margin: '0 auto 15px auto',
   },
   message: {
     fontSize: '15px',
     lineHeight: '1.6',
     color: '#555',
-    fontStyle: 'italic',
-    fontFamily: '"Cormorant Garamond", serif', // Mensagem em serif para contraste
-    marginBottom: '15px',
+    marginBottom: '20px',
   },
-  updateDate: {
+  updateRow: {
     fontSize: '11px',
-    color: '#BBB', // Muito discreto
+    color: '#AAA',
   },
 
-  // ENTREGA
+  // ENTREGA (Centrado)
   deliveryContainer: {
     display: 'flex',
     justifyContent: 'center',
     marginBottom: '45px',
   },
-  deliveryBox: {
+  deliveryContent: {
     textAlign: 'center',
-    // Pequena borda apenas na data de entrega para destacar (Opcional, mas fica bem)
-    border: '1px solid #F0F0F0',
-    padding: '15px 30px',
-    borderRadius: '50px',
-  },
-  deliveryLabel: {
-    display: 'block',
-    fontSize: '12px',
-    fontWeight: '600',
-    color: '#1D1D1F',
-    marginBottom: '2px',
-  },
-  deliveryLabelEn: {
-    display: 'block',
-    fontSize: '10px',
-    color: '#999',
-    marginBottom: '5px',
+    padding: '0 10px',
   },
   deliveryDate: {
-    fontFamily: '"Cormorant Garamond", serif',
+    fontFamily: '"Alice", serif',
     fontSize: '24px',
-    fontWeight: '600',
-    color: '#2C3E30',
+    color: '#333',
     margin: 0,
   },
 
   // BOTÕES
-  actionSection: {
+  actions: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '15px',
-    marginBottom: '45px',
+    gap: '12px',
+    marginBottom: '40px',
   },
-  buttonAction: {
+  // Botão Verde Sálvia (Simpático, não neon)
+  buttonPrimary: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2C2C2C', // Preto Carvão
+    backgroundColor: '#7C9082', // Verde Sálvia
     color: '#FFFFFF',
     textDecoration: 'none',
     padding: '16px',
     borderRadius: '50px',
     fontSize: '14px',
-    fontWeight: '500',
+    fontWeight: '700', // Lato Bold
+    boxShadow: '0 4px 10px rgba(124, 144, 130, 0.3)',
     transition: 'background 0.2s',
   },
-  buttonSite: {
+  buttonSecondary: {
     display: 'block',
     backgroundColor: '#FFFFFF',
-    color: '#1D1D1F',
+    color: '#555',
     textDecoration: 'none',
     padding: '16px',
     borderRadius: '50px',
     fontSize: '14px',
-    fontWeight: '500',
-    border: '1px solid #E0E0E0',
+    fontWeight: '400',
+    border: '1px solid #EEE',
   },
 
-  // FOOTER & SOCIAL
+  // FOOTER
   footer: {
-    borderTop: '1px solid #F9F9F9', // Divisão quase invisível
+    borderTop: '1px solid #F5F5F5',
     paddingTop: '30px',
   },
   socialRow: {
@@ -344,25 +321,24 @@ const styles = {
     width: '40px',
     height: '40px',
     borderRadius: '50%',
-    backgroundColor: '#F9F9F9',
-    border: '1px solid #F0F0F0',
+    backgroundColor: '#FAFAFA',
+    border: '1px solid #EEE',
   },
   location: {
     fontSize: '12px',
-    fontWeight: '600',
-    color: '#1D1D1F',
+    fontWeight: '700',
+    color: '#444',
     textTransform: 'uppercase',
-    letterSpacing: '0.15em',
-    marginBottom: '8px',
+    letterSpacing: '0.1em',
+    marginBottom: '5px',
   },
   copyright: {
     fontSize: '11px',
-    color: '#AAA',
+    color: '#CCC',
   },
 
   // ERRO
-  headingError: { fontFamily: '"Inter", sans-serif', fontSize: '24px', color: '#1D1D1F', marginBottom: '10px' },
-  textSecondary: { color: '#888', fontSize: '14px' },
-  textBody: { marginBottom: '30px', color: '#555', lineHeight: '1.5' },
-  divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
+  headingFont: { fontFamily: '"Alice", serif', fontSize: '28px', color: '#333' },
+  textBody: { marginBottom: '25px', color: '#666' },
+  divider: { height: '1px', backgroundColor: '#EEE', margin: '20px auto', width: '50px' }
 };
