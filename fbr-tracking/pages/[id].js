@@ -43,7 +43,6 @@ export default function Tracking({ encomenda }) {
         {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-            {/* Marca GRANDE (46px) */}
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
           <div style={styles.taglineContainer}>
@@ -59,7 +58,7 @@ export default function Tracking({ encomenda }) {
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente (30px) */}
+          {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
           {/* STATUS BOX */}
@@ -81,7 +80,7 @@ export default function Tracking({ encomenda }) {
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              {/* ALTERADO AQUI */}
+              {/* ESPAÇO GARANTIDO APÓS OS DOIS PONTOS */}
               Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
             </div>
           </div>
@@ -142,13 +141,6 @@ export default function Tracking({ encomenda }) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const { id } = context.params;
-  const encomenda = await getEncomendaById(id);
-
-  return { props: { encomenda } };
 }
 
 // --- ESTILOS ---
@@ -226,7 +218,7 @@ const styles = {
   // NOME CLIENTE
   clientName: {
     fontFamily: '"Instrument Serif", serif',
-    fontSize: '30px',
+    fontSize: '30px', // PEQUENO (Hierarquia correta)
     color: '#2F3E32', 
     margin: '0 0 35px 0',
     fontWeight: '400',
