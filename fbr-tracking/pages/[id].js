@@ -3,9 +3,9 @@ import { getEncomendaById } from '../utils/googleSheets';
 export default function Tracking({ encomenda }) {
   if (!encomenda) {
     return (
-      <h1 style={{ padding: 40, fontFamily: 'Arial' }}>
-        Encomenda não encontrada / Order not found
-      </h1>
+      <div style={{ padding: 40, fontFamily: 'Arial', textAlign: 'center' }}>
+        <h1>Encomenda não encontrada / Order not found</h1>
+      </div>
     );
   }
 
@@ -15,65 +15,58 @@ export default function Tracking({ encomenda }) {
       fontFamily: 'Arial',
       maxWidth: '600px',
       margin: '0 auto',
-      lineHeight: 1.6
+      lineHeight: 1.6,
     }}>
-      
-      {/* Cabeçalho: nome da encomenda */}
-      <h1 style={{ marginBottom: 30, textAlign: 'center' }}>
-        {encomenda.nome_encomenda}
-      </h1>
 
-      {/* Caixa da fase */}
+      {/* Introdução neutra */}
+      <p style={{ marginBottom: 30, textAlign: 'center', fontSize: 16 }}>
+        Estamos a acompanhar cuidadosamente cada etapa do seu quadro, do bouquet à obra final. /<br />
+        We are carefully tracking each step of your artwork, from bouquet to final piece.
+      </p>
+
+      {/* Nome da encomenda */}
+      <h2 style={{ marginBottom: 20, textAlign: 'center', fontWeight: 'normal' }}>
+        {encomenda.nome_encomenda}
+      </h2>
+
+      {/* Fase atual destacada */}
       <div style={{
-        padding: 20,
         backgroundColor: '#f7f7f7',
-        borderRadius: 8,
+        padding: 20,
+        borderRadius: 10,
         textAlign: 'center',
-        fontWeight: 'bold',
-        marginBottom: 30
+        marginBottom: 20,
       }}>
-        {encomenda.fase}
+        <h3 style={{ margin: 0, color: '#b45f9b' }}>
+          {encomenda.fase}
+        </h3>
       </div>
 
-      {/* Mensagem */}
-      <p style={{ fontSize: 16, textAlign: 'center', marginBottom: 30 }}>
+      {/* Mensagem explicativa da fase */}
+      <p style={{ fontSize: 16, textAlign: 'center', marginBottom: 20 }}>
         {encomenda.mensagem}
       </p>
 
-      {/* Data de entrega estimada do quadro */}
-      <p style={{ textAlign: 'center', fontSize: 16, marginBottom: 50 }}>
-        <strong>Data de entrega estimada do quadro / Estimated delivery date:</strong><br />
+      {/* Data de entrega estimada */}
+      <p style={{ fontWeight: 'bold', textAlign: 'center', marginBottom: 10 }}>
+        Data de entrega estimada do quadro / Estimated delivery date: <br />
         {encomenda.data_entrega}
       </p>
 
       {/* Última atualização */}
-      <p style={{ textAlign: 'center', fontSize: 14, color: '#777', marginBottom: 50 }}>
-        <strong>Última atualização / Last update:</strong><br />
-        {encomenda.ultima_atualizacao}
+      <p style={{ fontSize: 12, color: '#888', textAlign: 'center', marginBottom: 40 }}>
+        Última atualização / Last update: {encomenda.ultima_atualizacao}
       </p>
 
       {/* Rodapé emocional */}
-      <div style={{
-        paddingTop: 30,
-        borderTop: '1px solid #f0f0f0',
-        textAlign: 'center',
-        fontSize: 13,
-        color: '#8a8a8a',
-        fontStyle: 'italic',
-        lineHeight: 1.8
-      }}>
+      <div style={{ textAlign: 'center', fontSize: 14, color: '#555' }}>
         <p>✿</p>
         <p>
-          Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.
-        </p>
-        <p>
+          Obrigada por confiar na <strong>Flores à Beira-Rio</strong> para a preservação do seu bouquet.<br />
           Thank you for trusting <strong>Flores à Beira-Rio</strong> with the preservation of your bouquet.
         </p>
-        <br />
         <p>
-          Cada flor está a ser cuidada com tempo, delicadeza e intenção.
-        </p>
-        <p>
+          Cada flor está a ser cuidada com tempo, delicadeza e intenção.<br />
           Each flower is being cared for with time, delicacy and intention.
         </p>
       </div>
