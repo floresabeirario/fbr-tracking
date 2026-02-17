@@ -142,7 +142,7 @@ export default function Tracking({ encomenda }) {
             </a>
           </div>
           
-          {/* Link do Google Maps (Texto) */}
+          {/* Link do Google Maps no Texto */}
           <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
             Coimbra, Portugal
           </a>
