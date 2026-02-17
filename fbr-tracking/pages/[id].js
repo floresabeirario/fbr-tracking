@@ -36,7 +36,7 @@ export default function Tracking({ encomenda }) {
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         
-        {/* FAVICON - Certifica-te que o ficheiro 'icon.png' está na pasta public */}
+        {/* FAVICON */}
         <link rel="icon" href="/icon.png" type="image/png" />
         
         {/* Importação das Fontes */}
@@ -48,7 +48,6 @@ export default function Tracking({ encomenda }) {
         {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-            {/* Marca GRANDE (46px) */}
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
           <div style={styles.taglineContainer}>
@@ -64,7 +63,7 @@ export default function Tracking({ encomenda }) {
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente (30px) */}
+          {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
           {/* STATUS BOX */}
@@ -121,6 +120,7 @@ export default function Tracking({ encomenda }) {
         {/* Footer */}
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
+             {/* Instagram */}
              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -128,19 +128,21 @@ export default function Tracking({ encomenda }) {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
+            {/* Facebook */}
             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
-            <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" style={styles.socialIcon} aria-label="Google">
+            {/* Google - LINK ATUALIZADO AQUI */}
+            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
               </svg>
             </a>
           </div>
           
-          {/* Link do Google Maps Atualizado */}
+          {/* Link do Google Maps (Texto) */}
           <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
             Coimbra, Portugal
           </a>
@@ -378,16 +380,15 @@ const styles = {
     backgroundColor: '#F5F5F7',
     border: '1px solid #EEEEEE',
   },
-  // NOVO ESTILO PARA O LINK DO MAPA
   locationLink: {
-    display: 'inline-block', // Permite margens
+    display: 'inline-block',
     fontSize: '12px',
     fontWeight: '600',
     color: '#1D1D1F',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     marginBottom: '8px',
-    textDecoration: 'none', // Remove sublinhado padrão
+    textDecoration: 'none',
     cursor: 'pointer',
     transition: 'opacity 0.2s',
   },
