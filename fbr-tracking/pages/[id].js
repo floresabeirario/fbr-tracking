@@ -186,18 +186,17 @@ export default function Tracking({ encomenda }) {
               </svg>
               Fale connosco / Chat with us
             </a>
-
-            {/* Site */}
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
             </a>
           </div>
-
-          {/* Footer */}
-          <footer style={styles.footer}>
+        </main>
+        
+        {/* Footer Completo */}
+        <footer style={styles.footer}>
             <div style={styles.socialRow}>
-               <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
+              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -222,7 +221,6 @@ export default function Tracking({ encomenda }) {
             
             <p style={styles.copyright}>© Flores à Beira-Rio</p>
           </footer>
-
       </div>
     </div>
   );
