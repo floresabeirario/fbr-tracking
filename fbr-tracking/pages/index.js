@@ -18,10 +18,10 @@ export default function Home() {
       <Head>
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        
+        {/* FAVICON */}
+        <link rel="icon" href="/icon.png" type="image/png" />
 
-    {/* 2. AQUI LIGAS O ÍCONE (Se usares um PNG chamado 'icon.png' na pasta public) */}
-  <link rel="icon" href="/icon.png" type="image/png" />
-    
         {/* Fontes: Instrument Serif + Outfit */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
@@ -40,7 +40,7 @@ export default function Home() {
         </header>
 
         <main>
-          {/* Intro Section - TÍTULOS ALTERADOS AQUI */}
+          {/* Intro Section */}
           <div style={styles.welcomeSection}>
             <h2 style={styles.headingTitle}>A viagem das suas flores</h2>
             <h3 style={styles.headingSubtitle}>Your flowers' journey</h3>
@@ -78,9 +78,10 @@ export default function Home() {
           </div>
         </main>
 
-        {/* Footer */}
+        {/* Footer (IGUAL AO [ID].JS) */}
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
+             {/* Instagram */}
              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -88,18 +89,25 @@ export default function Home() {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
+            {/* Facebook */}
             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
-            <a href="https://share.google/cii2zipc8jx1Wjkop" target="_blank" style={styles.socialIcon} aria-label="Google">
+            {/* Google - Link do Mapa */}
+            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
               </svg>
             </a>
           </div>
-          <p style={styles.location}>Coimbra, Portugal</p>
+          
+          {/* Link do Google Maps (Texto) */}
+          <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
+            Coimbra, Portugal
+          </a>
+          
           <p style={styles.copyright}>© Flores à Beira-Rio</p>
         </footer>
 
@@ -108,7 +116,7 @@ export default function Home() {
   );
 }
 
-// --- ESTILOS (Sincronizados com o ID) ---
+// --- ESTILOS ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -271,18 +279,21 @@ const styles = {
     backgroundColor: '#F5F5F7',
     border: '1px solid #EEEEEE',
   },
-  location: {
+  // ESTILO NOVO PARA O LINK
+  locationLink: {
+    display: 'inline-block',
     fontSize: '12px',
     fontWeight: '600',
     color: '#1D1D1F',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     marginBottom: '8px',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    transition: 'opacity 0.2s',
   },
   copyright: {
     fontSize: '11px',
     color: '#86868B',
   },
 };
-
-
