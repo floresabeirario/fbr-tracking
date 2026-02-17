@@ -12,7 +12,8 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
-          {/* Instrument Serif (Títulos) + Outfit (Corpo Moderno) */}
+          <title>Rastreio | Flores à Beira-Rio</title>
+          <link rel="icon" href="/icon.png" type="image/png" />
           <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
@@ -34,10 +35,10 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    
-     {/* 2. AQUI LIGAS O ÍCONE (Se usares um PNG chamado 'icon.png' na pasta public) */}
-  <link rel="icon" href="/icon.png" type="image/png" />
-    
+        
+        {/* FAVICON - Certifica-te que o ficheiro 'icon.png' está na pasta public */}
+        <link rel="icon" href="/icon.png" type="image/png" />
+        
         {/* Importação das Fontes */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
@@ -85,7 +86,6 @@ export default function Tracking({ encomenda }) {
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
-              {/* ALTERADO AQUI */}
               Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
             </div>
           </div>
@@ -139,7 +139,12 @@ export default function Tracking({ encomenda }) {
               </svg>
             </a>
           </div>
-          <p style={styles.location}>Coimbra, Portugal</p>
+          
+          {/* Link do Google Maps Atualizado */}
+          <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
+            Coimbra, Portugal
+          </a>
+          
           <p style={styles.copyright}>© Flores à Beira-Rio</p>
         </footer>
 
@@ -373,13 +378,18 @@ const styles = {
     backgroundColor: '#F5F5F7',
     border: '1px solid #EEEEEE',
   },
-  location: {
+  // NOVO ESTILO PARA O LINK DO MAPA
+  locationLink: {
+    display: 'inline-block', // Permite margens
     fontSize: '12px',
     fontWeight: '600',
     color: '#1D1D1F',
     textTransform: 'uppercase',
     letterSpacing: '0.1em',
     marginBottom: '8px',
+    textDecoration: 'none', // Remove sublinhado padrão
+    cursor: 'pointer',
+    transition: 'opacity 0.2s',
   },
   copyright: {
     fontSize: '11px',
@@ -392,5 +402,3 @@ const styles = {
   textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
 };
-
-
