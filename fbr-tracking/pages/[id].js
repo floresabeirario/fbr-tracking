@@ -5,44 +5,31 @@ export default function Tracking({ encomenda }) {
   // Configuração WhatsApp
   const whatsappNumber = "351934680300";
   const whatsappMessage = `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  // Mensagem genérica para quando não há encomenda encontrada
+  const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site.";
+  
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
 
   // --- FUNÇÃO PARA FORMATAR TEXTO (LINKS E PARÁGRAFOS) ---
   const formatText = (text) => {
     if (!text) return null;
-
-    // 1. Divide o texto onde houver "Enters" (\n) no Google Sheets
     return text.split('\n').map((line, index) => (
       <span key={index} style={{ display: 'block', minHeight: '24px' }}>
-        {/* 2. Procura URLs dentro de cada linha */}
         {line.split(/(https?:\/\/[^\s]+)/g).map((part, i) => {
-          // Se for um link (começa por http ou https)
           if (part.match(/https?:\/\/[^\s]+/)) {
             return (
-              <a
-                key={i}
-                href={part}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ 
-                  color: '#2F3E32', // Cor Verde Musgo
-                  textDecoration: 'underline', 
-                  fontWeight: '600',
-                  wordBreak: 'break-all' // Garante que links longos não partem o layout
-                }}
-              >
+              <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#2F3E32', textDecoration: 'underline', fontWeight: '600', wordBreak: 'break-all' }}>
                 {part}
               </a>
             );
           }
-          // Se for texto normal
           return part;
         })}
       </span>
     ));
   };
 
-  // --- PÁGINA DE ERRO ---
+  // --- PÁGINA DE ERRO (BILINGUE E ESTILIZADA) ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
@@ -52,12 +39,33 @@ export default function Tracking({ encomenda }) {
           <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         </Head>
         <div style={styles.card}>
-          <h1 style={styles.headingError}>Encomenda não encontrada</h1>
-          <p style={styles.textSecondary}>Order not found</p>
-          <div style={styles.divider}></div>
-          <p style={styles.textBody}>Por favor, verifique o número da encomenda.</p>
+          
+          {/* Header Simplificado para Erro */}
+          <header style={styles.header}>
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+              <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
+            </a>
+          </header>
+
+          <div style={{marginTop: '40px', marginBottom: '40px'}}>
+            <h1 style={styles.headingError}>Encomenda não encontrada</h1>
+            <p style={styles.headingErrorEn}>Order not found</p>
+            
+            <div style={styles.divider}></div>
+            
+            <p style={styles.textBody}>
+              Por favor, verifique o número da encomenda.
+            </p>
+            <p style={styles.textBodyEn}>
+              Please check the order number.
+            </p>
+          </div>
+
           <a href={whatsappUrl} style={styles.buttonAction}>
-            Fale connosco
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+            </svg>
+            Fale connosco / Chat with us
           </a>
         </div>
       </div>
@@ -70,11 +78,7 @@ export default function Tracking({ encomenda }) {
       <Head>
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        
-        {/* FAVICON */}
         <link rel="icon" href="/icon.png" type="image/png" />
-        
-        {/* Importação das Fontes */}
         <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
@@ -111,7 +115,7 @@ export default function Tracking({ encomenda }) {
               {encomenda.fase}
             </div>
             
-            {/* MENSAGEM FORMATADA (Links e Parágrafos funcionam aqui) */}
+            {/* Mensagem Formatada */}
             <div style={styles.message}>
               {formatText(encomenda.mensagem)}
             </div>
@@ -156,7 +160,6 @@ export default function Tracking({ encomenda }) {
         {/* Footer */}
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
-             {/* Instagram */}
              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -164,13 +167,11 @@ export default function Tracking({ encomenda }) {
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
             </a>
-            {/* Facebook */}
             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
-            {/* Google */}
             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
@@ -178,7 +179,6 @@ export default function Tracking({ encomenda }) {
             </a>
           </div>
           
-          {/* Link do Google Maps */}
           <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
             Coimbra, Portugal
           </a>
@@ -219,8 +219,6 @@ const styles = {
     borderRadius: '24px',
     textAlign: 'center',
   },
-
-  // HEADER
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
@@ -232,9 +230,7 @@ const styles = {
     letterSpacing: '-0.01em',
     lineHeight: '1',
   },
-  taglineContainer: {
-    marginTop: '8px',
-  },
+  taglineContainer: { marginTop: '8px' },
   taglinePT: {
     fontSize: '11px',
     letterSpacing: '0.1em',
@@ -251,8 +247,6 @@ const styles = {
     fontWeight: '500',
     margin: 0,
   },
-
-  // INTRO
   introContainer: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
@@ -269,8 +263,6 @@ const styles = {
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
-
-  // NOME CLIENTE
   clientName: {
     fontFamily: '"Instrument Serif", serif',
     fontSize: '30px',
@@ -279,8 +271,6 @@ const styles = {
     fontWeight: '400',
     lineHeight: '1.1',
   },
-
-  // STATUS BOX
   statusBox: {
     backgroundColor: '#F7F9F8', 
     padding: '30px 25px',
@@ -327,8 +317,6 @@ const styles = {
     width: 'fit-content',
     boxShadow: '0 2px 5px rgba(0,0,0,0.03)',
   },
-
-  // ENTREGA
   deliveryContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -360,8 +348,6 @@ const styles = {
     color: '#2F3E32',
     margin: 0,
   },
-
-  // BOTÕES
   actionSection: {
     display: 'flex',
     flexDirection: 'column',
@@ -394,8 +380,6 @@ const styles = {
     fontWeight: '600',
     border: '2px solid #2F3E32',
   },
-
-  // FOOTER
   footer: {
     borderTop: '1px solid #F5F5F7',
     paddingTop: '30px',
@@ -432,10 +416,10 @@ const styles = {
     fontSize: '11px',
     color: '#86868B',
   },
-
-  // ERRO
   headingError: { fontFamily: '"Instrument Serif", serif', fontSize: '32px', color: '#2F3E32', marginBottom: '10px' },
+  headingErrorEn: { fontFamily: '"Outfit", sans-serif', fontSize: '14px', color: '#86868B', textTransform: 'uppercase', letterSpacing: '0.05em' },
   textSecondary: { color: '#86868B', fontSize: '14px' },
-  textBody: { marginBottom: '30px', color: '#424245', lineHeight: '1.5' },
+  textBody: { fontSize: '16px', color: '#424245', lineHeight: '1.5', margin: 0 },
+  textBodyEn: { fontSize: '14px', color: '#86868B', lineHeight: '1.5', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto', width: '100%' }
 };
