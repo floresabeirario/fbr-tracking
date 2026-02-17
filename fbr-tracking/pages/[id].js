@@ -7,6 +7,41 @@ export default function Tracking({ encomenda }) {
   const whatsappMessage = `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
+  // --- FUNÇÃO PARA FORMATAR TEXTO (LINKS E PARÁGRAFOS) ---
+  const formatText = (text) => {
+    if (!text) return null;
+
+    // 1. Divide o texto onde houver "Enters" (\n) no Google Sheets
+    return text.split('\n').map((line, index) => (
+      <span key={index} style={{ display: 'block', minHeight: '24px' }}>
+        {/* 2. Procura URLs dentro de cada linha */}
+        {line.split(/(https?:\/\/[^\s]+)/g).map((part, i) => {
+          // Se for um link (começa por http ou https)
+          if (part.match(/https?:\/\/[^\s]+/)) {
+            return (
+              <a
+                key={i}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ 
+                  color: '#2F3E32', // Cor Verde Musgo
+                  textDecoration: 'underline', 
+                  fontWeight: '600',
+                  wordBreak: 'break-all' // Garante que links longos não partem o layout
+                }}
+              >
+                {part}
+              </a>
+            );
+          }
+          // Se for texto normal
+          return part;
+        })}
+      </span>
+    ));
+  };
+
   // --- PÁGINA DE ERRO ---
   if (!encomenda) {
     return (
@@ -76,9 +111,10 @@ export default function Tracking({ encomenda }) {
               {encomenda.fase}
             </div>
             
-            <p style={styles.message}>
-              {encomenda.mensagem}
-            </p>
+            {/* MENSAGEM FORMATADA (Links e Parágrafos funcionam aqui) */}
+            <div style={styles.message}>
+              {formatText(encomenda.mensagem)}
+            </div>
 
             <div style={styles.updateBadge}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: 6, opacity: 0.6}}>
@@ -134,7 +170,7 @@ export default function Tracking({ encomenda }) {
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
-            {/* Google - LINK ATUALIZADO AQUI */}
+            {/* Google */}
             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                  <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
@@ -142,7 +178,7 @@ export default function Tracking({ encomenda }) {
             </a>
           </div>
           
-          {/* Link do Google Maps no Texto */}
+          {/* Link do Google Maps */}
           <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
             Coimbra, Portugal
           </a>
@@ -166,7 +202,7 @@ export async function getServerSideProps(context) {
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
-    backgroundColor: '#F0F2F0', // Eucalipto Pálido
+    backgroundColor: '#F0F2F0', 
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
