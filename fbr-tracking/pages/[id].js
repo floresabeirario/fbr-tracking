@@ -5,7 +5,6 @@ export default function Tracking({ encomenda }) {
   // Configuração WhatsApp
   const whatsappNumber = "351934680300";
   const whatsappMessage = `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
-  // Mensagem genérica para erro
   const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site.";
   
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
@@ -29,18 +28,34 @@ export default function Tracking({ encomenda }) {
     ));
   };
 
-  // --- PÁGINA DE ERRO (ATUALIZADA) ---
+  // --- PÁGINA DE ERRO ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
           <link rel="icon" href="/icon.png" type="image/png" />
-          <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+          {/* Apenas carrega a Outfit do Google Fonts */}
+          <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+          
+          {/* Carrega a tua fonte TAN MEMORIES */}
+          <style dangerouslySetInnerHTML={{__html: `
+            @font-face {
+              font-family: 'TanMemories';
+              src: url('/fonts/TAN-MEMORIES.otf') format('opentype');
+              font-weight: normal;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'TanMemories';
+              src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');
+              font-weight: normal;
+              font-style: italic;
+            }
+          `}} />
         </Head>
         <div style={styles.card}>
           
-          {/* Header */}
           <header style={styles.header}>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
               <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
@@ -51,19 +66,14 @@ export default function Tracking({ encomenda }) {
             </div>
           </header>
 
-          {/* Mensagem de Erro */}
           <div style={{marginTop: '20px', marginBottom: '40px'}}>
-            {/* Mesma fonte (Instrument Serif) para ambos */}
             <h2 style={styles.errorTitlePT}>Encomenda não encontrada</h2>
             <h3 style={styles.errorTitleEN}>Order not found</h3>
-            
             <div style={styles.divider}></div>
-            
             <p style={styles.textBody}>Por favor, verifique o número da encomenda.</p>
             <p style={styles.textBodyEn}>Please check the order number.</p>
           </div>
 
-          {/* Botões de Ação (Iguais à página normal) */}
           <div style={styles.actionSection}>
             <a href={whatsappUrl} style={styles.buttonAction}>
                <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
@@ -77,7 +87,6 @@ export default function Tracking({ encomenda }) {
             </a>
           </div>
 
-          {/* Footer Completo */}
           <footer style={styles.footer}>
             <div style={styles.socialRow}>
               <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
@@ -98,11 +107,9 @@ export default function Tracking({ encomenda }) {
                 </svg>
               </a>
             </div>
-            
             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
               Coimbra, Portugal
             </a>
-            
             <p style={styles.copyright}>© Flores à Beira-Rio</p>
           </footer>
         </div>
@@ -117,12 +124,29 @@ export default function Tracking({ encomenda }) {
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        {/* Apenas carrega a Outfit do Google Fonts */}
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        {/* Carrega a tua fonte TAN MEMORIES */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @font-face {
+            font-family: 'TanMemories';
+            src: url('/fonts/TAN-MEMORIES.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+          }
+          @font-face {
+            font-family: 'TanMemories';
+            src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');
+            font-weight: normal;
+            font-style: italic;
+          }
+        `}} />
       </Head>
 
       <div style={styles.card}>
         
-        {/* Header */}
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
@@ -134,16 +158,13 @@ export default function Tracking({ encomenda }) {
         </header>
 
         <main>
-          {/* Intro */}
           <div style={styles.introContainer}>
             <p style={styles.introText}>Acompanhe a sua preservação</p>
             <p style={styles.introTranslation}>Track your preservation journey</p>
           </div>
 
-          {/* Nome do Cliente */}
           <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
 
-          {/* STATUS BOX */}
           <div style={styles.statusBox}>
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
@@ -153,7 +174,6 @@ export default function Tracking({ encomenda }) {
               {encomenda.fase}
             </div>
             
-            {/* Mensagem Formatada */}
             <div style={styles.message}>
               {formatText(encomenda.mensagem)}
             </div>
@@ -167,7 +187,6 @@ export default function Tracking({ encomenda }) {
             </div>
           </div>
 
-          {/* DATA ENTREGA */}
           <div style={styles.deliveryContainer}>
             <div style={styles.deliveryContent}>
               <span style={styles.deliveryLabel}>Entrega estimada da sua encomenda</span>
@@ -176,10 +195,7 @@ export default function Tracking({ encomenda }) {
             </div>
           </div>
 
-          {/* BOTÕES DE AÇÃO */}
           <div style={styles.actionSection}>
-            
-            {/* WhatsApp */}
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white" style={{marginRight: 10}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.355-5.029c.002-5.45 4.439-9.884 9.894-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
@@ -192,35 +208,35 @@ export default function Tracking({ encomenda }) {
             </a>
           </div>
         </main>
-        
-        {/* Footer Completo */}
+
         <footer style={styles.footer}>
-            <div style={styles.socialRow}>
-              <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </a>
-              <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                   <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
-                </svg>
-              </a>
-            </div>
-            
-            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
-              Coimbra, Portugal
+          <div style={styles.socialRow}>
+            <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
             </a>
-            
-            <p style={styles.copyright}>© Flores à Beira-Rio</p>
-          </footer>
+            <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
+              </svg>
+            </a>
+          </div>
+          
+          <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
+            Coimbra, Portugal
+          </a>
+          
+          <p style={styles.copyright}>© Flores à Beira-Rio</p>
+        </footer>
+
       </div>
     </div>
   );
@@ -256,8 +272,10 @@ const styles = {
   },
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
+  
+  // A FONTE FOI SUBSTITUIDA AQUI
   brandName: {
-    fontFamily: '"Instrument Serif", serif',
+    fontFamily: '"TanMemories", serif',
     fontSize: '46px',
     color: '#1D1D1F',
     margin: '0',
@@ -298,8 +316,10 @@ const styles = {
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
+  
+  // A FONTE FOI SUBSTITUIDA AQUI
   clientName: {
-    fontFamily: '"Instrument Serif", serif',
+    fontFamily: '"TanMemories", serif',
     fontSize: '30px',
     color: '#2F3E32', 
     margin: '0 0 35px 0',
@@ -326,11 +346,13 @@ const styles = {
     fontWeight: '700',
     color: '#86868B',
   },
+  
+  // A FONTE FOI SUBSTITUIDA AQUI
   statusMainText: {
-    fontFamily: '"Instrument Serif", serif',
+    fontFamily: '"TanMemories", serif',
     fontSize: '32px',
     fontWeight: '400',
-    fontStyle: 'italic',
+    fontStyle: 'italic', // Puxará automaticamente a versão Italic
     color: '#2F3E32',
     marginBottom: '15px',
     lineHeight: '1.1',
@@ -375,9 +397,11 @@ const styles = {
     color: '#86868B',
     marginBottom: '8px',
   },
+  
+  // A FONTE FOI SUBSTITUIDA AQUI
   deliveryDate: {
-    fontFamily: '"Instrument Serif", serif',
-    fontStyle: 'italic',
+    fontFamily: '"TanMemories", serif',
+    fontStyle: 'italic', // Puxará automaticamente a versão Italic
     fontSize: '32px',
     fontWeight: '400',
     color: '#2F3E32',
@@ -452,9 +476,9 @@ const styles = {
     color: '#86868B',
   },
   
-  // ESTILOS DE ERRO ATUALIZADOS
+  // A FONTE FOI SUBSTITUIDA AQUI
   errorTitlePT: {
-    fontFamily: '"Instrument Serif", serif',
+    fontFamily: '"TanMemories", serif',
     fontSize: '34px',
     color: '#2F3E32',
     margin: '0 0 5px 0',
@@ -462,12 +486,12 @@ const styles = {
     lineHeight: '1.1',
   },
   errorTitleEN: {
-    fontFamily: '"Instrument Serif", serif',
+    fontFamily: '"TanMemories", serif',
     fontSize: '26px',
     color: '#86868B',
     margin: '0',
     fontWeight: '400',
-    fontStyle: 'italic',
+    fontStyle: 'italic', // Puxará automaticamente a versão Italic
   },
   textBody: { fontSize: '16px', color: '#424245', lineHeight: '1.5', margin: 0 },
   textBodyEn: { fontSize: '14px', color: '#86868B', lineHeight: '1.5', marginTop: '5px' },
