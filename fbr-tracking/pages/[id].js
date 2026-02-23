@@ -31,7 +31,8 @@ export default function Tracking({ encomenda }) {
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
           <link rel="icon" href="/icon.png" type="image/png" />
-          <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+          {/* FONTE URBANIST APLICADA */}
+          <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{__html: `
             @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
             @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
@@ -57,12 +58,8 @@ export default function Tracking({ encomenda }) {
               <p style={styles.textBodyEn}>Please check the order number.</p>
             </div>
             <div style={styles.actionSection}>
-              <a href={whatsappUrl} style={styles.buttonAction}>
-                Fale connosco / Chat with us
-              </a>
-              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
-                ✿ Visitar Site / Visit Website
-              </a>
+              <a href={whatsappUrl} style={styles.buttonAction}>Fale connosco / Chat with us</a>
+              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>✿ Visitar Site / Visit Website</a>
             </div>
           </main>
           <footer style={styles.footer}>
@@ -79,7 +76,8 @@ export default function Tracking({ encomenda }) {
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        {/* FONTE URBANIST APLICADA */}
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{__html: `
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
@@ -127,9 +125,7 @@ export default function Tracking({ encomenda }) {
           </div>
 
           <div style={styles.actionSection}>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>
-              Fale connosco / Chat with us
-            </a>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>Fale connosco / Chat with us</a>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
               <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
               Visitar Site / Visit Website
@@ -158,7 +154,7 @@ export async function getServerSideProps(context) {
 }
 
 const styles = {
-  pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Lexend", sans-serif', color: '#1D1D1F' },
+  pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Urbanist", sans-serif', color: '#1D1D1F' },
   card: { backgroundColor: '#FFFFFF', width: '100%', maxWidth: '460px', padding: '45px 30px', boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)', borderRadius: '24px', textAlign: 'center' },
   header: { marginBottom: '20px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
