@@ -56,7 +56,6 @@ export default function Tracking({ encomenda }) {
           
           <header style={styles.header}>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-              {/* QUEBRA DE LINHA FORÇADA AQUI */}
               <h1 style={styles.brandName}>
                 Flores à<br />Beira-Rio
               </h1>
@@ -148,7 +147,6 @@ export default function Tracking({ encomenda }) {
         
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-            {/* QUEBRA DE LINHA FORÇADA AQUI TAMBÉM */}
             <h1 style={styles.brandName}>
               Flores à<br />Beira-Rio
             </h1>
@@ -158,6 +156,9 @@ export default function Tracking({ encomenda }) {
             <p style={styles.taglineEN}>Flower preservation specialists</p>
           </div>
         </header>
+
+        {/* NOVA DIVISÓRIA AQUI */}
+        <div style={styles.headerDivider}></div>
 
         <main>
           <div style={styles.introContainer}>
@@ -272,24 +273,22 @@ const styles = {
     borderRadius: '24px',
     textAlign: 'center',
   },
-  header: { marginBottom: '35px' },
+  header: { 
+    marginBottom: '20px' // Reduzido ligeiramente para acomodar a nova divisória
+  },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
-  
-  // MARCA REDUZIDA E COM ESPAÇO PARA O PARÁGRAFO
   brandName: {
     fontFamily: '"TanMemories", serif',
-    fontSize: '42px', // Reduzido de 60px para 42px
+    fontSize: '42px',
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
     letterSpacing: '-0.01em',
-    lineHeight: '1.15', // Ligeiramente aumentado para as linhas não tocarem
+    lineHeight: '1.15',
   },
   taglineContainer: { marginTop: '12px' },
-  
-  // TAGLINES AUMENTADAS
   taglinePT: {
-    fontSize: '14px', // Aumentado de 11px
+    fontSize: '14px',
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: '#666',
@@ -297,13 +296,22 @@ const styles = {
     margin: '0 0 2px 0',
   },
   taglineEN: {
-    fontSize: '12px', // Aumentado de 9px
+    fontSize: '12px',
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: '#999',
     fontWeight: '500',
     margin: 0,
   },
+  
+  // NOVA DIVISÓRIA AQUI
+  headerDivider: {
+    height: '1px',
+    backgroundColor: '#E5E5EA', // Cinza muito suave para não ser agressivo
+    width: '80%',               // 80% mantém o aspeto elegante
+    margin: '0 auto 25px auto', // Centrado e com margem em baixo
+  },
+
   introContainer: { marginBottom: '25px' },
   introText: {
     fontSize: '14px',
