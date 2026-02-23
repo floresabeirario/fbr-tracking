@@ -35,7 +35,9 @@ export default function Tracking({ encomenda }) {
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
           <link rel="icon" href="/icon.png" type="image/png" />
-          <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+          
+          {/* NOVA FONTE HANKEN GROTESK */}
+          <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           
           <style dangerouslySetInnerHTML={{__html: `
             @font-face {
@@ -107,9 +109,11 @@ export default function Tracking({ encomenda }) {
                 </svg>
               </a>
             </div>
+            
             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
               Coimbra, Portugal
             </a>
+            
             <p style={styles.copyright}>© Flores à Beira-Rio</p>
           </footer>
         </div>
@@ -125,7 +129,8 @@ export default function Tracking({ encomenda }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
         
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        {/* NOVA FONTE HANKEN GROTESK */}
+        <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         
         <style dangerouslySetInnerHTML={{__html: `
           @font-face {
@@ -157,7 +162,7 @@ export default function Tracking({ encomenda }) {
           </div>
         </header>
 
-        {/* NOVA DIVISÓRIA AQUI */}
+        {/* DIVISÓRIA AQUI */}
         <div style={styles.headerDivider}></div>
 
         <main>
@@ -210,35 +215,34 @@ export default function Tracking({ encomenda }) {
               Visitar Site / Visit Website
             </a>
           </div>
-        </main>
 
-        <footer style={styles.footer}>
-          <div style={styles.socialRow}>
-             <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
+          <footer style={styles.footer}>
+            <div style={styles.socialRow}>
+               <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                   <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
+                </svg>
+              </a>
+            </div>
+            
+            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
+              Coimbra, Portugal
             </a>
-            <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Facebook">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon} aria-label="Google">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                 <path d="M12.0003 10.9997V13.9997H17.2003C16.9903 15.3497 15.1903 17.6997 12.0003 17.6997C9.09028 17.6997 6.70029 15.2997 6.70029 12.3997C6.70029 9.49969 9.09028 7.09969 12.0003 7.09969C13.6903 7.09969 14.8003 7.79969 15.4503 8.39969L17.5503 6.29969C16.2003 4.99969 14.3003 4.19969 12.0003 4.19969C7.47029 4.19969 3.80029 7.86969 3.80029 12.3997C3.80029 16.9297 7.47029 20.5997 12.0003 20.5997C16.6003 20.5997 19.8003 17.2997 19.8003 12.6997C19.8003 11.9997 19.7403 11.4497 19.6403 10.9997H12.0003Z" fill="#555"/>
-              </svg>
-            </a>
-          </div>
-          
-          <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>
-            Coimbra, Portugal
-          </a>
-          
-          <p style={styles.copyright}>© Flores à Beira-Rio</p>
-        </footer>
+            
+            <p style={styles.copyright}>© Flores à Beira-Rio</p>
+          </footer>
 
       </div>
     </div>
@@ -261,7 +265,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
-    fontFamily: '"Outfit", sans-serif',
+    // MUDANÇA GLOBAL AQUI PARA HANKEN GROTESK
+    fontFamily: '"Hanken Grotesk", sans-serif',
     color: '#1D1D1F',
   },
   card: {
@@ -274,12 +279,12 @@ const styles = {
     textAlign: 'center',
   },
   header: { 
-    marginBottom: '20px' // Reduzido ligeiramente para acomodar a nova divisória
+    marginBottom: '20px' 
   },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   brandName: {
     fontFamily: '"TanMemories", serif',
-    fontSize: '42px',
+    fontSize: '42px', 
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -304,12 +309,11 @@ const styles = {
     margin: 0,
   },
   
-  // NOVA DIVISÓRIA AQUI
   headerDivider: {
     height: '1px',
-    backgroundColor: '#E5E5EA', // Cinza muito suave para não ser agressivo
-    width: '80%',               // 80% mantém o aspeto elegante
-    margin: '0 auto 25px auto', // Centrado e com margem em baixo
+    backgroundColor: '#E5E5EA', 
+    width: '80%',               
+    margin: '0 auto 25px auto', 
   },
 
   introContainer: { marginBottom: '25px' },
