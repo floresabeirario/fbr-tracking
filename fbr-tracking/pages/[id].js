@@ -56,7 +56,10 @@ export default function Tracking({ encomenda }) {
           
           <header style={styles.header}>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-              <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
+              {/* QUEBRA DE LINHA FORÇADA AQUI */}
+              <h1 style={styles.brandName}>
+                Flores à<br />Beira-Rio
+              </h1>
             </a>
             <div style={styles.taglineContainer}>
               <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
@@ -145,8 +148,10 @@ export default function Tracking({ encomenda }) {
         
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
-            {/* Título da marca agora maior para equilibrar com as fontes */}
-            <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
+            {/* QUEBRA DE LINHA FORÇADA AQUI TAMBÉM */}
+            <h1 style={styles.brandName}>
+              Flores à<br />Beira-Rio
+            </h1>
           </a>
           <div style={styles.taglineContainer}>
             <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
@@ -167,7 +172,6 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
 
-            {/* O status ganha uma cor verde mais visível */}
             <div style={styles.statusMainText}>
               {encomenda.fase}
             </div>
@@ -271,19 +275,21 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   
-  // NOME DA MARCA AUMENTADO (De 46px para 60px)
+  // MARCA REDUZIDA E COM ESPAÇO PARA O PARÁGRAFO
   brandName: {
     fontFamily: '"TanMemories", serif',
-    fontSize: '60px',
+    fontSize: '42px', // Reduzido de 60px para 42px
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
     letterSpacing: '-0.01em',
-    lineHeight: '1',
+    lineHeight: '1.15', // Ligeiramente aumentado para as linhas não tocarem
   },
-  taglineContainer: { marginTop: '8px' },
+  taglineContainer: { marginTop: '12px' },
+  
+  // TAGLINES AUMENTADAS
   taglinePT: {
-    fontSize: '11px',
+    fontSize: '14px', // Aumentado de 11px
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: '#666',
@@ -291,7 +297,7 @@ const styles = {
     margin: '0 0 2px 0',
   },
   taglineEN: {
-    fontSize: '9px',
+    fontSize: '12px', // Aumentado de 9px
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
     color: '#999',
@@ -314,8 +320,6 @@ const styles = {
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   },
-  
-  // NOME DO CLIENTE AUMENTADO
   clientName: {
     fontFamily: '"TanMemories", serif',
     fontSize: '34px',
@@ -344,14 +348,12 @@ const styles = {
     fontWeight: '700',
     color: '#86868B',
   },
-  
-  // ESTADO: COR VERDE MAIS VIBRANTE E ELEGANTE (#436850)
   statusMainText: {
     fontFamily: '"TanMemories", serif',
     fontSize: '32px',
     fontWeight: '400',
     fontStyle: 'italic', 
-    color: '#436850', // Verde vibrante
+    color: '#436850',
     marginBottom: '15px',
     lineHeight: '1.1',
   },
