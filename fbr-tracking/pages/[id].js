@@ -35,10 +35,8 @@ export default function Tracking({ encomenda }) {
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
           <link rel="icon" href="/icon.png" type="image/png" />
-          {/* Apenas carrega a Outfit do Google Fonts */}
           <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           
-          {/* Carrega a tua fonte TAN MEMORIES */}
           <style dangerouslySetInnerHTML={{__html: `
             @font-face {
               font-family: 'TanMemories';
@@ -125,10 +123,8 @@ export default function Tracking({ encomenda }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
         
-        {/* Apenas carrega a Outfit do Google Fonts */}
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         
-        {/* Carrega a tua fonte TAN MEMORIES */}
         <style dangerouslySetInnerHTML={{__html: `
           @font-face {
             font-family: 'TanMemories';
@@ -149,6 +145,7 @@ export default function Tracking({ encomenda }) {
         
         <header style={styles.header}>
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+            {/* Título da marca agora maior para equilibrar com as fontes */}
             <h1 style={styles.brandName}>Flores à Beira-Rio</h1>
           </a>
           <div style={styles.taglineContainer}>
@@ -170,6 +167,7 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
 
+            {/* O status ganha uma cor verde mais visível */}
             <div style={styles.statusMainText}>
               {encomenda.fase}
             </div>
@@ -211,7 +209,7 @@ export default function Tracking({ encomenda }) {
 
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
-            <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
+             <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon} aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -273,10 +271,10 @@ const styles = {
   header: { marginBottom: '35px' },
   brandLink: { textDecoration: 'none', cursor: 'pointer' },
   
-  // A FONTE FOI SUBSTITUIDA AQUI
+  // NOME DA MARCA AUMENTADO (De 46px para 60px)
   brandName: {
     fontFamily: '"TanMemories", serif',
-    fontSize: '46px',
+    fontSize: '60px',
     color: '#1D1D1F',
     margin: '0',
     fontWeight: '400',
@@ -317,10 +315,10 @@ const styles = {
     letterSpacing: '0.05em',
   },
   
-  // A FONTE FOI SUBSTITUIDA AQUI
+  // NOME DO CLIENTE AUMENTADO
   clientName: {
     fontFamily: '"TanMemories", serif',
-    fontSize: '30px',
+    fontSize: '34px',
     color: '#2F3E32', 
     margin: '0 0 35px 0',
     fontWeight: '400',
@@ -347,13 +345,13 @@ const styles = {
     color: '#86868B',
   },
   
-  // A FONTE FOI SUBSTITUIDA AQUI
+  // ESTADO: COR VERDE MAIS VIBRANTE E ELEGANTE (#436850)
   statusMainText: {
     fontFamily: '"TanMemories", serif',
     fontSize: '32px',
     fontWeight: '400',
-    fontStyle: 'italic', // Puxará automaticamente a versão Italic
-    color: '#2F3E32',
+    fontStyle: 'italic', 
+    color: '#436850', // Verde vibrante
     marginBottom: '15px',
     lineHeight: '1.1',
   },
@@ -397,11 +395,9 @@ const styles = {
     color: '#86868B',
     marginBottom: '8px',
   },
-  
-  // A FONTE FOI SUBSTITUIDA AQUI
   deliveryDate: {
     fontFamily: '"TanMemories", serif',
-    fontStyle: 'italic', // Puxará automaticamente a versão Italic
+    fontStyle: 'italic',
     fontSize: '32px',
     fontWeight: '400',
     color: '#2F3E32',
@@ -476,7 +472,6 @@ const styles = {
     color: '#86868B',
   },
   
-  // A FONTE FOI SUBSTITUIDA AQUI
   errorTitlePT: {
     fontFamily: '"TanMemories", serif',
     fontSize: '34px',
@@ -491,7 +486,7 @@ const styles = {
     color: '#86868B',
     margin: '0',
     fontWeight: '400',
-    fontStyle: 'italic', // Puxará automaticamente a versão Italic
+    fontStyle: 'italic',
   },
   textBody: { fontSize: '16px', color: '#424245', lineHeight: '1.5', margin: 0 },
   textBodyEn: { fontSize: '14px', color: '#86868B', lineHeight: '1.5', marginTop: '5px' },
