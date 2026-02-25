@@ -7,14 +7,15 @@ export default function Tracking({ encomenda }) {
   const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
 
+  // --- FUNÇÃO PARA FORMATAR TEXTO (LINKS E QUEBRAS DE LINHA) ---
   const formatText = (text) => {
     if (!text) return null;
     return text.split('\n').map((line, index) => (
-      <span key={index} style={{ display: 'block', minHeight: '24px' }}>
+      <span key={index} style={{ display: 'block', minHeight: '1.2em' }}>
         {line.split(/(https?:\/\/[^\s]+)/g).map((part, i) => {
           if (part.match(/https?:\/\/[^\s]+/)) {
             return (
-              <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#2F3E32', textDecoration: 'underline', fontWeight: '600', wordBreak: 'break-all' }}>
+              <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#436850', textDecoration: 'underline', fontWeight: '600', wordBreak: 'break-all' }}>
                 {part}
               </a>
             );
@@ -25,13 +26,13 @@ export default function Tracking({ encomenda }) {
     ));
   };
 
+  // --- PÁGINA DE ERRO ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
           <link rel="icon" href="/icon.png" type="image/png" />
-          {/* FONTE URBANIST APLICADA */}
           <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{__html: `
             @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
@@ -59,7 +60,9 @@ export default function Tracking({ encomenda }) {
             </div>
             <div style={styles.actionSection}>
               <a href={whatsappUrl} style={styles.buttonAction}>Fale connosco / Chat with us</a>
-              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>✿ Visitar Site / Visit Website</a>
+              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+                <span style={{marginRight: '8px'}}>✿</span> Visitar Site / Visit Website
+              </a>
             </div>
           </main>
           <footer style={styles.footer}>
@@ -70,13 +73,13 @@ export default function Tracking({ encomenda }) {
     );
   }
 
+  // --- PÁGINA PRINCIPAL (DUAS LÍNGUAS) ---
   return (
     <div style={styles.pageWrapper}>
       <Head>
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        {/* FONTE URBANIST APLICADA */}
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{__html: `
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
@@ -109,8 +112,17 @@ export default function Tracking({ encomenda }) {
             <div style={styles.statusHeaderRow}>
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
-            <div style={styles.statusMainText}>{encomenda.fase}</div>
-            <div style={styles.message}>{formatText(encomenda.mensagem)}</div>
+            
+            {/* FASE PT */}
+            {encomenda.fase && <div style={styles.statusMainText}>{encomenda.fase}</div>}
+            {/* FASE EN */}
+            {encomenda.fase_en && <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>}
+            
+            {/* MENSAGEM PT */}
+            {encomenda.mensagem && <div style={styles.message}>{formatText(encomenda.mensagem)}</div>}
+            {/* MENSAGEM EN */}
+            {encomenda.mensagem_en && <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
+
             <div style={styles.updateBadge}>
               Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
             </div>
@@ -157,8 +169,8 @@ const styles = {
   pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Urbanist", sans-serif', color: '#1D1D1F' },
   card: { backgroundColor: '#FFFFFF', width: '100%', maxWidth: '460px', padding: '45px 30px', boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)', borderRadius: '24px', textAlign: 'center' },
   header: { marginBottom: '20px' },
-  brandLink: { textDecoration: 'none', cursor: 'pointer' },
-  brandName: { fontFamily: '"TanMemories", serif', fontSize: '42px', color: '#1D1D1F', margin: '0', fontWeight: '400', letterSpacing: '-0.01em', lineHeight: '1.15' },
+  brandLink: { textDecoration: 'none', cursor: 'pointer', color: 'inherit' },
+  brandName: { fontFamily: '"TanMemories", serif', fontSize: '42px', margin: '0', fontWeight: '400', letterSpacing: '-0.01em', lineHeight: '1.15' },
   taglineContainer: { marginTop: '12px' },
   taglinePT: { fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#666', fontWeight: '600', margin: '0 0 2px 0' },
   taglineEN: { fontSize: '12px', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#999', fontWeight: '500', margin: 0 },
@@ -170,8 +182,10 @@ const styles = {
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
   statusHeaderRow: { marginBottom: '10px' },
   statusLabel: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', color: '#86868B' },
-  statusMainText: { fontFamily: '"TanMemories", serif', fontSize: '32px', fontWeight: '400', fontStyle: 'italic', color: '#436850', marginBottom: '15px', lineHeight: '1.1' },
-  message: { fontSize: '15px', lineHeight: '1.6', color: '#424245', marginBottom: '20px' },
+  statusMainText: { fontFamily: '"TanMemories", serif', fontSize: '32px', color: '#436850', marginBottom: '4px', lineHeight: '1.1' },
+  statusMainTextEn: { fontFamily: '"TanMemories", serif', fontSize: '26px', fontStyle: 'italic', color: '#6D8C78', marginBottom: '15px', lineHeight: '1.1' },
+  message: { fontSize: '15px', lineHeight: '1.6', color: '#424245', marginBottom: '10px' },
+  messageEn: { fontSize: '14px', lineHeight: '1.6', color: '#7E7E82', fontStyle: 'italic', marginBottom: '20px' },
   updateBadge: { fontSize: '12px', color: '#6E6E73', backgroundColor: '#FFFFFF', padding: '8px 12px', borderRadius: '50px', width: 'fit-content', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' },
   deliveryContainer: { marginBottom: '40px' },
   deliveryContent: { textAlign: 'center' },
@@ -179,8 +193,8 @@ const styles = {
   deliveryLabelEn: { display: 'block', fontSize: '14px', fontWeight: '500', color: '#86868B', marginBottom: '8px' },
   deliveryDate: { fontFamily: '"TanMemories", serif', fontStyle: 'italic', fontSize: '32px', color: '#2F3E32', margin: 0 },
   actionSection: { display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '40px' },
-  buttonAction: { backgroundColor: '#2F3E32', color: '#FFFFFF', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600' },
-  buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32' },
+  buttonAction: { backgroundColor: '#2F3E32', color: '#FFFFFF', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', display: 'block' },
+  buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32', display: 'block' },
   footer: { borderTop: '1px solid #F5F5F7', paddingTop: '30px' },
   socialRow: { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' },
   socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '10px', textDecoration: 'none', color: '#555' },
@@ -188,7 +202,7 @@ const styles = {
   copyright: { fontSize: '11px', color: '#86868B' },
   errorTitlePT: { fontFamily: '"TanMemories", serif', fontSize: '34px', color: '#2F3E32', margin: '0 0 5px 0' },
   errorTitleEN: { fontFamily: '"TanMemories", serif', fontSize: '26px', color: '#86868B', fontStyle: 'italic' },
-  textBody: { fontSize: '16px' },
-  textBodyEn: { fontSize: '14px', color: '#86868B' },
+  textBody: { fontSize: '16px', margin: 0 },
+  textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
