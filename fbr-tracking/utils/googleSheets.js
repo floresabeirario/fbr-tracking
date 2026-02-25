@@ -9,8 +9,8 @@ export async function getEncomendaById(id) {
 
     const sheets = google.sheets({ version: 'v4', auth });
     
-    // CORRIGIDO: Nome da aba é Folha1
-    const range = 'Folha1!A:Z'; 
+    // NOME EXATO DA ABA CONFORME O SEU PRINT: Folha1
+    const range = 'Folha1!A:H'; 
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
@@ -18,15 +18,23 @@ export async function getEncomendaById(id) {
     });
 
     const rows = response.data.values;
-    if (!rows || rows.length === 0) return null;
+    if (!rows || rows.length === 0) {
+      console.log("Folha vazia ou não encontrada.");
+      return null;
+    }
 
-    // Procura o ID na Coluna A limpando espaços e ignorando maiúsculas/minúsculas
+    // Procura o ID na Coluna A. 
+    // O .trim() remove espaços que possam existir por acidente no Excel.
     const row = rows.find((r) => 
-      r[0] && r[0].toString().trim().toLowerCase() === id.toString().trim().toLowerCase()
+      r[0] && r[0].toString().trim() === id.toString().trim()
     );
 
-    if (!row) return null;
+    if (!row) {
+      console.log(`ID ${id} não encontrado na Folha1.`);
+      return null;
+    }
 
+    // Retorna os dados para o ficheiro [id].js
     return {
       id: row[0] || '',
       nome_encomenda: row[1] || '',
@@ -38,7 +46,7 @@ export async function getEncomendaById(id) {
       data_entrega: row[7] || '',
     };
   } catch (error) {
-    console.error('Erro ao buscar dados:', error.message);
+    console.error('Erro na ligação ao Google Sheets:', error.message);
     return null;
   }
 }
