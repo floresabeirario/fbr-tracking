@@ -8,7 +8,9 @@ export async function getEncomendaById(id) {
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
-    const range = 'Folha 1!A:H'; // Aumentámos o intervalo até à coluna H
+    
+    // CORRIGIDO: Nome da aba é Folha1
+    const range = 'Folha1!A:Z'; 
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
@@ -16,26 +18,27 @@ export async function getEncomendaById(id) {
     });
 
     const rows = response.data.values;
-    if (!rows) return null;
+    if (!rows || rows.length === 0) return null;
 
-    // Procurar a linha pelo ID (Coluna A)
-    const row = rows.find((r) => r[0] === id);
+    // Procura o ID na Coluna A limpando espaços e ignorando maiúsculas/minúsculas
+    const row = rows.find((r) => 
+      r[0] && r[0].toString().trim().toLowerCase() === id.toString().trim().toLowerCase()
+    );
 
     if (!row) return null;
 
-    // MAPEAMENTO DAS COLUNAS (A ordem aqui é fundamental)
     return {
       id: row[0] || '',
       nome_encomenda: row[1] || '',
       fase: row[2] || '',
-      fase_en: row[3] || '',           // Nova coluna
+      fase_en: row[3] || '',
       mensagem: row[4] || '',
-      mensagem_en: row[5] || '',        // Nova coluna
+      mensagem_en: row[5] || '',
       ultima_atualizacao: row[6] || '',
       data_entrega: row[7] || '',
     };
   } catch (error) {
-    console.error('Erro ao buscar dados do Google Sheets:', error);
+    console.error('Erro ao buscar dados:', error.message);
     return null;
   }
 }
