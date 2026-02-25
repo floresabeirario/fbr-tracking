@@ -9,8 +9,9 @@ export async function getEncomendaById(id) {
 
     const sheets = google.sheets({ version: 'v4', auth });
     
-    // NOME EXATO DA ABA CONFORME O SEU PRINT: Folha1
-    const range = 'Folha1!A:H'; 
+    // NOME EXATO DA TUA ABA: Folha1
+    // Usamos A:Z para garantir que ele lê todas as colunas sem restrição
+    const range = 'Folha1!A:Z'; 
 
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
@@ -18,23 +19,19 @@ export async function getEncomendaById(id) {
     });
 
     const rows = response.data.values;
-    if (!rows || rows.length === 0) {
-      console.log("Folha vazia ou não encontrada.");
-      return null;
-    }
+    if (!rows || rows.length === 0) return null;
 
-    // Procura o ID na Coluna A. 
-    // O .trim() remove espaços que possam existir por acidente no Excel.
+    // BUSCA ROBUSTA:
+    // 1. Converte ID para texto
+    // 2. Remove espaços (trim)
+    // 3. Ignora maiúsculas/minúsculas (toLowerCase)
     const row = rows.find((r) => 
-      r[0] && r[0].toString().trim() === id.toString().trim()
+      r[0] && r[0].toString().trim().toLowerCase() === id.toString().trim().toLowerCase()
     );
 
-    if (!row) {
-      console.log(`ID ${id} não encontrado na Folha1.`);
-      return null;
-    }
+    if (!row) return null;
 
-    // Retorna os dados para o ficheiro [id].js
+    // MAPEAMENTO SEGURO (Baseado no teu print: A=0, B=1, C=2, D=3, E=4, F=5, G=6, H=7)
     return {
       id: row[0] || '',
       nome_encomenda: row[1] || '',
@@ -46,7 +43,7 @@ export async function getEncomendaById(id) {
       data_entrega: row[7] || '',
     };
   } catch (error) {
-    console.error('Erro na ligação ao Google Sheets:', error.message);
+    console.error('Erro na ligação:', error.message);
     return null;
   }
 }
