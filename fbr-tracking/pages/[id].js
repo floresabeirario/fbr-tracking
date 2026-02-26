@@ -200,15 +200,13 @@ const styles = {
   introTranslation: { fontSize: '12px', fontWeight: '500', color: '#889', textTransform: 'uppercase', letterSpacing: '0.05em' },
  clientName: { 
     fontFamily: '"TanMemories", serif', 
-    fontSize: '28px', 
-    color: '#2F3E32', 
-    margin: '0 auto 35px auto', 
-    padding: '12px 16px', // Espaço em cima/baixo e um pouco nas laterais
-    borderTop: '1px solid #E5E5EA', // Linha superior
-    borderBottom: '1px solid #E5E5EA', // Linha inferior
+    fontStyle: 'italic',
+    fontSize: '26px', 
+    color: '#6D8C78', 
+    margin: '0 0 35px 0', 
     fontWeight: '400', 
     lineHeight: '1.1',
-    display: 'inline-block'
+    letterSpacing: '0.02em' // Afasta muito subtilmente as letras
   },
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
   statusHeaderRow: { marginBottom: '10px' },
@@ -245,6 +243,7 @@ const styles = {
   textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
+
 
 
 
