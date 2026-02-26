@@ -73,7 +73,7 @@ export default function Tracking({ encomenda }) {
     );
   }
 
-  // --- PÁGINA PRINCIPAL (DUAS LÍNGUAS) ---
+  // --- PÁGINA PRINCIPAL ---
   return (
     <div style={styles.pageWrapper}>
       <Head>
@@ -113,13 +113,19 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
             
+            {/* LÓGICA CONDICIONAL: Só renderiza se a célula não estiver vazia */}
+            
             {/* FASE PT */}
             {encomenda.fase && <div style={styles.statusMainText}>{encomenda.fase}</div>}
+            
             {/* FASE EN */}
             {encomenda.fase_en && <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>}
             
+            <div style={{marginBottom: '15px'}}></div> {/* Espaçador seguro */}
+
             {/* MENSAGEM PT */}
             {encomenda.mensagem && <div style={styles.message}>{formatText(encomenda.mensagem)}</div>}
+            
             {/* MENSAGEM EN */}
             {encomenda.mensagem_en && <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
 
@@ -165,6 +171,7 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
+// --- ESTILOS ---
 const styles = {
   pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Urbanist", sans-serif', color: '#1D1D1F' },
   card: { backgroundColor: '#FFFFFF', width: '100%', maxWidth: '460px', padding: '45px 30px', boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)', borderRadius: '24px', textAlign: 'center' },
@@ -183,7 +190,7 @@ const styles = {
   statusHeaderRow: { marginBottom: '10px' },
   statusLabel: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', color: '#86868B' },
   statusMainText: { fontFamily: '"TanMemories", serif', fontSize: '32px', color: '#436850', marginBottom: '4px', lineHeight: '1.1' },
-  statusMainTextEn: { fontFamily: '"TanMemories", serif', fontSize: '26px', fontStyle: 'italic', color: '#6D8C78', marginBottom: '15px', lineHeight: '1.1' },
+  statusMainTextEn: { fontFamily: '"TanMemories", serif', fontSize: '26px', fontStyle: 'italic', color: '#6D8C78', marginBottom: '0px', lineHeight: '1.1' },
   message: { fontSize: '15px', lineHeight: '1.6', color: '#424245', marginBottom: '10px' },
   messageEn: { fontSize: '14px', lineHeight: '1.6', color: '#7E7E82', fontStyle: 'italic', marginBottom: '20px' },
   updateBadge: { fontSize: '12px', color: '#6E6E73', backgroundColor: '#FFFFFF', padding: '8px 12px', borderRadius: '50px', width: 'fit-content', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' },
@@ -193,8 +200,8 @@ const styles = {
   deliveryLabelEn: { display: 'block', fontSize: '14px', fontWeight: '500', color: '#86868B', marginBottom: '8px' },
   deliveryDate: { fontFamily: '"TanMemories", serif', fontStyle: 'italic', fontSize: '32px', color: '#2F3E32', margin: 0 },
   actionSection: { display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '40px' },
-  buttonAction: { backgroundColor: '#2F3E32', color: '#FFFFFF', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', display: 'block' },
-  buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32', display: 'block' },
+  buttonAction: { backgroundColor: '#2F3E32', color: '#FFFFFF', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', display: 'block', textAlign: 'center' },
+  buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32', display: 'block', textAlign: 'center' },
   footer: { borderTop: '1px solid #F5F5F7', paddingTop: '30px' },
   socialRow: { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' },
   socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '10px', textDecoration: 'none', color: '#555' },
