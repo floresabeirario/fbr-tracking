@@ -198,7 +198,17 @@ const styles = {
   introContainer: { marginBottom: '25px' },
   introText: { fontSize: '14px', fontWeight: '600', color: '#2F3E32', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.05em' },
   introTranslation: { fontSize: '12px', fontWeight: '500', color: '#889', textTransform: 'uppercase', letterSpacing: '0.05em' },
-  clientName: { fontFamily: '"TanMemories", serif', fontSize: '34px', color: '#2F3E32', margin: '0 0 35px 0', fontWeight: '400', lineHeight: '1.1' },
+ clientName: { 
+    fontFamily: '"Urbanist", sans-serif', 
+    fontSize: '22px', 
+    fontWeight: '600', 
+    color: '#436850', 
+    margin: '0 auto 35px auto', 
+    padding: '8px 24px', 
+    backgroundColor: '#F5F7F5', 
+    borderRadius: '50px',
+    display: 'inline-block'
+  },
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
   statusHeaderRow: { marginBottom: '10px' },
   statusLabel: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', color: '#86868B' },
@@ -234,3 +244,4 @@ const styles = {
   textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
+
