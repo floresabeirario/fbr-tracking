@@ -201,7 +201,7 @@ const styles = {
  clientName: { 
     fontFamily: '"TanMemories", serif', 
     fontSize: '28px', 
-    color: '#9B825E',
+    color: '#6D8C78',
     margin: '0 auto 35px auto', 
     padding: '12px 20px', 
     borderTop: '1px solid #E5E5EA', 
@@ -245,6 +245,7 @@ const styles = {
   textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
+
 
 
 
