@@ -1,14 +1,13 @@
 import Head from 'next/head';
-import { useState } from 'react';
 import { getEncomendaById } from '../utils/googleSheets';
 
 export default function Tracking({ encomenda }) {
-  const [language, setLanguage] = useState('pt'); // 'pt', 'en', 'both'
   const whatsappNumber = "351934680300";
   const whatsappMessage = `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
   const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site.";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
 
+  // --- FUNÇÃO PARA FORMATAR TEXTO (LINKS E QUEBRAS DE LINHA) ---
   const formatText = (text) => {
     if (!text) return null;
     return text.split('\n').map((line, index) => (
@@ -27,88 +26,134 @@ export default function Tracking({ encomenda }) {
     ));
   };
 
+  // --- PÁGINA DE ERRO ---
   if (!encomenda) {
     return (
       <div style={styles.pageWrapper}>
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
+          <link rel="icon" href="/icon.png" type="image/png" />
+          <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+          <style dangerouslySetInnerHTML={{__html: `
+            @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
+            @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
+          `}} />
         </Head>
         <div style={styles.card}>
-          <h2>Encomenda não encontrada / Order not found</h2>
-          <p>Por favor, verifique o número da encomenda / Please check the order number.</p>
-          <a href={whatsappUrl} style={styles.buttonAction}>Fale connosco / Chat with us</a>
+          <header style={styles.header}>
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+              <h1 style={styles.brandName}>Flores à<br />Beira-Rio</h1>
+            </a>
+            <div style={styles.taglineContainer}>
+              <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
+              <p style={styles.taglineEN}>Flower preservation specialists</p>
+            </div>
+          </header>
+          <div style={styles.headerDivider}></div>
+          <main>
+            <div style={{marginTop: '20px', marginBottom: '40px'}}>
+              <h2 style={styles.errorTitlePT}>Encomenda não encontrada</h2>
+              <h3 style={styles.errorTitleEN}>Order not found</h3>
+              <div style={styles.divider}></div>
+              <p style={styles.textBody}>Por favor, verifique o número da encomenda.</p>
+              <p style={styles.textBodyEn}>Please check the order number.</p>
+            </div>
+            <div style={styles.actionSection}>
+              <a href={whatsappUrl} style={styles.buttonAction}>Fale connosco / Chat with us</a>
+              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+                <span style={{marginRight: '8px'}}>✿</span> Visitar Site / Visit Website
+              </a>
+            </div>
+          </main>
+          <footer style={styles.footer}>
+            <p style={styles.copyright}>© Flores à Beira-Rio</p>
+          </footer>
         </div>
       </div>
     );
   }
 
-  const renderFase = () => {
-    if (!encomenda.fase && !encomenda.fase_en) return null;
-    if (language === 'pt') return <div style={styles.statusMainText}>{encomenda.fase}</div>;
-    if (language === 'en') return <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>;
-    if (language === 'both') return (
-      <>
-        <div style={styles.statusMainText}>{encomenda.fase}</div>
-        <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>
-      </>
-    );
-  };
-
-  const renderMensagem = () => {
-    if (!encomenda.mensagem && !encomenda.mensagem_en) return null;
-    if (language === 'pt') return <div style={styles.message}>{formatText(encomenda.mensagem)}</div>;
-    if (language === 'en') return <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>;
-    if (language === 'both') return (
-      <>
-        <div style={styles.message}>{formatText(encomenda.mensagem)}</div>
-        <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>
-      </>
-    );
-  };
-
+  // --- PÁGINA PRINCIPAL (DUAS LÍNGUAS) ---
   return (
     <div style={styles.pageWrapper}>
       <Head>
         <title>Status | Flores à Beira-Rio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="icon" href="/icon.png" type="image/png" />
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <style dangerouslySetInnerHTML={{__html: `
+          @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
+          @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
+        `}} />
       </Head>
 
       <div style={styles.card}>
-        {/* BOTÕES DE LÍNGUA */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
-          <button onClick={() => setLanguage('pt')} style={{ padding: '8px 12px', cursor: 'pointer', fontWeight: language === 'pt' ? '700' : '400' }}>PT</button>
-          <button onClick={() => setLanguage('en')} style={{ padding: '8px 12px', cursor: 'pointer', fontWeight: language === 'en' ? '700' : '400' }}>EN</button>
-          <button onClick={() => setLanguage('both')} style={{ padding: '8px 12px', cursor: 'pointer', fontWeight: language === 'both' ? '700' : '400' }}>PT + EN</button>
-        </div>
-
-        <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
-
-        <div style={styles.statusBox}>
-          <div style={styles.statusHeaderRow}>
-            <span style={styles.statusLabel}>Estado Atual / Status</span>
-          </div>
-          {renderFase()}
-          {renderMensagem()}
-
-          <div style={styles.updateBadge}>
-            Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
-          </div>
-        </div>
-
-        <div style={styles.deliveryContainer}>
-          <div style={styles.deliveryContent}>
-            {language !== 'en' && <span style={styles.deliveryLabel}>Entrega estimada da sua encomenda</span>}
-            {language !== 'pt' && <span style={styles.deliveryLabelEn}>Estimated delivery of your order</span>}
-            <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
-          </div>
-        </div>
-
-        <div style={styles.actionSection}>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>Fale connosco / Chat with us</a>
-          <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
-            <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
-            Visitar Site / Visit Website
+        <header style={styles.header}>
+          <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.brandLink}>
+            <h1 style={styles.brandName}>Flores à<br />Beira-Rio</h1>
           </a>
-        </div>
+          <div style={styles.taglineContainer}>
+            <p style={styles.taglinePT}>Especialistas em preservação de flores</p>
+            <p style={styles.taglineEN}>Flower preservation specialists</p>
+          </div>
+        </header>
+
+        <div style={styles.headerDivider}></div>
+
+        <main>
+          <div style={styles.introContainer}>
+            <p style={styles.introText}>Acompanhe a sua preservação</p>
+            <p style={styles.introTranslation}>Track your preservation journey</p>
+          </div>
+
+          <h2 style={styles.clientName}>{encomenda.nome_encomenda}</h2>
+
+          <div style={styles.statusBox}>
+            <div style={styles.statusHeaderRow}>
+              <span style={styles.statusLabel}>Estado Atual / Status</span>
+            </div>
+            
+            {/* FASE PT */}
+            {encomenda.fase && <div style={styles.statusMainText}>{encomenda.fase}</div>}
+            {/* FASE EN */}
+            {encomenda.fase_en && <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>}
+            
+            {/* MENSAGEM PT */}
+            {encomenda.mensagem && <div style={styles.message}>{formatText(encomenda.mensagem)}</div>}
+            {/* MENSAGEM EN */}
+            {encomenda.mensagem_en && <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
+
+            <div style={styles.updateBadge}>
+              Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong>
+            </div>
+          </div>
+
+          <div style={styles.deliveryContainer}>
+            <div style={styles.deliveryContent}>
+              <span style={styles.deliveryLabel}>Entrega estimada da sua encomenda</span>
+              <span style={styles.deliveryLabelEn}>Estimated delivery of your order</span>
+              <p style={styles.deliveryDate}>{encomenda.data_entrega}</p>
+            </div>
+          </div>
+
+          <div style={styles.actionSection}>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={styles.buttonAction}>Fale connosco / Chat with us</a>
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={styles.buttonSite}>
+              <span style={{marginRight: '8px', fontSize: '18px', lineHeight: '1'}}>✿</span>
+              Visitar Site / Visit Website
+            </a>
+          </div>
+        </main>
+
+        <footer style={styles.footer}>
+          <div style={styles.socialRow}>
+             <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon}>IG</a>
+             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon}>FB</a>
+             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon}>MAPS</a>
+          </div>
+          <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>Coimbra, Portugal</a>
+          <p style={styles.copyright}>© Flores à Beira-Rio</p>
+        </footer>
       </div>
     </div>
   );
@@ -120,7 +165,6 @@ export async function getServerSideProps(context) {
   return { props: { encomenda } };
 }
 
-// STYLES: mantém todos os teus styles originais
 const styles = {
   pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Urbanist", sans-serif', color: '#1D1D1F' },
   card: { backgroundColor: '#FFFFFF', width: '100%', maxWidth: '460px', padding: '45px 30px', boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)', borderRadius: '24px', textAlign: 'center' },
