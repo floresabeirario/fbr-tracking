@@ -53,11 +53,14 @@ export async function getEncomendaById(id) {
     
     if (!encomenda) return null;
 
+    // AQUI ESTÁ A ALTERAÇÃO: Adicionadas as colunas fase_en e mensagem_en
     return {
       id: encomenda.id,
       nome_encomenda: encomenda.nome_encomenda,
-      fase: encomenda.fase,
-      mensagem: encomenda.mensagem,
+      fase: encomenda.fase || null,
+      fase_en: encomenda.fase_en || null,
+      mensagem: encomenda.mensagem || null,
+      mensagem_en: encomenda.mensagem_en || null,
       ultima_atualizacao: encomenda.ultima_atualizacao,
       data_entrega: encomenda.data_entrega
     };
