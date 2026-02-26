@@ -203,10 +203,11 @@ const styles = {
     fontSize: '28px', 
     color: '#2F3E32', 
     margin: '0 auto 35px auto', 
+    padding: '12px 16px', // Espaço em cima/baixo e um pouco nas laterais
+    borderTop: '1px solid #E5E5EA', // Linha superior
+    borderBottom: '1px solid #E5E5EA', // Linha inferior
     fontWeight: '400', 
     lineHeight: '1.1',
-    borderBottom: '1px solid #E5E5EA', // Linha fina e elegante
-    paddingBottom: '12px',
     display: 'inline-block'
   },
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
@@ -244,6 +245,7 @@ const styles = {
   textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
+
 
 
 
