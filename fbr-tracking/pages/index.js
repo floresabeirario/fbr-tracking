@@ -19,10 +19,9 @@ export default function Home() {
         <title>Status | Flores à Beira-Rio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        
-        {/* Usando as mesmas fontes do [id].js */}
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{__html: `
+          body { margin: 0; padding: 0; background-color: #F0F2F0; }
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
         `}} />
@@ -109,7 +108,7 @@ export default function Home() {
   );
 }
 
-// --- ESTILOS IGUAIS AOS DE [ID].JS ---
+// --- ESTILOS ---
 const styles = {
   pageWrapper: { minHeight: '100vh', backgroundColor: '#F0F2F0', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px', fontFamily: '"Urbanist", sans-serif', color: '#1D1D1F' },
   card: { backgroundColor: '#FFFFFF', width: '100%', maxWidth: '460px', padding: '45px 30px', boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)', borderRadius: '24px', textAlign: 'center' },
@@ -137,7 +136,7 @@ const styles = {
 
   footer: { borderTop: '1px solid #F5F5F7', paddingTop: '30px' },
   socialRow: { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' },
-  socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', textDecoration: 'none' },
+  socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', textDecoration: 'none', transition: 'background-color 0.2s' },
   locationLink: { display: 'inline-block', fontSize: '12px', fontWeight: '600', color: '#1D1D1F', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', textDecoration: 'none' },
   copyright: { fontSize: '11px', color: '#86868B' },
 };
