@@ -200,11 +200,14 @@ const styles = {
   introTranslation: { fontSize: '12px', fontWeight: '500', color: '#889', textTransform: 'uppercase', letterSpacing: '0.05em' },
  clientName: { 
     fontFamily: '"TanMemories", serif', 
-    fontSize: '34px', 
-    color: '#1D1D1F', // Tom escuro e neutro para não chocar com o verde abaixo
-    margin: '0 0 35px 0', 
+    fontSize: '28px', 
+    color: '#2F3E32', 
+    margin: '0 auto 35px auto', 
     fontWeight: '400', 
-    lineHeight: '1.1' 
+    lineHeight: '1.1',
+    borderBottom: '1px solid #E5E5EA', // Linha fina e elegante
+    paddingBottom: '12px',
+    display: 'inline-block'
   },
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
   statusHeaderRow: { marginBottom: '10px' },
@@ -241,5 +244,6 @@ const styles = {
   textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
   divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
 };
+
 
 
