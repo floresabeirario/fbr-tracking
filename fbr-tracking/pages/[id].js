@@ -35,6 +35,7 @@ export default function Tracking({ encomenda }) {
           <link rel="icon" href="/icon.png" type="image/png" />
           <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{__html: `
+            body { margin: 0; padding: 0; background-color: #F0F2F0; }
             @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
             @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
           `}} />
@@ -82,6 +83,7 @@ export default function Tracking({ encomenda }) {
         <link rel="icon" href="/icon.png" type="image/png" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
         <style dangerouslySetInnerHTML={{__html: `
+          body { margin: 0; padding: 0; background-color: #F0F2F0; }
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES.otf') format('opentype'); font-weight: normal; font-style: normal; }
           @font-face { font-family: 'TanMemories'; src: url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype'); font-weight: normal; font-style: italic; }
         `}} />
@@ -113,7 +115,7 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
             
-            {/* FASE PT (AGORA EM ITÁLICO) */}
+            {/* FASE PT */}
             {encomenda.fase && <div style={styles.statusMainText}>{encomenda.fase}</div>}
             
             {/* FASE EN */}
@@ -124,7 +126,7 @@ export default function Tracking({ encomenda }) {
             {/* MENSAGEM PT */}
             {encomenda.mensagem && <div style={styles.message}>{formatText(encomenda.mensagem)}</div>}
             
-            {/* MENSAGEM EN (AGORA SEM ITÁLICO) */}
+            {/* MENSAGEM EN */}
             {encomenda.mensagem_en && <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
 
             <div style={styles.updateBadge}>
@@ -193,62 +195,4 @@ const styles = {
   brandName: { fontFamily: '"TanMemories", serif', fontSize: '42px', margin: '0', fontWeight: '400', letterSpacing: '-0.01em', lineHeight: '1.15' },
   taglineContainer: { marginTop: '12px' },
   taglinePT: { fontSize: '14px', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#666', fontWeight: '600', margin: '0 0 2px 0' },
-  taglineEN: { fontSize: '12px', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#999', fontWeight: '500', margin: 0 },
-  headerDivider: { height: '1px', backgroundColor: '#E5E5EA', width: '80%', margin: '0 auto 25px auto' },
-  introContainer: { marginBottom: '25px' },
-  introText: { fontSize: '14px', fontWeight: '600', color: '#2F3E32', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.05em' },
-  introTranslation: { fontSize: '12px', fontWeight: '500', color: '#889', textTransform: 'uppercase', letterSpacing: '0.05em' },
- clientName: { 
-    fontFamily: '"TanMemories", serif', 
-    fontSize: '28px', 
-    color: '#6D8C78',
-    margin: '0 auto 35px auto', 
-    padding: '12px 20px', 
-    borderTop: '1px solid #E5E5EA', 
-    borderBottom: '1px solid #E5E5EA', 
-    fontWeight: '400', 
-    lineHeight: '1.1',
-    display: 'inline-block'
-  },
-  statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
-  statusHeaderRow: { marginBottom: '10px' },
-  statusLabel: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', color: '#86868B' },
-  
-  /* AQUI: statusMainText agora tem fontStyle: 'italic' */
-  statusMainText: { fontFamily: '"TanMemories", serif', fontStyle: 'italic', fontSize: '32px', color: '#436850', marginBottom: '4px', lineHeight: '1.1' },
-  statusMainTextEn: { fontFamily: '"TanMemories", serif', fontSize: '26px', fontStyle: 'italic', color: '#6D8C78', marginBottom: '0px', lineHeight: '1.1' },
-  message: { fontSize: '15px', lineHeight: '1.6', color: '#424245', marginBottom: '10px' },
-  
-  /* AQUI: messageEn perdeu o fontStyle: 'italic' */
-  messageEn: { fontSize: '14px', lineHeight: '1.6', color: '#7E7E82', marginBottom: '20px' },
-  
-  updateBadge: { fontSize: '12px', color: '#6E6E73', backgroundColor: '#FFFFFF', padding: '8px 12px', borderRadius: '50px', width: 'fit-content', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' },
-  deliveryContainer: { marginBottom: '40px' },
-  deliveryContent: { textAlign: 'center' },
-  deliveryLabel: { display: 'block', fontSize: '16px', fontWeight: '700', color: '#1D1D1F', marginBottom: '4px' },
-  deliveryLabelEn: { display: 'block', fontSize: '14px', fontWeight: '500', color: '#86868B', marginBottom: '8px' },
-  deliveryDate: { fontFamily: '"TanMemories", serif', fontStyle: 'italic', fontSize: '32px', color: '#2F3E32', margin: 0 },
-  actionSection: { display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '40px' },
-  buttonAction: { backgroundColor: '#2F3E32', color: '#FFFFFF', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', display: 'block', textAlign: 'center' },
-  buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32', display: 'block', textAlign: 'center' },
-  footer: { borderTop: '1px solid #F5F5F7', paddingTop: '30px' },
-  socialRow: { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' },
-  
-  /* AQUI: Removido fontSize e ajustado para ícones */
-  socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', textDecoration: 'none', transition: 'background-color 0.2s' },
-  
-  locationLink: { display: 'inline-block', fontSize: '12px', fontWeight: '600', color: '#1D1D1F', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', textDecoration: 'none' },
-  copyright: { fontSize: '11px', color: '#86868B' },
-  errorTitlePT: { fontFamily: '"TanMemories", serif', fontSize: '34px', color: '#2F3E32', margin: '0 0 5px 0' },
-  errorTitleEN: { fontFamily: '"TanMemories", serif', fontSize: '26px', color: '#86868B', fontStyle: 'italic' },
-  textBody: { fontSize: '16px', margin: 0 },
-  textBodyEn: { fontSize: '14px', color: '#86868B', marginTop: '5px' },
-  divider: { height: '1px', backgroundColor: '#E5E5EA', margin: '20px auto' }
-};
-
-
-
-
-
-
-
+  taglineEN: { fontSize: '
