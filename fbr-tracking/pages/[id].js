@@ -113,20 +113,18 @@ export default function Tracking({ encomenda }) {
               <span style={styles.statusLabel}>Estado Atual / Status</span>
             </div>
             
-            {/* LÓGICA CONDICIONAL: Só renderiza se a célula não estiver vazia */}
-            
-            {/* FASE PT */}
+            {/* FASE PT (AGORA EM ITÁLICO) */}
             {encomenda.fase && <div style={styles.statusMainText}>{encomenda.fase}</div>}
             
             {/* FASE EN */}
             {encomenda.fase_en && <div style={styles.statusMainTextEn}>{encomenda.fase_en}</div>}
             
-            <div style={{marginBottom: '15px'}}></div> {/* Espaçador seguro */}
+            <div style={{marginBottom: '15px'}}></div>
 
             {/* MENSAGEM PT */}
             {encomenda.mensagem && <div style={styles.message}>{formatText(encomenda.mensagem)}</div>}
             
-            {/* MENSAGEM EN */}
+            {/* MENSAGEM EN (AGORA SEM ITÁLICO) */}
             {encomenda.mensagem_en && <div style={styles.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
 
             <div style={styles.updateBadge}>
@@ -153,9 +151,24 @@ export default function Tracking({ encomenda }) {
 
         <footer style={styles.footer}>
           <div style={styles.socialRow}>
-             <a href="https://www.instagram.com/floresabeirario/" target="_blank" style={styles.socialIcon}>IG</a>
-             <a href="https://www.facebook.com/floresabeirario/" target="_blank" style={styles.socialIcon}>FB</a>
-             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" style={styles.socialIcon}>MAPS</a>
+             <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="Instagram">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+               </svg>
+             </a>
+             <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="Facebook">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+               </svg>
+             </a>
+             <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.socialIcon} aria-label="Maps">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                 <circle cx="12" cy="10" r="3"></circle>
+               </svg>
+             </a>
           </div>
           <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={styles.locationLink}>Coimbra, Portugal</a>
           <p style={styles.copyright}>© Flores à Beira-Rio</p>
@@ -189,10 +202,15 @@ const styles = {
   statusBox: { backgroundColor: '#F7F9F8', padding: '30px 25px', borderRadius: '20px', marginBottom: '30px', textAlign: 'left' },
   statusHeaderRow: { marginBottom: '10px' },
   statusLabel: { fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '700', color: '#86868B' },
-  statusMainText: { fontFamily: '"TanMemories", serif', fontSize: '32px', color: '#436850', marginBottom: '4px', lineHeight: '1.1' },
+  
+  /* AQUI: statusMainText agora tem fontStyle: 'italic' */
+  statusMainText: { fontFamily: '"TanMemories", serif', fontStyle: 'italic', fontSize: '32px', color: '#436850', marginBottom: '4px', lineHeight: '1.1' },
   statusMainTextEn: { fontFamily: '"TanMemories", serif', fontSize: '26px', fontStyle: 'italic', color: '#6D8C78', marginBottom: '0px', lineHeight: '1.1' },
   message: { fontSize: '15px', lineHeight: '1.6', color: '#424245', marginBottom: '10px' },
-  messageEn: { fontSize: '14px', lineHeight: '1.6', color: '#7E7E82', fontStyle: 'italic', marginBottom: '20px' },
+  
+  /* AQUI: messageEn perdeu o fontStyle: 'italic' */
+  messageEn: { fontSize: '14px', lineHeight: '1.6', color: '#7E7E82', marginBottom: '20px' },
+  
   updateBadge: { fontSize: '12px', color: '#6E6E73', backgroundColor: '#FFFFFF', padding: '8px 12px', borderRadius: '50px', width: 'fit-content', boxShadow: '0 2px 5px rgba(0,0,0,0.03)' },
   deliveryContainer: { marginBottom: '40px' },
   deliveryContent: { textAlign: 'center' },
@@ -204,7 +222,10 @@ const styles = {
   buttonSite: { backgroundColor: '#FFFFFF', color: '#2F3E32', textDecoration: 'none', padding: '16px', borderRadius: '14px', fontSize: '15px', fontWeight: '600', border: '2px solid #2F3E32', display: 'block', textAlign: 'center' },
   footer: { borderTop: '1px solid #F5F5F7', paddingTop: '30px' },
   socialRow: { display: 'flex', justifyContent: 'center', gap: '20px', marginBottom: '20px' },
-  socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '10px', textDecoration: 'none', color: '#555' },
+  
+  /* AQUI: Removido fontSize e ajustado para ícones */
+  socialIcon: { width: '44px', height: '44px', borderRadius: '50%', backgroundColor: '#F5F5F7', display: 'flex', justifyContent: 'center', alignItems: 'center', textDecoration: 'none', transition: 'background-color 0.2s' },
+  
   locationLink: { display: 'inline-block', fontSize: '12px', fontWeight: '600', color: '#1D1D1F', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '8px', textDecoration: 'none' },
   copyright: { fontSize: '11px', color: '#86868B' },
   errorTitlePT: { fontFamily: '"TanMemories", serif', fontSize: '34px', color: '#2F3E32', margin: '0 0 5px 0' },
