@@ -1,9 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { "src": "fbr-tracking/package.json", "use": "@vercel/next" }
+    { "src": "package.json", "use": "@vercel/next" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/fbr-tracking/$1" }
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
