@@ -32,6 +32,7 @@ export default function Tracking({ encomenda }) {
       <div style={styles.pageWrapper}>
         <Head>
           <title>Rastreio | Flores à Beira-Rio</title>
+          <meta name="robots" content="noindex, nofollow" />
           <link rel="icon" href="/icon.png" type="image/png" />
           <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
           <style dangerouslySetInnerHTML={{__html: `
@@ -79,6 +80,7 @@ export default function Tracking({ encomenda }) {
     <div style={styles.pageWrapper}>
       <Head>
         <title>Status | Flores à Beira-Rio</title>
+        <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
