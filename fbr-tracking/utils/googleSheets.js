@@ -13,20 +13,13 @@ async function accessSheet() {
 
       const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
-      // --- BLOCO DE CORREÇÃO DA CHAVE ---
-      // 1. Garante que a chave existe
       if (!creds.private_key) throw new Error('O JSON não tem o campo "private_key".');
 
-      // 2. Limpeza Profunda:
-      // Remove aspas extras se existirem e converte os \n literais em quebras de linha reais
-      const cleanPrivateKey = creds.private_key
-        .replace(/\\n/g, '\n');
+      const cleanPrivateKey = creds.private_key.replace(/\\n/g, '\n');
 
-      // 3. DEBUG (Isto vai aparecer nos logs da Vercel se falhar)
-      // Se a chave estiver correta, deve começar por "-----BEGIN" e ter >1500 caracteres
       console.log('DEBUG AUTH - Email:', creds.client_email);
       console.log('DEBUG AUTH - Key Start:', cleanPrivateKey.substring(0, 25) + '...');
-      console.log('DEBUG AUTH - Key Length:', cleanPrivateKey.length); 
+      console.log('DEBUG AUTH - Key Length:', cleanPrivateKey.length);
 
       await doc.useServiceAccountAuth({
         client_email: creds.client_email,
@@ -47,18 +40,18 @@ export async function getEncomendaById(id) {
     await accessSheet();
     const sheet = doc.sheetsByIndex[0];
     const rows = await sheet.getRows();
-    
+
     const searchId = id ? id.toString().trim() : '';
     const encomenda = rows.find(r => r.id && r.id.toString().trim() === searchId);
-    
+
     if (!encomenda) return null;
 
-    // AQUI ESTÁ A ALTERAÇÃO: Adicionadas as colunas fase_en e mensagem_en
     return {
       id: encomenda.id,
       nome_encomenda: encomenda.nome_encomenda,
       fase: encomenda.fase || null,
       fase_en: encomenda.fase_en || null,
+      fase_numero: encomenda.fase_numero ? parseInt(encomenda.fase_numero, 10) : null,
       mensagem: encomenda.mensagem || null,
       mensagem_en: encomenda.mensagem_en || null,
       ultima_atualizacao: encomenda.ultima_atualizacao,
@@ -66,6 +59,6 @@ export async function getEncomendaById(id) {
     };
   } catch (err) {
     console.error('Erro no getEncomendaById:', err);
-    throw err; 
+    throw err;
   }
 }
