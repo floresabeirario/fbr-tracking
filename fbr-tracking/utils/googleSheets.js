@@ -1,6 +1,7 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-const SPREADSHEET_ID = process.env.GOOGLE_SPREADSHEET_ID || '1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI';
+const SPREADSHEET_ID = process.env.GOOGLE_SPREADSHEET_ID;
+if (!SPREADSHEET_ID) throw new Error('A variável GOOGLE_SPREADSHEET_ID não foi encontrada.');
 const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
 let isAuth = false;
