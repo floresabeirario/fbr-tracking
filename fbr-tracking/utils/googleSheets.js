@@ -1,6 +1,7 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-const doc = new GoogleSpreadsheet('1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI');
+const SPREADSHEET_ID = process.env.GOOGLE_SPREADSHEET_ID || '1XgUuKrf_hI_WHY5CReKAafoW7aby1lEWV2wAxnlesQI';
+const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
 let isAuth = false;
 
@@ -13,13 +14,11 @@ async function accessSheet() {
 
       const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
-      if (!creds.private_key) throw new Error('O JSON não tem o campo "private_key".');
+      if (!creds.client_email || !creds.private_key) {
+        throw new Error('O JSON não tem os campos "client_email" ou "private_key".');
+      }
 
       const cleanPrivateKey = creds.private_key.replace(/\\n/g, '\n');
-
-      console.log('DEBUG AUTH - Email:', creds.client_email);
-      console.log('DEBUG AUTH - Key Start:', cleanPrivateKey.substring(0, 25) + '...');
-      console.log('DEBUG AUTH - Key Length:', cleanPrivateKey.length);
 
       await doc.useServiceAccountAuth({
         client_email: creds.client_email,
@@ -28,7 +27,7 @@ async function accessSheet() {
 
       isAuth = true;
     } catch (err) {
-      console.error('ERRO CRÍTICO NA AUTENTICAÇÃO:', err.message);
+      console.error('Erro na autenticação com Google Sheets.');
       throw new Error('Falha na autenticação com Google Sheets: ' + err.message);
     }
   }

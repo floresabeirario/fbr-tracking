@@ -49,11 +49,11 @@ export default function Tracking({ encomenda }) {
     return (
       <div style={s.pageWrapper}>
         <Head>
-          <title>Rastreio | Flores à Beira-Rio</title>
+          <title>Encomenda não encontrada | Flores à Beira-Rio</title>
+          <meta name="description" content="Acompanhe o progresso da sua preservação de flores." />
           <meta name="robots" content="noindex, nofollow" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
           <link rel="icon" href="/icon.png" type="image/png" />
-          <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-          <style dangerouslySetInnerHTML={{__html: `body{margin:0;padding:0;background-color:#F0F2F0;}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES.otf') format('opentype');}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');font-style:italic;}`}} />
         </Head>
         <div style={s.card}>
           <header style={s.headerBand}>
@@ -90,12 +90,11 @@ export default function Tracking({ encomenda }) {
   return (
     <div style={s.pageWrapper}>
       <Head>
-        <title>Status | Flores à Beira-Rio</title>
+        <title>{encomenda.nome_encomenda} | Flores à Beira-Rio</title>
+        <meta name="description" content={`Acompanhe o progresso da sua preservação de flores — ${encomenda.nome_encomenda}.`} />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <style dangerouslySetInnerHTML={{__html: `body{margin:0;padding:0;background-color:#F0F2F0;}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES.otf') format('opentype');}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');font-style:italic;}`}} />
       </Head>
 
       <div style={s.card}>
@@ -208,8 +207,13 @@ export default function Tracking({ encomenda }) {
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
-  const encomenda = await getEncomendaById(id);
-  return { props: { encomenda } };
+  try {
+    const encomenda = await getEncomendaById(id);
+    return { props: { encomenda: encomenda ?? null } };
+  } catch (err) {
+    console.error('Erro ao carregar encomenda.');
+    return { props: { encomenda: null } };
+  }
 }
 
 const s = {

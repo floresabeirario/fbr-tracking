@@ -14,12 +14,11 @@ export default function Home() {
   return (
     <div style={st.pageWrapper}>
       <Head>
-        <title>Status | Flores à Beira-Rio</title>
+        <title>Estado da Encomenda | Flores à Beira-Rio</title>
+        <meta name="description" content="Acompanhe o progresso da sua preservação de flores. Track the progress of your flower preservation order." />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <style dangerouslySetInnerHTML={{__html:`body{margin:0;padding:0;background-color:#F0F2F0;}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES.otf') format('opentype');}@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');font-style:italic;}`}} />
       </Head>
 
       <div style={st.card}>

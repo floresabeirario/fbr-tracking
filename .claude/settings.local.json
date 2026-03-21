@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"import\\\\|require\" c:UsersmariaDocumentsfbr-trackingfbr-tracking/fbr-tracking --include=*.js)"
+    ]
+  }
+}
