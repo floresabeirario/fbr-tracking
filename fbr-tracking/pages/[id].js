@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { getEncomendaById } from '../utils/googleSheets';
+import { getEncomendaById } from '../utils/supabase';
 
 const PASSOS = [
   { pt: 'Entrega das flores agendada', en: 'Flower delivery scheduled' },
