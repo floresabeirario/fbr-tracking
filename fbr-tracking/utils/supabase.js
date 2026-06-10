@@ -140,14 +140,12 @@ function formatEstimatedDelivery(dateIso, lang) {
   return new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(d);
 }
 
-// "2026-05-04T08:30:00Z" → "04/05/2026, 08:30" (pt-PT)
+// "2026-05-04T08:30:00Z" → "04/05/2026" (pt-PT) — sem horas (cliente não vê hora)
 function formatUpdatedAt(iso) {
   if (!iso) return '';
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  const date = new Intl.DateTimeFormat('pt-PT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
-  const time = new Intl.DateTimeFormat('pt-PT', { hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
-  return `${date}, ${time}`;
+  return new Intl.DateTimeFormat('pt-PT', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(d);
 }
 
 // ── API principal ────────────────────────────────────────────
