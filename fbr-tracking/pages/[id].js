@@ -160,9 +160,9 @@ export default function Tracking({ encomenda }) {
                 {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
                 {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
                 {passoAtual && (
-                  <p className="stage-step">
+                  <span className="sr-only">
                     {isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}
-                  </p>
+                  </span>
                 )}
               </div>
             </div>
@@ -177,6 +177,15 @@ export default function Tracking({ encomenda }) {
               </div>
             )}
           </section>
+
+          {/* Mensagem da equipa, colada ao estado que explica */}
+          {(encomenda.mensagem || encomenda.mensagem_en) && (
+            <section className="note">
+              {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
+              {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
+              <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
+            </section>
+          )}
 
           {/* Timeline completa, expansível */}
           {passoAtual && (
@@ -213,15 +222,6 @@ export default function Tracking({ encomenda }) {
                 </div>
               </div>
             </div>
-          )}
-
-          {/* Mensagem da equipa */}
-          {(encomenda.mensagem || encomenda.mensagem_en) && (
-            <section className="note">
-              {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
-              {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
-              <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
-            </section>
           )}
 
           {/* Entrega estimada, emoldurada (o produto final é um quadro) */}
