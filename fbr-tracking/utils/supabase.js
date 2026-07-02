@@ -83,7 +83,7 @@ const PUBLIC_PHASE_LABEL_EN = {
 
 const DEFAULT_MESSAGES_PT = {
   0:  'A sua reserva foi recebida. Estamos a coordenar consigo a melhor forma de receber as flores.',
-  1:  'O primeiro passo para eternizar a sua memória! Já reservámos o nosso calendário para receber o seu bouquet.',
+  1:  'O primeiro passo para eternizar a sua memória! Já reservámos o nosso calendário para receber as suas flores.',
   2:  'As suas flores já chegaram ao nosso atelier! Vamos agora iniciar o processo de tratamento e preservação para que durem para sempre.',
   3:  'As suas flores estão agora a ser preservadas. Este passo é o segredo para que fiquem deslumbrantes durante muitos anos. Estamos a cuidar de todo o processo e garantimos que a espera vai valer a pena, vão ficar lindas!',
   4:  'Algumas flores exigem um cuidado extra e estão a ser reconstruídas pétala a pétala para recuperarem a sua forma original.',
@@ -100,7 +100,7 @@ const DEFAULT_MESSAGES_PT = {
 
 const DEFAULT_MESSAGES_EN = {
   0:  'Your reservation has been received. We are coordinating with you the best way to receive the flowers.',
-  1:  'The first step to eternalizing your memory! We have already reserved our calendar to receive your bouquet.',
+  1:  'The first step to eternalizing your memory! We have already reserved our calendar to receive your flowers.',
   2:  'Your flowers have arrived at our studio! We will now begin the treatment and preservation process so they can last forever.',
   3:  'Your flowers are now being preserved. This step is the secret to keeping them stunning for many years. We are taking care of the whole process and we guarantee the wait will be worth it, they are going to look beautiful!',
   4:  'Some flowers require extra care and are being reconstructed petal by petal to regain their original shape.',

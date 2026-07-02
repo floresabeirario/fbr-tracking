@@ -20,11 +20,14 @@ export default function Tracking({ encomenda }) {
   const [timelineOpen, setTimelineOpen] = useState(false);
 
   const whatsappNumber = "351934680300";
-  const whatsappMessage = `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
-  const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site.";
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
-
   const isInternational = encomenda && !encomenda.fase && !!encomenda.fase_en;
+
+  // Mensagem pré-escrita no idioma do cliente (EN-only → inglês)
+  const whatsappMessage = isInternational
+    ? `Hello! I would like to know more about order ${encomenda ? encomenda.nome_encomenda : ''}.`
+    : `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
+  const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site. / Hello! I could not find my order on the website.";
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(encomenda ? whatsappMessage : whatsappErrorMsg)}`;
 
   const formatText = (text) => {
     if (!text) return null;
@@ -83,6 +86,14 @@ export default function Tracking({ encomenda }) {
     );
   }
 
+  // Descrição do link (preview no WhatsApp/iMessage) no idioma do cliente:
+  // EN-only -> inglês; 'ambos' -> bilingue; PT -> português.
+  const description = isInternational
+    ? `Follow the preservation of your flowers, step by step · ${encomenda.nome_encomenda}.`
+    : encomenda.fase_en
+      ? `Acompanhe a sua preservação de flores · Track your flower preservation · ${encomenda.nome_encomenda}.`
+      : `Acompanhe o progresso da sua preservação de flores · ${encomenda.nome_encomenda}.`;
+
   const passoAtual = encomenda.fase_numero || null;
   const totalPassos = PASSOS.length;
   const percentagem = passoAtual ? Math.round(((passoAtual - 1) / (totalPassos - 1)) * 100) : 0;
@@ -91,7 +102,10 @@ export default function Tracking({ encomenda }) {
     <div style={s.pageWrapper}>
       <Head>
         <title>{encomenda.nome_encomenda} | Flores à Beira-Rio</title>
-        <meta name="description" content={`Acompanhe o progresso da sua preservação de flores — ${encomenda.nome_encomenda}.`} />
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${encomenda.nome_encomenda} | Flores à Beira-Rio`} />
+        <meta property="og:description" content={description} />
+        <meta property="og:site_name" content="Flores à Beira-Rio" />
         <meta name="robots" content="noindex, nofollow" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
