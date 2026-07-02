@@ -6,37 +6,33 @@
 // ============================================================
 
 // Flores decorativas em line-art (linhas finas, quase invisíveis,
-// no cabeçalho escuro). Desenhadas à mão, sem dependências.
-function MargaridaSvg({ className }) {
+// no cabeçalho escuro). Estilo ilustração botânica: flor vista de
+// lado, pétalas em leque com alturas irregulares. Sem dependências.
+function FlorLadoSvg({ className }) {
   return (
     <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M60 155 C57 120 62 90 59 62" />
-      <path d="M59 108 C46 104 38 94 36 82 C50 87 57 96 59 108 Z" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(45 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(90 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(135 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(180 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(225 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(270 60 42)" />
-      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(315 60 42)" />
-      <circle cx="60" cy="42" r="7" />
+      <path d="M62 155 C58 118 64 82 60 52" />
+      <path d="M60 50 C46 50 36 44 32 34 C44 34 54 42 60 50 Z" />
+      <path d="M60 50 C48 44 40 32 42 18 C52 26 58 38 60 50 Z" />
+      <path d="M60 50 C54 36 54 20 62 8 C68 20 66 38 60 50 Z" />
+      <path d="M60 50 C72 42 78 30 76 16 C66 24 61 38 60 50 Z" />
+      <path d="M60 50 C74 50 84 46 88 36 C76 34 66 42 60 50 Z" />
+      <path d="M61 100 C50 96 43 88 41 78 C52 82 59 90 61 100 Z" />
+      <path d="M61 88 C70 84 76 78 78 70" />
+      <path d="M78 70 C74 64 75 57 80 53 C84 58 83 66 78 70 Z" />
     </svg>
   );
 }
 
-function FlorCampoSvg({ className }) {
+function BotaoFlorSvg({ className }) {
   return (
     <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M60 155 C58 130 62 105 60 80" />
-      <path d="M60 122 C48 118 41 109 39 98 C51 103 58 111 60 122 Z" />
-      <path d="M60 136 C70 133 76 126 78 117 C68 121 62 127 60 136 Z" />
-      <ellipse cx="60" cy="25" rx="9" ry="13" />
-      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(72 60 46)" />
-      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(144 60 46)" />
-      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(216 60 46)" />
-      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(288 60 46)" />
-      <circle cx="60" cy="46" r="5.5" />
+      <path d="M54 155 C52 122 58 92 55 62" />
+      <path d="M55 60 C44 52 38 40 40 28 C50 36 54 48 55 60 Z" />
+      <path d="M55 60 C51 46 52 30 59 20 C64 32 61 48 55 60 Z" />
+      <path d="M55 60 C66 54 72 44 71 32 C62 40 57 50 55 60 Z" />
+      <path d="M56 112 C46 108 40 100 38 90 C48 94 54 102 56 112 Z" />
+      <path d="M55 128 C64 125 69 119 71 111 C63 114 57 120 55 128 Z" />
     </svg>
   );
 }
@@ -44,8 +40,8 @@ function FlorCampoSvg({ className }) {
 export function Hero({ tagline }) {
   return (
     <header className="hero">
-      <MargaridaSvg className="hero-flor" />
-      <FlorCampoSvg className="hero-flor2" />
+      <FlorLadoSvg className="hero-flor" />
+      <BotaoFlorSvg className="hero-flor2" />
       <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="brand-link">
         <h1 className="brand">Flores à<br />Beira-Rio</h1>
       </a>
