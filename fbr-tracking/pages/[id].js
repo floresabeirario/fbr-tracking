@@ -118,7 +118,13 @@ export default function Tracking({ encomenda }) {
           <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={s.brandLink}>
             <h1 style={s.brandName}>Flores à<br />Beira-Rio</h1>
           </a>
-          <p style={s.tagline}>Especialistas em preservação de flores · Flower preservation specialists</p>
+          <p style={s.tagline}>
+            {isEn
+              ? 'Flower preservation specialists'
+              : idioma === 'ambos'
+                ? 'Especialistas em preservação de flores · Flower preservation specialists'
+                : 'Especialistas em preservação de flores'}
+          </p>
         </header>
 
         <div style={s.body}>
