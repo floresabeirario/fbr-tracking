@@ -41,7 +41,17 @@ a{-webkit-tap-highlight-color:transparent;}
 
 /* ── Página ── */
 .page{min-height:100vh;min-height:100svh;display:flex;justify-content:center;background:radial-gradient(1000px 480px at 50% -60px,#FBFDF3 0%,var(--paper) 60%);}
-.wrap{width:100%;max-width:520px;display:flex;flex-direction:column;padding:0 22px;}
+.wrap{position:relative;z-index:1;width:100%;max-width:520px;display:flex;flex-direction:column;padding:0 22px;}
+
+/* ── Chuva de pétalas (primavera) ──
+   CSS puro, por trás do conteúdo, pointer-events none.
+   Com prefers-reduced-motion as animações morrem e as pétalas
+   ficam paradas fora do ecrã (invisíveis). */
+.petals{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.petal-fall{position:absolute;top:-6vh;left:var(--x);animation:fall var(--d) linear infinite;}
+@keyframes fall{to{transform:translateY(114vh);}}
+.petal{display:block;width:var(--s);height:calc(var(--s)*1.25);border-radius:100% 4px 100% 100%;opacity:.5;animation:sway var(--sw) ease-in-out infinite alternate;}
+@keyframes sway{from{transform:translateX(-16px) rotate(-28deg);}to{transform:translateX(16px) rotate(42deg);}}
 @media (min-width:560px){.wrap{padding:0 24px;}}
 
 /* Entrada suave em cascata */
@@ -69,9 +79,12 @@ a{-webkit-tap-highlight-color:transparent;}
 .eyebrow-en{margin:0;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);}
 .client{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(25px,7vw,30px);line-height:1.15;color:var(--g800);margin:10px 0 0;}
 
-/* ── Palco do estado (cartão verde-escuro) ── */
-.stage{position:relative;overflow:hidden;background:linear-gradient(165deg,#436B4F 0%,var(--g900) 96%);border-radius:24px;padding:26px 22px;margin-bottom:18px;color:var(--cream-ink);text-align:left;box-shadow:0 18px 50px rgba(42,63,49,.20);}
-.stage.cancelled{background:linear-gradient(165deg,#5D625B 0%,#414540 92%);}
+/* ── Cartão do estado: metade escura (fase) + metade clara
+      (mensagem), coladas — lê-se como uma coisa só ── */
+.status-card{border-radius:24px;overflow:hidden;margin-bottom:18px;text-align:left;background:var(--paper-hi);border:1px solid var(--warm-line);box-shadow:0 18px 50px rgba(42,63,49,.16);}
+.status-top{position:relative;overflow:hidden;background:linear-gradient(165deg,#436B4F 0%,var(--g900) 96%);padding:26px 22px;color:var(--cream-ink);}
+.status-card.cancelled .status-top{background:linear-gradient(165deg,#5D625B 0%,#414540 92%);}
+.status-msg{padding:20px 20px 22px;}
 .stage-flor{position:absolute;top:-18px;right:-26px;width:140px;height:auto;opacity:.12;transform:rotate(16deg);pointer-events:none;}
 .stage-top{position:relative;display:flex;align-items:center;gap:18px;}
 .stage-info{min-width:0;}
@@ -124,7 +137,6 @@ a{-webkit-tap-highlight-color:transparent;}
 .step-sub{font-size:11px;color:var(--mut);font-style:italic;margin-top:2px;}
 
 /* ── Mensagem ── */
-.note{background:var(--paper-hi);border:1px solid var(--warm-line);border-radius:20px;padding:22px 20px;margin-bottom:14px;text-align:left;}
 .msg{font-size:15px;line-height:1.65;color:var(--ink2);margin:0 0 10px;}
 .msg-en{font-size:14px;line-height:1.6;color:#75816F;margin:0 0 10px;}
 .msg a,.msg-en a{color:var(--g600);font-weight:600;text-decoration:underline;word-break:break-all;}

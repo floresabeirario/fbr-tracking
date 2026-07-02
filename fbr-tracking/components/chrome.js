@@ -19,6 +19,35 @@ export function FlorSvg({ className }) {
   );
 }
 
+// Chuva de pétalas em cores de primavera. Valores fixos (não
+// aleatórios) para o servidor e o browser renderizarem o mesmo.
+// Delays negativos = o ecrã já nasce polvilhado.
+const PETALS = [
+  { x: '6%',  s: '10px', d: '11s',   delay: '0s',   sw: '3.1s', c: '#F3DBDD' },
+  { x: '14%', s: '8px',  d: '14s',   delay: '-4s',  sw: '2.6s', c: '#E9C7CC' },
+  { x: '24%', s: '11px', d: '12s',   delay: '-8s',  sw: '3.4s', c: '#DCD3EA' },
+  { x: '33%', s: '7px',  d: '15s',   delay: '-2s',  sw: '2.9s', c: '#F6ECC0' },
+  { x: '42%', s: '9px',  d: '13s',   delay: '-10s', sw: '3.2s', c: '#F3DBDD' },
+  { x: '51%', s: '8px',  d: '16s',   delay: '-6s',  sw: '2.7s', c: '#CFE3CF' },
+  { x: '60%', s: '11px', d: '12.5s', delay: '-1s',  sw: '3.5s', c: '#E9C7CC' },
+  { x: '69%', s: '7px',  d: '14.5s', delay: '-9s',  sw: '2.8s', c: '#DCD3EA' },
+  { x: '78%', s: '10px', d: '11.5s', delay: '-5s',  sw: '3.0s', c: '#F6ECC0' },
+  { x: '86%', s: '8px',  d: '15.5s', delay: '-12s', sw: '2.5s', c: '#F3DBDD' },
+  { x: '93%', s: '9px',  d: '13.5s', delay: '-3s',  sw: '3.3s', c: '#CFE3CF' },
+];
+
+export function Petals() {
+  return (
+    <div className="petals" aria-hidden="true">
+      {PETALS.map((p, i) => (
+        <span key={i} className="petal-fall" style={{ '--x': p.x, '--d': p.d, animationDelay: p.delay }}>
+          <span className="petal" style={{ '--s': p.s, '--sw': p.sw, background: p.c }} />
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function Mast({ tagline }) {
   return (
     <header className="mast">

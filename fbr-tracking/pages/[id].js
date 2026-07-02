@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { getEncomendaById } from '../utils/supabase';
 import { TIMELINE_STEPS } from '../utils/timeline';
-import { Mast, Footer, FlorSvg, WhatsappIcon } from '../components/chrome';
+import { Mast, Footer, FlorSvg, WhatsappIcon, Petals } from '../components/chrome';
 
 const REVIEW_URL = 'https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7';
 
@@ -81,6 +81,7 @@ export default function Tracking({ encomenda }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/icon.png" type="image/png" />
         </Head>
+        <Petals />
         <div className="wrap">
           <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
           <main className="content">
@@ -140,6 +141,7 @@ export default function Tracking({ encomenda }) {
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
+      <Petals />
       <div className="wrap">
         <Mast tagline={tagline} />
 
@@ -150,42 +152,42 @@ export default function Tracking({ encomenda }) {
             <h1 className="client">{encomenda.nome_encomenda}</h1>
           </section>
 
-          {/* Palco: estado actual em destaque, sobre verde-escuro */}
-          <section className={`stage${encomenda.cancelada ? ' cancelled' : ''}`}>
-            <FlorSvg className="stage-flor" />
-            <div className="stage-top">
-              {passoAtual && <Ring passo={passoAtual} total={totalPassos} concluido={concluido} />}
-              <div className="stage-info">
-                <span className="stage-label">{bi('Estado atual', 'Status')}</span>
-                {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
-                {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
-                {passoAtual && (
-                  <span className="sr-only">
-                    {isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}
-                  </span>
-                )}
+          {/* Cartão do estado: fase (escuro) + mensagem (claro), UM só bloco */}
+          <section className={`status-card${encomenda.cancelada ? ' cancelled' : ''}`}>
+            <div className="status-top">
+              <FlorSvg className="stage-flor" />
+              <div className="stage-top">
+                {passoAtual && <Ring passo={passoAtual} total={totalPassos} concluido={concluido} />}
+                <div className="stage-info">
+                  <span className="stage-label">{bi('Estado atual', 'Status')}</span>
+                  {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
+                  {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
+                  {passoAtual && (
+                    <span className="sr-only">
+                      {isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}
+                    </span>
+                  )}
+                </div>
               </div>
+              {passoAtual && (
+                <div className="dots" aria-hidden="true">
+                  {TIMELINE_STEPS.map((_, i) => {
+                    const numero = i + 1;
+                    const isDone = numero < passoAtual || (concluido && numero === passoAtual);
+                    const isActive = numero === passoAtual && !concluido;
+                    return <span key={i} className={`pip${isDone ? ' done' : ''}${isActive ? ' active' : ''}`} />;
+                  })}
+                </div>
+              )}
             </div>
-            {passoAtual && (
-              <div className="dots" aria-hidden="true">
-                {TIMELINE_STEPS.map((_, i) => {
-                  const numero = i + 1;
-                  const isDone = numero < passoAtual || (concluido && numero === passoAtual);
-                  const isActive = numero === passoAtual && !concluido;
-                  return <span key={i} className={`pip${isDone ? ' done' : ''}${isActive ? ' active' : ''}`} />;
-                })}
+            {(encomenda.mensagem || encomenda.mensagem_en) && (
+              <div className="status-msg">
+                {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
+                {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
+                <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
               </div>
             )}
           </section>
-
-          {/* Mensagem da equipa, colada ao estado que explica */}
-          {(encomenda.mensagem || encomenda.mensagem_en) && (
-            <section className="note">
-              {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
-              {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
-              <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
-            </section>
-          )}
 
           {/* Timeline completa, expansível */}
           {passoAtual && (
