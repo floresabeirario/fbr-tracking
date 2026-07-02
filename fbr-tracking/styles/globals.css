@@ -44,11 +44,11 @@ body{margin:0;padding:0;background-color:var(--paper);color:var(--ink);font-fami
 a{-webkit-tap-highlight-color:transparent;}
 
 /* ── Página ── */
-.page{min-height:100vh;min-height:100svh;display:flex;justify-content:center;background:linear-gradient(180deg,#FAF0EC 0%,var(--paper) 38%);}
+/* Papel de parede suave: flores line-art pastel espalhadas pelo
+   fundo (margarida rosa, tulipa lilás, flor manteiga, folhas verdes),
+   num tile de 280px que se repete. O véu blush desvanece por cima. */
+.page{min-height:100vh;min-height:100svh;display:flex;justify-content:center;background-color:var(--paper);background-image:linear-gradient(180deg,rgba(250,240,236,.85) 0%,rgba(248,247,238,0) 40%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280' fill='none' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23D98E96' stroke-opacity='.30' transform='rotate(-12 52 58)'%3E%3Cpath d='M52 84 C51 74 53 66 52 58'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6' transform='rotate(60 52 56)'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6' transform='rotate(120 52 56)'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6' transform='rotate(180 52 56)'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6' transform='rotate(240 52 56)'/%3E%3Cellipse cx='52' cy='49' rx='2.8' ry='6' transform='rotate(300 52 56)'/%3E%3Ccircle cx='52' cy='56' r='2.4'/%3E%3C/g%3E%3Cg stroke='%23B5A3CF' stroke-opacity='.30' transform='rotate(10 216 120)'%3E%3Cpath d='M216 150 C215 138 217 130 216 122'/%3E%3Cpath d='M209 108 C209 100 212 95 216 94 C220 95 223 100 223 108 C223 114 220 117 216 117 C212 117 209 114 209 108 Z'/%3E%3C/g%3E%3Cg stroke='%23CDB86B' stroke-opacity='.30' transform='rotate(8 90 208)'%3E%3Cpath d='M90 232 C89 222 91 216 90 208'/%3E%3Cellipse cx='90' cy='193' rx='2.6' ry='5.5'/%3E%3Cellipse cx='90' cy='193' rx='2.6' ry='5.5' transform='rotate(72 90 200)'/%3E%3Cellipse cx='90' cy='193' rx='2.6' ry='5.5' transform='rotate(144 90 200)'/%3E%3Cellipse cx='90' cy='193' rx='2.6' ry='5.5' transform='rotate(216 90 200)'/%3E%3Cellipse cx='90' cy='193' rx='2.6' ry='5.5' transform='rotate(288 90 200)'/%3E%3Ccircle cx='90' cy='200' r='2.2'/%3E%3C/g%3E%3Cg stroke='%239DBF9E' stroke-opacity='.32' transform='rotate(-8 150 40)'%3E%3Cpath d='M150 64 C148 50 152 38 150 26'/%3E%3Cpath d='M150 42 C144 39 141 34 140 28 C146 31 149 36 150 42 Z'/%3E%3Cpath d='M150 54 C156 51 159 46 160 40 C154 43 151 48 150 54 Z'/%3E%3C/g%3E%3Cg stroke='%23D98E96' stroke-opacity='.26' transform='rotate(14 226 226)'%3E%3Cpath d='M226 244 C225 236 227 231 226 224'/%3E%3Ccircle cx='226' cy='218' r='4.5'/%3E%3Cpath d='M222 213 C224 211 228 211 230 213'/%3E%3C/g%3E%3Cg stroke='%239DBF9E' stroke-opacity='.24' transform='rotate(24 140 150)'%3E%3Cpath d='M140 166 C139 158 141 152 140 146'/%3E%3Cpath d='M140 152 C135 149 132 145 131 140 C136 142 139 147 140 152 Z'/%3E%3C/g%3E%3C/svg%3E");background-size:auto,280px 280px;}
 .wrap{position:relative;z-index:1;width:100%;max-width:520px;display:flex;flex-direction:column;padding:0 22px;}
-
-/* Raminho de flores desenhadas, atrás do topo da página */
-.page-flor{position:absolute;top:8px;right:-20px;width:150px;height:auto;opacity:.6;transform:rotate(8deg);pointer-events:none;z-index:-1;}
 @media (min-width:560px){.wrap{padding:0 24px;}}
 
 /* Entrada suave em cascata */
@@ -62,10 +62,10 @@ a{-webkit-tap-highlight-color:transparent;}
 .content>*:nth-child(6){animation-delay:.40s;}
 .content>*:nth-child(7){animation-delay:.47s;}
 
-/* ── Topo (wordmark) ── */
-.mast{text-align:center;padding:30px 0 6px;}
-.wordmark{font-family:'TanMemories',serif;font-weight:400;font-size:30px;line-height:1.1;color:var(--g800);text-decoration:none;display:inline-block;}
-.mast-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:8px 0 0;}
+/* ── Topo (wordmark) — discreto, o protagonista é o nome do cliente ── */
+.mast{text-align:center;padding:26px 0 4px;}
+.wordmark{font-family:'TanMemories',serif;font-weight:400;font-size:21px;line-height:1.1;color:var(--g600);text-decoration:none;display:inline-block;}
+.mast-tag{font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:600;margin:6px 0 0;}
 .mast-rule{width:44px;height:2px;border-radius:2px;background:var(--blossom);opacity:.55;margin:16px auto 0;border:none;}
 
 .content{text-align:center;padding:22px 0 8px;}
@@ -74,7 +74,7 @@ a{-webkit-tap-highlight-color:transparent;}
 .greet{margin-bottom:24px;}
 .eyebrow{margin:0 0 2px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blossom-deep);}
 .eyebrow-en{margin:0;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);}
-.client{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(25px,7vw,30px);line-height:1.15;color:var(--g800);margin:10px 0 0;}
+.client{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(28px,8vw,33px);line-height:1.15;color:var(--g800);margin:10px 0 0;}
 
 /* ── Cartão do estado: fase + mensagem juntas; no rodapé do cartão
       vive a linha de progresso, que é o próprio botão que abre a
@@ -90,9 +90,7 @@ a{-webkit-tap-highlight-color:transparent;}
 /* Linha de progresso = botão do dropdown das etapas */
 .progress-row{display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:13px 20px;background:#F4F6EC;border:none;border-top:1px solid var(--warm-line);cursor:pointer;font-family:inherit;color:inherit;user-select:none;transition:filter .18s ease;}
 @media (hover:hover){.progress-row:hover{filter:brightness(.98);}}
-.progress-text{flex-shrink:0;text-align:left;}
-.progress-title{display:block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g600);}
-.progress-sub{display:block;font-size:12.5px;font-weight:600;color:var(--ink2);margin-top:2px;white-space:nowrap;}
+.progress-sub{flex-shrink:0;text-align:left;font-size:13px;font-weight:600;color:var(--ink2);white-space:nowrap;}
 .bar{flex:1;height:6px;background:#E5E2D3;border-radius:6px;overflow:hidden;}
 .bar-fill{height:100%;background:var(--g600);border-radius:6px;transform-origin:left;animation:barIn 1s .3s cubic-bezier(.22,1,.36,1) backwards;}
 @keyframes barIn{from{transform:scaleX(0);}}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Mast, Footer, BouquetSvg } from '../components/chrome';
+import { Mast, Footer } from '../components/chrome';
 
 export default function Home() {
   const router = useRouter();
@@ -23,7 +23,6 @@ export default function Home() {
       </Head>
 
       <div className="wrap">
-        <BouquetSvg className="page-flor" />
         <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
 
         <main className="content">
