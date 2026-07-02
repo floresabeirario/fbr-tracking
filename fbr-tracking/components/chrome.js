@@ -5,16 +5,47 @@
 // — o cartão escuro é agora o palco do estado na página da encomenda.
 // ============================================================
 
-// Raminho botânico decorativo (linhas finas, quase invisível).
-// Desenhado à mão, sem dependências.
-export function FlorSvg({ className, stroke = '#EDF5EC' }) {
+// Raminho decorativo com quatro flores diferentes, desenhadas à mão
+// em line-art pastel: margarida rosa, tulipa lilás, flor de cinco
+// pétalas amarela e raminho de folhas verde.
+export function BouquetSvg({ className }) {
   return (
-    <svg className={className} viewBox="0 0 120 160" fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-      <path d="M60 155 C56 110 62 70 58 26" />
-      <path d="M59 96 C42 90 32 76 30 58 C48 64 57 78 59 96 Z" />
-      <path d="M59 66 C76 60 86 46 88 28 C70 34 61 48 59 66 Z" />
-      <circle cx="58" cy="16" r="7" />
-      <path d="M58 2 v5 M44 16 h5 M67 16 h5 M48 6 l3.5 3.5 M68 6 l-3.5 3.5" />
+    <svg className={className} viewBox="0 0 210 240" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {/* Margarida rosa */}
+      <g stroke="#D98E96">
+        <path d="M52 234 C50 192 56 152 54 110" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" transform="rotate(60 54 92)" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" transform="rotate(120 54 92)" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" transform="rotate(180 54 92)" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" transform="rotate(240 54 92)" />
+        <ellipse cx="54" cy="79" rx="4.5" ry="10" transform="rotate(300 54 92)" />
+        <circle cx="54" cy="92" r="4" />
+      </g>
+      {/* Tulipa lilás */}
+      <g stroke="#B5A3CF">
+        <path d="M108 234 C106 196 110 166 109 132" />
+        <path d="M97 110 C97 97 102 90 109 88 C116 90 121 97 121 110 C121 120 116 125 109 125 C102 125 97 120 97 110 Z" />
+        <path d="M103 93 C104 103 104 113 106 123 M115 93 C114 103 114 113 112 123" />
+        <path d="M108 192 C96 186 90 174 89 160 C101 166 107 178 108 192 Z" />
+      </g>
+      {/* Flor de cinco pétalas, amarelo-manteiga */}
+      <g stroke="#CDB86B">
+        <path d="M158 234 C157 206 161 186 160 162" />
+        <ellipse cx="160" cy="137" rx="4" ry="8.5" />
+        <ellipse cx="160" cy="137" rx="4" ry="8.5" transform="rotate(72 160 148)" />
+        <ellipse cx="160" cy="137" rx="4" ry="8.5" transform="rotate(144 160 148)" />
+        <ellipse cx="160" cy="137" rx="4" ry="8.5" transform="rotate(216 160 148)" />
+        <ellipse cx="160" cy="137" rx="4" ry="8.5" transform="rotate(288 160 148)" />
+        <circle cx="160" cy="148" r="3.5" />
+      </g>
+      {/* Raminho de folhas verde */}
+      <g stroke="#9DBF9E">
+        <path d="M187 234 C184 192 190 152 188 118" />
+        <path d="M188 142 C178 138 173 130 172 120 C181 124 186 132 188 142 Z" />
+        <path d="M188 168 C198 164 203 156 204 146 C195 150 190 158 188 168 Z" />
+        <path d="M188 196 C178 192 173 184 172 174 C181 178 186 186 188 196 Z" />
+      </g>
     </svg>
   );
 }

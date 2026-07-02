@@ -2,41 +2,9 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { getEncomendaById } from '../utils/supabase';
 import { TIMELINE_STEPS } from '../utils/timeline';
-import { Mast, Footer, FlorSvg, WhatsappIcon } from '../components/chrome';
+import { Mast, Footer, BouquetSvg, WhatsappIcon } from '../components/chrome';
 
 const REVIEW_URL = 'https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7';
-
-// Anel de progresso do palco. r=30 → circunferência ~188.5
-// (o valor está espelhado no @keyframes ringIn do CSS).
-function Ring({ passo, total, concluido }) {
-  const R = 30;
-  const C = 2 * Math.PI * R;
-  const frac = concluido ? 1 : passo / total;
-  return (
-    <div className="ring" aria-hidden="true">
-      <svg viewBox="0 0 76 76" width="86" height="86">
-        <defs>
-          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#4A7A57" />
-            <stop offset="100%" stopColor="#D98E96" />
-          </linearGradient>
-        </defs>
-        <circle cx="38" cy="38" r={R} className="ring-bg" />
-        <circle cx="38" cy="38" r={R} className="ring-fg" stroke="url(#ringGrad)" strokeDasharray={C} strokeDashoffset={C * (1 - frac)} />
-      </svg>
-      <div className="ring-num">
-        {concluido ? (
-          <span className="ring-check">✓</span>
-        ) : (
-          <>
-            <span className="ring-cur">{passo}</span>
-            <span className="ring-tot">/{total}</span>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default function Tracking({ encomenda }) {
   const [timelineOpen, setTimelineOpen] = useState(false);
@@ -88,7 +56,7 @@ export default function Tracking({ encomenda }) {
           <link rel="icon" href="/icon.png" type="image/png" />
         </Head>
         <div className="wrap">
-          <FlorSvg className="page-flor" stroke="#E8C3C8" />
+          <BouquetSvg className="page-flor" />
           <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
           <main className="content">
             <div className="err">
@@ -148,7 +116,7 @@ export default function Tracking({ encomenda }) {
       </Head>
 
       <div className="wrap">
-        <FlorSvg className="page-flor" stroke="#E8C3C8" />
+        <BouquetSvg className="page-flor" />
         <Mast tagline={tagline} />
 
         <main className="content">
@@ -158,67 +126,55 @@ export default function Tracking({ encomenda }) {
             <h1 className="client">{encomenda.nome_encomenda}</h1>
           </section>
 
-          {/* Cartão do estado: fase + mensagem juntas, fio primaveril no topo */}
+          {/* Cartão do estado: fase + mensagem juntas; no rodapé do
+              cartão, a linha de progresso é o botão que abre as etapas */}
           <section className={`status-card${encomenda.cancelada ? ' cancelled' : ''}`}>
-            <div className="status-accent" aria-hidden="true"></div>
-            <div className="status-head">
-              {passoAtual && <Ring passo={passoAtual} total={totalPassos} concluido={concluido} />}
-              <div className="stage-info">
-                <span className="stage-label">{bi('Estado atual', 'Status')}</span>
-                {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
-                {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
-                {passoAtual && (
-                  <span className="sr-only">
-                    {isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}
-                  </span>
-                )}
-              </div>
+            <div className="status-body">
+              <span className="stage-label">{bi('Estado atual', 'Status')}</span>
+              {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
+              {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
+              {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
+              {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
+              <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
             </div>
-            {(encomenda.mensagem || encomenda.mensagem_en) && (
-              <div className="status-msg">
-                {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
-                {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
-                <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
-              </div>
-            )}
-          </section>
-
-          {/* Timeline completa, expansível */}
-          {passoAtual && (
-            <div className="tl-block">
-              <button type="button" className="tl-toggle" onClick={() => setTimelineOpen(!timelineOpen)} aria-expanded={timelineOpen}>
-                {timelineOpen
-                  ? bi('Esconder as etapas', 'Hide the stages')
-                  : bi('Ver as 12 etapas', 'See all 12 stages')}
-                <svg className={`chev${timelineOpen ? ' up' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </button>
-              <div className={`tl-wrap${timelineOpen ? ' open' : ''}`}>
-                <div className="tl-inner">
-                  <div className="tl">
-                    {TIMELINE_STEPS.map((passo, i) => {
-                      const numero = i + 1;
-                      // Encomenda concluída (fase 12): o último passo também fica ✓,
-                      // sem "Em curso" pendurado no fim da viagem.
-                      const isDone = numero < passoAtual || (concluido && numero === passoAtual);
-                      const isActive = numero === passoAtual && !concluido;
-                      return (
-                        <div key={i} className={`step${isDone ? ' done' : ''}`}>
-                          <div className={`dot${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}>{isDone ? '✓' : numero}</div>
-                          <div className="step-text">
-                            <div className={`step-label${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}>{isEn ? passo.en : passo.pt}</div>
-                            {idioma === 'ambos' && <div className="step-en">{passo.en}</div>}
-                            {isActive && <div className="step-sub">{bi('Em curso', 'In progress')}</div>}
+            {passoAtual && (
+              <>
+                <button type="button" className="progress-row" onClick={() => setTimelineOpen(!timelineOpen)} aria-expanded={timelineOpen}>
+                  <div className="progress-text">
+                    <span className="progress-title">{isEn ? 'The journey' : 'A viagem'}</span>
+                    <span className="progress-sub">{isEn ? `Stage ${passoAtual} of ${totalPassos}` : `Etapa ${passoAtual} de ${totalPassos}`}</span>
+                  </div>
+                  <div className="bar"><div className="bar-fill" style={{ width: `${Math.round((passoAtual / totalPassos) * 100)}%` }}></div></div>
+                  <svg className={`chev${timelineOpen ? ' up' : ''}`} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                <div className={`tl-wrap${timelineOpen ? ' open' : ''}`}>
+                  <div className="tl-inner">
+                    <div className="tl">
+                      {TIMELINE_STEPS.map((passo, i) => {
+                        const numero = i + 1;
+                        // Encomenda concluída (fase 12): o último passo também fica ✓,
+                        // sem "Em curso" pendurado no fim da viagem.
+                        const isDone = numero < passoAtual || (concluido && numero === passoAtual);
+                        const isActive = numero === passoAtual && !concluido;
+                        return (
+                          <div key={i} className={`step${isDone ? ' done' : ''}`}>
+                            <div className={`dot${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}>{isDone ? '✓' : numero}</div>
+                            <div className="step-text">
+                              <div className={`step-label${isDone ? ' done' : ''}${isActive ? ' active' : ''}`}>{isEn ? passo.en : passo.pt}</div>
+                              {idioma === 'ambos' && <div className="step-en">{passo.en}</div>}
+                              {isActive && <div className="step-sub">{bi('Em curso', 'In progress')}</div>}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
+              </>
+            )}
+          </section>
 
           {/* Entrega estimada, emoldurada (o produto final é um quadro) */}
           {!encomenda.cancelada && !concluido && (
