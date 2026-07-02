@@ -2,9 +2,35 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { getEncomendaById } from '../utils/supabase';
 import { TIMELINE_STEPS } from '../utils/timeline';
-import { Hero, Footer, WhatsappIcon } from '../components/chrome';
+import { Mast, Footer, FlorSvg, WhatsappIcon } from '../components/chrome';
 
 const REVIEW_URL = 'https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7';
+
+// Anel de progresso do palco. r=30 → circunferência ~188.5
+// (o valor está espelhado no @keyframes ringIn do CSS).
+function Ring({ passo, total, concluido }) {
+  const R = 30;
+  const C = 2 * Math.PI * R;
+  const frac = concluido ? 1 : passo / total;
+  return (
+    <div className="ring" aria-hidden="true">
+      <svg viewBox="0 0 76 76" width="88" height="88">
+        <circle cx="38" cy="38" r={R} className="ring-bg" />
+        <circle cx="38" cy="38" r={R} className="ring-fg" strokeDasharray={C} strokeDashoffset={C * (1 - frac)} />
+      </svg>
+      <div className="ring-num">
+        {concluido ? (
+          <span className="ring-check">✓</span>
+        ) : (
+          <>
+            <span className="ring-cur">{passo}</span>
+            <span className="ring-tot">/{total}</span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Tracking({ encomenda }) {
   const [timelineOpen, setTimelineOpen] = useState(false);
@@ -55,13 +81,13 @@ export default function Tracking({ encomenda }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/icon.png" type="image/png" />
         </Head>
-        <div className="card">
-          <Hero tagline="Especialistas em preservação de flores · Flower preservation specialists" />
-          <div className="body">
+        <div className="wrap">
+          <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
+          <main className="content">
             <div className="err">
-              <h2 className="err-title">Encomenda não encontrada</h2>
-              <h3 className="err-sub">Order not found</h3>
-              <div className="divider"></div>
+              <h1 className="err-title">Encomenda não encontrada</h1>
+              <h2 className="err-sub">Order not found</h2>
+              <hr className="divider" />
               <p className="err-text">Por favor, verifique o número da encomenda.</p>
               <p className="err-text-en">Please check the order number.</p>
             </div>
@@ -74,7 +100,7 @@ export default function Tracking({ encomenda }) {
                 Visitar Site / Visit Website
               </a>
             </div>
-          </div>
+          </main>
           <Footer />
         </div>
       </div>
@@ -91,7 +117,6 @@ export default function Tracking({ encomenda }) {
   const passoAtual = encomenda.fase_numero || null;
   const totalPassos = TIMELINE_STEPS.length;
   const concluido = passoAtual === totalPassos;
-  const percentagem = passoAtual ? Math.round(((passoAtual - 1) / (totalPassos - 1)) * 100) : 0;
 
   const tagline = isEn
     ? 'Flower preservation specialists'
@@ -115,26 +140,52 @@ export default function Tracking({ encomenda }) {
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
-      <div className="card">
-        <Hero tagline={tagline} />
+      <div className="wrap">
+        <Mast tagline={tagline} />
 
-        <div className="body">
-          <div className="intro-wrap">
-            {showPt && <p className="intro">Acompanhe a sua preservação</p>}
-            {showEn && <p className={isEn ? 'intro' : 'intro-en'}>Track your preservation journey</p>}
-          </div>
+        <main className="content">
+          <section className="greet">
+            {showPt && <p className="eyebrow">A viagem das suas flores</p>}
+            {showEn && <p className={isEn ? 'eyebrow' : 'eyebrow-en'}>Your flowers&apos; journey</p>}
+            <h1 className="client">{encomenda.nome_encomenda}</h1>
+          </section>
 
-          <h2 className="client-name">{encomenda.nome_encomenda}</h2>
+          {/* Palco: estado actual em destaque, sobre verde-escuro */}
+          <section className={`stage${encomenda.cancelada ? ' cancelled' : ''}`}>
+            <FlorSvg className="stage-flor" />
+            <div className="stage-top">
+              {passoAtual && <Ring passo={passoAtual} total={totalPassos} concluido={concluido} />}
+              <div className="stage-info">
+                <span className="stage-label">{bi('Estado atual', 'Status')}</span>
+                {encomenda.fase && <h2 className="stage-phase">{encomenda.fase}</h2>}
+                {encomenda.fase_en && <h2 className={isEn ? 'stage-phase' : 'stage-phase-en'}>{encomenda.fase_en}</h2>}
+                {passoAtual && (
+                  <p className="stage-step">
+                    {isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}
+                  </p>
+                )}
+              </div>
+            </div>
+            {passoAtual && (
+              <div className="dots" aria-hidden="true">
+                {TIMELINE_STEPS.map((_, i) => {
+                  const numero = i + 1;
+                  const isDone = numero < passoAtual || (concluido && numero === passoAtual);
+                  const isActive = numero === passoAtual && !concluido;
+                  return <span key={i} className={`pip${isDone ? ' done' : ''}${isActive ? ' active' : ''}`} />;
+                })}
+              </div>
+            )}
+          </section>
 
+          {/* Timeline completa, expansível */}
           {passoAtual && (
-            <div className="progress-wrap">
-              <button type="button" className="progress-card" onClick={() => setTimelineOpen(!timelineOpen)} aria-expanded={timelineOpen}>
-                <div className="progress-text">
-                  <div className="progress-title">{isEn ? 'Progress' : 'Progresso'}</div>
-                  <div className="progress-sub">{isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}</div>
-                </div>
-                <div className="bar"><div className="bar-fill" style={{ width: `${concluido ? 100 : percentagem}%` }}></div></div>
-                <svg className={`chev${timelineOpen ? ' up' : ''}`} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+            <div className="tl-block">
+              <button type="button" className="tl-toggle" onClick={() => setTimelineOpen(!timelineOpen)} aria-expanded={timelineOpen}>
+                {timelineOpen
+                  ? bi('Esconder as etapas', 'Hide the stages')
+                  : bi('Ver as 12 etapas', 'See all 12 stages')}
+                <svg className={`chev${timelineOpen ? ' up' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
@@ -164,21 +215,22 @@ export default function Tracking({ encomenda }) {
             </div>
           )}
 
-          <div className={`status${encomenda.cancelada ? ' cancelled' : ''}`}>
-            <span className="status-label">{bi('Estado Atual', 'Status')}</span>
-            {encomenda.fase && <div className="phase">{encomenda.fase}</div>}
-            {encomenda.fase_en && <div className={isEn ? 'phase' : 'phase-en'}>{encomenda.fase_en}</div>}
-            {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
-            {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
-            <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
-          </div>
+          {/* Mensagem da equipa */}
+          {(encomenda.mensagem || encomenda.mensagem_en) && (
+            <section className="note">
+              {encomenda.mensagem && <div className="msg">{formatText(encomenda.mensagem)}</div>}
+              {encomenda.mensagem_en && <div className={isEn ? 'msg' : 'msg-en'}>{formatText(encomenda.mensagem_en)}</div>}
+              <div className="updated">{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
+            </section>
+          )}
 
+          {/* Entrega estimada, emoldurada (o produto final é um quadro) */}
           {!encomenda.cancelada && !concluido && (
-            <div className="delivery">
-              {showPt && <span className="delivery-label">Entrega estimada da sua encomenda</span>}
-              {showEn && <span className={isEn ? 'delivery-label' : 'delivery-label-en'}>Estimated delivery of your order</span>}
-              <p className="delivery-date">{encomenda.data_entrega || bi('Em breve', 'Coming soon')}</p>
-            </div>
+            <section className="frame">
+              {showPt && <span className="frame-label">Entrega estimada da sua encomenda</span>}
+              {showEn && <span className={isEn ? 'frame-label' : 'frame-label-en'}>Estimated delivery of your order</span>}
+              <p className="frame-date">{encomenda.data_entrega || bi('Em breve', 'Coming soon')}</p>
+            </section>
           )}
 
           {concluido && (
@@ -197,7 +249,7 @@ export default function Tracking({ encomenda }) {
               {bi('Visitar Site', 'Visit Website')}
             </a>
           </div>
-        </div>
+        </main>
 
         <Footer />
       </div>
