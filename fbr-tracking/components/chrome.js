@@ -1,19 +1,33 @@
 // ============================================================
-// fbr-tracking — topo e rodapé partilhados pelas páginas
+// fbr-tracking — cabeçalho e rodapé partilhados pelas páginas
 // (home, encomenda e erro), para não haver 3 cópias do mesmo JSX.
-// Design "Herbário": papel com flores pastel em padrão de fundo
-// (definido em globals.css), wordmark discreto, o protagonista é
-// o nome do cliente e o cartão do estado.
+// Cabeçalho escuro do main (a marca ancora a página); o corpo
+// segue a estrutura "Herbário" definida em globals.css.
 // ============================================================
 
-export function Mast({ tagline }) {
+// Raminho botânico decorativo (linhas finas, quase invisível,
+// no cabeçalho escuro). Desenhado à mão, sem dependências.
+export function FlorSvg({ className }) {
   return (
-    <header className="mast">
-      <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="wordmark">
-        Flores à Beira-Rio
+    <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <path d="M60 155 C56 110 62 70 58 26" />
+      <path d="M59 96 C42 90 32 76 30 58 C48 64 57 78 59 96 Z" />
+      <path d="M59 66 C76 60 86 46 88 28 C70 34 61 48 59 66 Z" />
+      <circle cx="58" cy="16" r="7" />
+      <path d="M58 2 v5 M44 16 h5 M67 16 h5 M48 6 l3.5 3.5 M68 6 l-3.5 3.5" />
+    </svg>
+  );
+}
+
+export function Hero({ tagline }) {
+  return (
+    <header className="hero">
+      <FlorSvg className="hero-flor" />
+      <FlorSvg className="hero-flor2" />
+      <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="brand-link">
+        <h1 className="brand">Flores à<br />Beira-Rio</h1>
       </a>
-      <p className="mast-tag">{tagline}</p>
-      <hr className="mast-rule" />
+      <p className="tagline">{tagline}</p>
     </header>
   );
 }
@@ -23,13 +37,13 @@ export function Footer() {
     <footer className="footer">
       <div className="socials">
         <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" className="social" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#84907C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
         <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" className="social" aria-label="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#84907C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
         </a>
         <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" className="social" aria-label="Maps">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#84907C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
         </a>
       </div>
       <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" className="loc">Coimbra, Portugal</a>

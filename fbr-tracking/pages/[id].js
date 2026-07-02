@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { getEncomendaById } from '../utils/supabase';
 import { TIMELINE_STEPS } from '../utils/timeline';
-import { Mast, Footer, WhatsappIcon } from '../components/chrome';
+import { Hero, Footer, WhatsappIcon } from '../components/chrome';
 
 const REVIEW_URL = 'https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7';
 
@@ -55,12 +55,12 @@ export default function Tracking({ encomenda }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/icon.png" type="image/png" />
         </Head>
-        <div className="wrap">
-          <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
-          <main className="content">
+        <div className="card">
+          <Hero tagline="Especialistas em preservação de flores · Flower preservation specialists" />
+          <main className="body">
             <div className="err">
-              <h1 className="err-title">Encomenda não encontrada</h1>
-              <h2 className="err-sub">Order not found</h2>
+              <h2 className="err-title">Encomenda não encontrada</h2>
+              <h3 className="err-sub">Order not found</h3>
               <hr className="divider" />
               <p className="err-text">Por favor, verifique o número da encomenda.</p>
               <p className="err-text-en">Please check the order number.</p>
@@ -114,14 +114,14 @@ export default function Tracking({ encomenda }) {
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
-      <div className="wrap">
-        <Mast tagline={tagline} />
+      <div className="card">
+        <Hero tagline={tagline} />
 
-        <main className="content">
+        <main className="body">
           <section className="greet">
             {showPt && <p className="eyebrow">A viagem das suas flores</p>}
             {showEn && <p className={isEn ? 'eyebrow' : 'eyebrow-en'}>Your flowers&apos; journey</p>}
-            <h1 className="client">{encomenda.nome_encomenda}</h1>
+            <h2 className="client">{encomenda.nome_encomenda}</h2>
           </section>
 
           {/* Cartão do estado: fase + mensagem juntas; no rodapé do

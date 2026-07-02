@@ -7,8 +7,8 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        {/* Barra do browser no telemóvel fica blush, como o topo da página */}
-        <meta name="theme-color" content="#FAF0EC" />
+        {/* Barra do browser no telemóvel fica verde-escura, como o cabeçalho */}
+        <meta name="theme-color" content="#2F3E32" />
         <link rel="apple-touch-icon" href="/icon.png" />
       </Head>
       <body>

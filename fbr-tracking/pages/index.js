@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Mast, Footer } from '../components/chrome';
+import { Hero, Footer } from '../components/chrome';
 
 export default function Home() {
   const router = useRouter();
@@ -22,13 +22,13 @@ export default function Home() {
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
-      <div className="wrap">
-        <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
+      <div className="card">
+        <Hero tagline="Especialistas em preservação de flores · Flower preservation specialists" />
 
-        <main className="content">
+        <main className="body">
           <div>
-            <h1 className="home-title">A viagem das suas flores</h1>
-            <h2 className="home-sub">Your flowers&apos; journey</h2>
+            <h2 className="home-title">A viagem das suas flores</h2>
+            <h3 className="home-sub">Your flowers&apos; journey</h3>
             <p className="home-text">Utilize o link que recebeu para acompanhar o progresso da sua preservação, ou insira o código da encomenda abaixo.</p>
             <p className="home-text-en">Use the link you received to track your preservation progress, or enter your order code below.</p>
           </div>
