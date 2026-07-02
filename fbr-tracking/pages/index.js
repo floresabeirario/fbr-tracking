@@ -48,7 +48,6 @@ export default function Home() {
 
           <div className="actions">
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-              <span aria-hidden="true">✿</span>
               Visitar Site / Visit Website
             </a>
           </div>

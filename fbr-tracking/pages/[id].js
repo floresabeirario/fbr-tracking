@@ -71,7 +71,7 @@ export default function Tracking({ encomenda }) {
                 Fale connosco / Chat with us
               </a>
               <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-                <span aria-hidden="true">✿</span> Visitar Site / Visit Website
+                Visitar Site / Visit Website
               </a>
             </div>
           </div>
@@ -175,7 +175,6 @@ export default function Tracking({ encomenda }) {
 
           {!encomenda.cancelada && !concluido && (
             <div className="delivery">
-              <span className="orn" aria-hidden="true">✿</span>
               {showPt && <span className="delivery-label">Entrega estimada da sua encomenda</span>}
               {showEn && <span className={isEn ? 'delivery-label' : 'delivery-label-en'}>Estimated delivery of your order</span>}
               <p className="delivery-date">{encomenda.data_entrega || bi('Em breve', 'Coming soon')}</p>
@@ -195,7 +194,6 @@ export default function Tracking({ encomenda }) {
               {bi('Fale connosco', 'Chat with us')}
             </a>
             <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="btn btn-outline">
-              <span aria-hidden="true">✿</span>
               {bi('Visitar Site', 'Visit Website')}
             </a>
           </div>

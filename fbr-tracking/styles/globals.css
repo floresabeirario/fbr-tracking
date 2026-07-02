@@ -115,7 +115,6 @@ a{-webkit-tap-highlight-color:transparent;}
 
 /* ── Entrega estimada ── */
 .delivery{margin:0 0 28px;}
-.orn{display:block;color:var(--g200);font-size:16px;margin-bottom:10px;}
 .delivery-label{display:block;font-size:15px;font-weight:700;color:var(--ink);}
 .delivery-label-en{display:block;font-size:13px;font-weight:500;color:var(--mut);margin-top:2px;}
 .delivery-date{font-family:'TanMemories',serif;font-style:italic;font-size:clamp(28px,8vw,32px);color:var(--g800);margin:8px 0 0;}
