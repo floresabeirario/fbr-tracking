@@ -65,8 +65,8 @@ a{-webkit-tap-highlight-color:transparent;}
 
 /* ── Cabeçalho escuro ── */
 .hero{position:relative;overflow:hidden;background:linear-gradient(168deg,#37493C 0%,var(--g900) 92%);padding:38px 26px 30px;}
-.hero-flor{position:absolute;top:-16px;right:-24px;width:150px;height:auto;opacity:.13;transform:rotate(16deg);pointer-events:none;}
-.hero-flor2{position:absolute;bottom:-34px;left:-28px;width:120px;height:auto;opacity:.10;transform:rotate(-158deg);pointer-events:none;}
+.hero-flor{position:absolute;top:-14px;right:-26px;width:150px;height:auto;opacity:.13;transform:rotate(16deg);pointer-events:none;}
+.hero-flor2{position:absolute;bottom:-52px;left:-30px;width:120px;height:auto;opacity:.10;transform:rotate(-12deg);pointer-events:none;}
 .brand-link{position:relative;display:block;text-decoration:none;color:inherit;}
 .brand{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(36px,10vw,42px);line-height:1.12;letter-spacing:-.01em;color:#E8F0E9;margin:0 0 10px;}
 .tagline{position:relative;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,240,233,.6);font-weight:500;margin:0;}

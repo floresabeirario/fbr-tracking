@@ -5,16 +5,38 @@
 // segue a estrutura "Herbário" definida em globals.css.
 // ============================================================
 
-// Raminho botânico decorativo (linhas finas, quase invisível,
-// no cabeçalho escuro). Desenhado à mão, sem dependências.
-export function FlorSvg({ className }) {
+// Flores decorativas em line-art (linhas finas, quase invisíveis,
+// no cabeçalho escuro). Desenhadas à mão, sem dependências.
+function MargaridaSvg({ className }) {
   return (
-    <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-      <path d="M60 155 C56 110 62 70 58 26" />
-      <path d="M59 96 C42 90 32 76 30 58 C48 64 57 78 59 96 Z" />
-      <path d="M59 66 C76 60 86 46 88 28 C70 34 61 48 59 66 Z" />
-      <circle cx="58" cy="16" r="7" />
-      <path d="M58 2 v5 M44 16 h5 M67 16 h5 M48 6 l3.5 3.5 M68 6 l-3.5 3.5" />
+    <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M60 155 C57 120 62 90 59 62" />
+      <path d="M59 108 C46 104 38 94 36 82 C50 87 57 96 59 108 Z" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(45 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(90 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(135 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(180 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(225 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(270 60 42)" />
+      <ellipse cx="60" cy="21" rx="5.5" ry="13" transform="rotate(315 60 42)" />
+      <circle cx="60" cy="42" r="7" />
+    </svg>
+  );
+}
+
+function FlorCampoSvg({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 120 160" fill="none" stroke="#E8F0E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M60 155 C58 130 62 105 60 80" />
+      <path d="M60 122 C48 118 41 109 39 98 C51 103 58 111 60 122 Z" />
+      <path d="M60 136 C70 133 76 126 78 117 C68 121 62 127 60 136 Z" />
+      <ellipse cx="60" cy="25" rx="9" ry="13" />
+      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(72 60 46)" />
+      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(144 60 46)" />
+      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(216 60 46)" />
+      <ellipse cx="60" cy="25" rx="9" ry="13" transform="rotate(288 60 46)" />
+      <circle cx="60" cy="46" r="5.5" />
     </svg>
   );
 }
@@ -22,8 +44,8 @@ export function FlorSvg({ className }) {
 export function Hero({ tagline }) {
   return (
     <header className="hero">
-      <FlorSvg className="hero-flor" />
-      <FlorSvg className="hero-flor2" />
+      <MargaridaSvg className="hero-flor" />
+      <FlorCampoSvg className="hero-flor2" />
       <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="brand-link">
         <h1 className="brand">Flores à<br />Beira-Rio</h1>
       </a>
