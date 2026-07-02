@@ -17,7 +17,7 @@ export default function Home() {
         <title>Estado da Encomenda | Flores à Beira-Rio</title>
         <meta name="description" content="Acompanhe o progresso da sua preservação de flores. Track the progress of your flower preservation order." />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
@@ -40,12 +40,12 @@ export default function Home() {
           </div>
 
           <form onSubmit={handleSearch} style={st.searchForm}>
-            <input type="text" placeholder="Ex: 2024001" value={orderId} onChange={(e) => setOrderId(e.target.value)} style={st.input} />
-            <button type="submit" style={st.buttonSearch}>Rastrear / Track</button>
+            <input type="text" placeholder="Código da encomenda / Order code" value={orderId} onChange={(e) => setOrderId(e.target.value)} className="fbr-input" style={st.input} autoComplete="off" spellCheck={false} />
+            <button type="submit" className="fbr-btn" style={st.buttonSearch}>Rastrear / Track</button>
           </form>
 
           <div style={st.actionSection}>
-            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={st.buttonSite}>
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="fbr-btn" style={st.buttonSite}>
               <span style={{marginRight:'8px',fontSize:'18px',lineHeight:'1'}}>✿</span>
               Visitar Site / Visit Website
             </a>

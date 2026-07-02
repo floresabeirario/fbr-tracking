@@ -1,29 +1,26 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { getEncomendaById } from '../utils/supabase';
-
-const PASSOS = [
-  { pt: 'Entrega das flores agendada', en: 'Flower delivery scheduled' },
-  { pt: 'Flores recebidas',            en: 'Flowers received' },
-  { pt: 'Flores na prensa',            en: 'Pressing in progress' },
-  { pt: 'Reconstrução botânica',       en: 'Botanical reconstruction' },
-  { pt: 'A compor o design do quadro', en: 'Composing the design' },
-  { pt: 'A aguardar aprovação',        en: 'Awaiting your approval' },
-  { pt: 'A ser emoldurado',            en: 'Being framed' },
-  { pt: 'A ser fotografado',           en: 'Being photographed' },
-  { pt: 'Quadro pronto',               en: 'Frame ready' },
-  { pt: 'Quadro enviado',              en: 'Frame dispatched' },
-  { pt: 'Concluído',                   en: 'Completed' },
-];
+import { TIMELINE_STEPS } from '../utils/timeline';
 
 export default function Tracking({ encomenda }) {
   const [timelineOpen, setTimelineOpen] = useState(false);
 
   const whatsappNumber = "351934680300";
-  const isInternational = encomenda && !encomenda.fase && !!encomenda.fase_en;
+
+  // Idioma escolhido na aba Status do admin: 'pt' | 'en' | 'ambos'.
+  // (fallback pelos campos fase/fase_en para links gerados antes desta versão)
+  const idioma = encomenda
+    ? (encomenda.idioma || (!encomenda.fase && encomenda.fase_en ? 'en' : 'pt'))
+    : 'pt';
+  const showPt = idioma === 'pt' || idioma === 'ambos';
+  const showEn = idioma === 'en' || idioma === 'ambos';
+  const isEn = idioma === 'en';
+  // Texto curto no idioma do cliente ('ambos' → "PT / EN")
+  const bi = (pt, en) => (idioma === 'en' ? en : idioma === 'ambos' ? `${pt} / ${en}` : pt);
 
   // Mensagem pré-escrita no idioma do cliente (EN-only → inglês)
-  const whatsappMessage = isInternational
+  const whatsappMessage = isEn
     ? `Hello! I would like to know more about order ${encomenda ? encomenda.nome_encomenda : ''}.`
     : `Olá! Gostaria de saber mais sobre a encomenda ${encomenda ? encomenda.nome_encomenda : ''}.`;
   const whatsappErrorMsg = "Olá! Não consegui encontrar a minha encomenda no site. / Hello! I could not find my order on the website.";
@@ -55,7 +52,7 @@ export default function Tracking({ encomenda }) {
           <title>Encomenda não encontrada | Flores à Beira-Rio</title>
           <meta name="description" content="Acompanhe o progresso da sua preservação de flores." />
           <meta name="robots" content="noindex, nofollow" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/icon.png" type="image/png" />
         </Head>
         <div style={s.card}>
@@ -74,8 +71,8 @@ export default function Tracking({ encomenda }) {
               <p style={s.textBodyEn}>Please check the order number.</p>
             </div>
             <div style={s.actionSection}>
-              <a href={whatsappUrl} style={s.buttonAction}>Fale connosco / Chat with us</a>
-              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={s.buttonSite}>
+              <a href={whatsappUrl} className="fbr-btn" style={s.buttonAction}>Fale connosco / Chat with us</a>
+              <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="fbr-btn" style={s.buttonSite}>
                 <span style={{marginRight:'8px'}}>✿</span> Visitar Site / Visit Website
               </a>
             </div>
@@ -86,28 +83,31 @@ export default function Tracking({ encomenda }) {
     );
   }
 
-  // Descrição do link (preview no WhatsApp/iMessage) no idioma do cliente:
-  // EN-only -> inglês; 'ambos' -> bilingue; PT -> português.
-  const description = isInternational
+  // Descrição do link (preview no WhatsApp/iMessage) no idioma do cliente.
+  const description = isEn
     ? `Follow the preservation of your flowers, step by step · ${encomenda.nome_encomenda}.`
-    : encomenda.fase_en
+    : idioma === 'ambos'
       ? `Acompanhe a sua preservação de flores · Track your flower preservation · ${encomenda.nome_encomenda}.`
       : `Acompanhe o progresso da sua preservação de flores · ${encomenda.nome_encomenda}.`;
 
   const passoAtual = encomenda.fase_numero || null;
-  const totalPassos = PASSOS.length;
+  const totalPassos = TIMELINE_STEPS.length;
+  const concluido = passoAtual === totalPassos;
   const percentagem = passoAtual ? Math.round(((passoAtual - 1) / (totalPassos - 1)) * 100) : 0;
 
   return (
     <div style={s.pageWrapper}>
       <Head>
-        <title>{encomenda.nome_encomenda} | Flores à Beira-Rio</title>
+        <title>{`${encomenda.nome_encomenda} | Flores à Beira-Rio`}</title>
         <meta name="description" content={description} />
         <meta property="og:title" content={`${encomenda.nome_encomenda} | Flores à Beira-Rio`} />
         <meta property="og:description" content={description} />
         <meta property="og:site_name" content="Flores à Beira-Rio" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://status.floresabeirario.pt/${encomenda.id}`} />
+        <meta property="og:image" content="https://status.floresabeirario.pt/icon.png" />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
@@ -123,39 +123,42 @@ export default function Tracking({ encomenda }) {
 
         <div style={s.body}>
           <div style={s.introContainer}>
-            <p style={s.introText}>Acompanhe a sua preservação</p>
-            <p style={s.introTranslation}>Track your preservation journey</p>
+            {showPt && <p style={s.introText}>Acompanhe a sua preservação</p>}
+            {showEn && <p style={isEn ? s.introText : s.introTranslation}>Track your preservation journey</p>}
           </div>
 
           <h2 style={s.clientName}>{encomenda.nome_encomenda}</h2>
 
           {passoAtual && (
             <div style={{marginBottom:'20px'}}>
-              <div style={s.timelineToggle} onClick={() => setTimelineOpen(!timelineOpen)} role="button" aria-expanded={timelineOpen}>
+              <button type="button" className="fbr-toggle" style={s.timelineToggle} onClick={() => setTimelineOpen(!timelineOpen)} aria-expanded={timelineOpen}>
                 <div style={s.tlLeft}>
                   <div>
-                    <div style={s.tlTitle}>{isInternational ? 'Progress' : 'Progresso'}</div>
-                    <div style={s.tlSub}>{isInternational ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}</div>
+                    <div style={s.tlTitle}>{isEn ? 'Progress' : 'Progresso'}</div>
+                    <div style={s.tlSub}>{isEn ? `Step ${passoAtual} of ${totalPassos}` : `Passo ${passoAtual} de ${totalPassos}`}</div>
                   </div>
                   <div style={s.miniBar}><div style={{...s.miniFill, width:`${percentagem}%`}}></div></div>
                 </div>
                 <svg style={{transition:'transform 0.3s',transform:timelineOpen?'rotate(180deg)':'rotate(0deg)',color:'#86868B',flexShrink:0}} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
-              </div>
+              </button>
               {timelineOpen && (
                 <div style={s.tlBody}>
                   <div style={s.vt}>
-                    {PASSOS.map((passo, i) => {
+                    {TIMELINE_STEPS.map((passo, i) => {
                       const numero = i + 1;
-                      const isDone = numero < passoAtual;
-                      const isActive = numero === passoAtual;
+                      // Encomenda concluída (fase 12): o último passo também fica ✓,
+                      // sem "Em curso" pendurado no fim da viagem.
+                      const isDone = numero < passoAtual || (concluido && numero === passoAtual);
+                      const isActive = numero === passoAtual && !concluido;
                       return (
-                        <div key={i} style={{...s.vStep,...(i===PASSOS.length-1?{paddingBottom:0}:{})}}>
+                        <div key={i} style={{...s.vStep,...(i===TIMELINE_STEPS.length-1?{paddingBottom:0}:{})}}>
                           <div style={{...s.vDot,...(isDone?s.vDotDone:{}),...(isActive?s.vDotActive:{})}}>{isDone ? '✓' : numero}</div>
                           <div>
-                            <div style={{...s.vLabel,...(isDone?s.vLabelDone:{}),...(isActive?s.vLabelActive:{})}}>{isInternational ? passo.en : passo.pt}</div>
-                            {isActive && <div style={s.vSub}>{isInternational ? 'In progress' : 'Em curso'}</div>}
+                            <div style={{...s.vLabel,...(isDone?s.vLabelDone:{}),...(isActive?s.vLabelActive:{})}}>{isEn ? passo.en : passo.pt}</div>
+                            {idioma === 'ambos' && <div style={s.vLabelEn}>{passo.en}</div>}
+                            {isActive && <div style={s.vSub}>{bi('Em curso', 'In progress')}</div>}
                           </div>
                         </div>
                       );
@@ -167,47 +170,49 @@ export default function Tracking({ encomenda }) {
           )}
 
           <div style={s.statusBox}>
-            <div style={s.statusHeaderRow}><span style={s.statusLabel}>Estado Atual / Status</span></div>
+            <div style={s.statusHeaderRow}><span style={s.statusLabel}>{bi('Estado Atual', 'Status')}</span></div>
             {encomenda.fase && <div style={s.statusMainText}>{encomenda.fase}</div>}
-            {encomenda.fase_en && <div style={s.statusMainTextEn}>{encomenda.fase_en}</div>}
+            {encomenda.fase_en && <div style={isEn ? s.statusMainText : s.statusMainTextEn}>{encomenda.fase_en}</div>}
             <div style={{marginBottom:'15px'}}></div>
             {encomenda.mensagem && <div style={s.message}>{formatText(encomenda.mensagem)}</div>}
-            {encomenda.mensagem_en && <div style={s.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
-            <div style={s.updateBadge}>Atualizado a / Updated on: <strong>{encomenda.ultima_atualizacao}</strong></div>
+            {encomenda.mensagem_en && <div style={isEn ? s.message : s.messageEn}>{formatText(encomenda.mensagem_en)}</div>}
+            <div style={s.updateBadge}>{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
           </div>
 
-          <div style={s.deliveryContainer}>
-            <div style={s.deliveryContent}>
-              <span style={s.deliveryLabel}>Entrega estimada da sua encomenda</span>
-              <span style={s.deliveryLabelEn}>Estimated delivery of your order</span>
-              <p style={s.deliveryDate}>{encomenda.data_entrega}</p>
+          {encomenda.data_entrega && (
+            <div style={s.deliveryContainer}>
+              <div style={s.deliveryContent}>
+                {showPt && <span style={s.deliveryLabel}>Entrega estimada da sua encomenda</span>}
+                {showEn && <span style={isEn ? s.deliveryLabel : s.deliveryLabelEn}>Estimated delivery of your order</span>}
+                <p style={s.deliveryDate}>{encomenda.data_entrega}</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <div style={s.actionSection}>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" style={s.buttonAction}>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="fbr-btn" style={s.buttonAction}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{marginRight:'8px',flexShrink:0}}>
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                 <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2 22l5.185-1.32A9.951 9.951 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="none" stroke="currentColor" strokeWidth="1.5"/>
               </svg>
-              Fale connosco / Chat with us
+              {bi('Fale connosco', 'Chat with us')}
             </a>
-            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" style={s.buttonSite}>
+            <a href="https://floresabeirario.pt" target="_blank" rel="noopener noreferrer" className="fbr-btn" style={s.buttonSite}>
               <span style={{marginRight:'8px',fontSize:'18px',lineHeight:'1'}}>✿</span>
-              Visitar Site / Visit Website
+              {bi('Visitar Site', 'Visit Website')}
             </a>
           </div>
         </div>
 
         <footer style={s.footer}>
           <div style={s.socialRow}>
-            <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={s.socialIcon} aria-label="Instagram">
+            <a href="https://www.instagram.com/floresabeirario/" target="_blank" rel="noopener noreferrer" className="fbr-social" style={s.socialIcon} aria-label="Instagram">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-            <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" style={s.socialIcon} aria-label="Facebook">
+            <a href="https://www.facebook.com/floresabeirario/" target="_blank" rel="noopener noreferrer" className="fbr-social" style={s.socialIcon} aria-label="Facebook">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
-            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" style={s.socialIcon} aria-label="Maps">
+            <a href="https://maps.app.goo.gl/qGGdyE8mo2kdNBmm7" target="_blank" rel="noopener noreferrer" className="fbr-social" style={s.socialIcon} aria-label="Maps">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             </a>
           </div>
@@ -240,9 +245,9 @@ const s = {
   body: { padding:'30px 30px' },
   introContainer: { marginBottom:'22px' },
   introText: { fontSize:'14px', fontWeight:'600', color:'#2F3E32', margin:'0 0 4px 0', textTransform:'uppercase', letterSpacing:'0.05em' },
-  introTranslation: { fontSize:'12px', fontWeight:'500', color:'#999', textTransform:'uppercase', letterSpacing:'0.05em' },
+  introTranslation: { fontSize:'12px', fontWeight:'500', color:'#999', textTransform:'uppercase', letterSpacing:'0.05em', margin:0 },
   clientName: { fontFamily:'"TanMemories", serif', fontSize:'28px', color:'#6D8C78', margin:'0 auto 28px auto', padding:'12px 20px', borderTop:'1px solid #E5E5EA', borderBottom:'1px solid #E5E5EA', fontWeight:'400', lineHeight:'1.1', display:'inline-block' },
-  timelineToggle: { display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer', padding:'13px 16px', background:'#F4F7F5', borderRadius:'14px', userSelect:'none' },
+  timelineToggle: { display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer', padding:'13px 16px', background:'#F4F7F5', borderRadius:'14px', userSelect:'none', width:'100%', border:'none', fontFamily:'inherit', color:'inherit' },
   tlLeft: { display:'flex', alignItems:'center', gap:'12px' },
   tlTitle: { fontSize:'12px', fontWeight:'700', color:'#436850', textTransform:'uppercase', letterSpacing:'0.08em', textAlign:'left' },
   tlSub: { fontSize:'11px', color:'#86868B', fontWeight:'500', marginTop:'2px', textAlign:'left' },
@@ -257,6 +262,7 @@ const s = {
   vLabel: { fontSize:'13px', fontWeight:'400', color:'#BBBBBB', lineHeight:'1.3' },
   vLabelDone: { color:'#6D8C78', fontWeight:'600' },
   vLabelActive: { color:'#2F3E32', fontWeight:'700', fontSize:'14px' },
+  vLabelEn: { fontSize:'11px', color:'#A8A8AD', fontStyle:'italic', lineHeight:'1.3', marginTop:'1px' },
   vSub: { fontSize:'11px', color:'#86868B', fontStyle:'italic', marginTop:'2px' },
   statusBox: { backgroundColor:'#F7F9F8', padding:'26px 22px', borderRadius:'20px', marginBottom:'28px', textAlign:'left' },
   statusHeaderRow: { marginBottom:'10px' },
