@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Mast, Footer, Petals } from '../components/chrome';
+import { Mast, Footer, FlorSvg } from '../components/chrome';
 
 export default function Home() {
   const router = useRouter();
@@ -22,8 +22,8 @@ export default function Home() {
         <link rel="icon" href="/icon.png" type="image/png" />
       </Head>
 
-      <Petals />
       <div className="wrap">
+        <FlorSvg className="page-flor" stroke="#E8C3C8" />
         <Mast tagline="Especialistas em preservação de flores · Flower preservation specialists" />
 
         <main className="content">
