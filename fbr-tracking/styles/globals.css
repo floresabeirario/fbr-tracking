@@ -1,0 +1,161 @@
+/* ============================================================
+   fbr-tracking — estilos globais (mobile-first; 99% dos clientes
+   acedem no telemóvel). Paleta da marca FBR: verdes profundos +
+   cream; fontes TanMemories (títulos) + Urbanist (corpo).
+   ============================================================ */
+
+@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES.otf') format('opentype');font-display:swap;}
+@font-face{font-family:'TanMemories';src:url('/fonts/TAN-MEMORIES-Italic.otf') format('opentype');font-style:italic;font-display:swap;}
+
+:root{
+  --g900:#26332A;
+  --g800:#2F3E32;
+  --g600:#436850;
+  --g400:#6D8C78;
+  --g200:#B9CFBF;
+  --g100:#D9E8DC;
+  --sage:#F4F7F5;
+  --sage2:#F7F9F8;
+  --ink:#1D1D1F;
+  --ink2:#424245;
+  --mut:#86868B;
+  --line:#E5E5EA;
+  --cream:#FBF7EC;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;padding:0;background-color:#EDF1EE;color:var(--ink);font-family:'Urbanist',ui-sans-serif,system-ui,sans-serif;}
+a{-webkit-tap-highlight-color:transparent;}
+
+/* ── Página / cartão ─────────────────────────────────────────
+   Telemóvel: o cartão ocupa o ecrã todo, como uma app.
+   Desktop: cartão flutuante centrado com sombra. */
+.page{min-height:100vh;min-height:100svh;display:flex;justify-content:center;background:radial-gradient(1100px 520px at 50% -80px,#F7F9F6 0%,#EDF1EE 62%);}
+.card{width:100%;max-width:480px;background:#fff;display:flex;flex-direction:column;overflow:hidden;text-align:center;}
+@media (max-width:559.98px){
+  .card{min-height:100vh;min-height:100svh;}
+}
+@media (min-width:560px){
+  .page{align-items:center;padding:32px 20px;}
+  .card{border-radius:28px;box-shadow:0 24px 70px rgba(38,51,42,.14);}
+}
+
+/* Entrada suave das secções, em cascata */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.body{padding:28px 22px 10px;}
+@media (min-width:560px){.body{padding:30px 30px 12px;}}
+.body>*{animation:fadeUp .55s ease both;}
+.body>*:nth-child(1){animation-delay:.05s;}
+.body>*:nth-child(2){animation-delay:.11s;}
+.body>*:nth-child(3){animation-delay:.17s;}
+.body>*:nth-child(4){animation-delay:.23s;}
+.body>*:nth-child(5){animation-delay:.29s;}
+.body>*:nth-child(6){animation-delay:.35s;}
+.body>*:nth-child(7){animation-delay:.41s;}
+
+/* ── Cabeçalho escuro ── */
+.hero{position:relative;overflow:hidden;background:linear-gradient(168deg,#37493C 0%,var(--g900) 92%);padding:38px 26px 30px;}
+.hero-flor{position:absolute;top:-16px;right:-24px;width:150px;height:auto;opacity:.13;transform:rotate(16deg);pointer-events:none;}
+.hero-flor2{position:absolute;bottom:-34px;left:-28px;width:120px;height:auto;opacity:.10;transform:rotate(-158deg);pointer-events:none;}
+.brand-link{position:relative;display:block;text-decoration:none;color:inherit;}
+.brand{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(36px,10vw,42px);line-height:1.12;letter-spacing:-.01em;color:#E8F0E9;margin:0 0 10px;}
+.tagline{position:relative;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,240,233,.6);font-weight:500;margin:0;}
+
+/* ── Intro + nome do cliente ── */
+.intro-wrap{margin-bottom:20px;}
+.intro{margin:0 0 4px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g800);}
+.intro-en{margin:0;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#9A9AA0;}
+.client-name{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(26px,7.5vw,30px);line-height:1.15;color:var(--g400);display:inline-block;margin:0 auto 26px;padding:12px 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+/* ── Progresso ── */
+.progress-wrap{margin-bottom:22px;}
+.progress-card{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;background:var(--sage);border:none;border-radius:16px;cursor:pointer;font-family:inherit;color:inherit;user-select:none;transition:filter .18s ease;}
+@media (hover:hover){.progress-card:hover{filter:brightness(.975);}}
+.progress-text{text-align:left;flex-shrink:0;}
+.progress-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g600);}
+.progress-sub{font-size:11px;font-weight:500;color:var(--mut);margin-top:2px;}
+.bar{flex:1;height:6px;background:var(--g100);border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--g600),var(--g400));border-radius:6px;transform-origin:left;animation:barIn 1s .35s cubic-bezier(.22,1,.36,1) backwards;}
+@keyframes barIn{from{transform:scaleX(0);}}
+.chev{flex-shrink:0;color:var(--mut);transition:transform .3s ease;}
+.chev.up{transform:rotate(180deg);}
+
+/* Timeline expansível (animada via grid-template-rows) */
+.tl-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.22,1,.36,1);}
+.tl-wrap.open{grid-template-rows:1fr;}
+.tl-inner{overflow:hidden;}
+.tl{text-align:left;padding:20px 4px 6px 8px;}
+.step{position:relative;display:flex;gap:14px;padding-bottom:18px;}
+.step:last-child{padding-bottom:4px;}
+.step::before{content:'';position:absolute;left:12px;top:28px;bottom:0;width:2px;background:var(--line);}
+.step.done::before{background:var(--g100);}
+.step:last-child::before{display:none;}
+.dot{position:relative;z-index:1;width:26px;height:26px;border-radius:50%;border:2px solid #E0E0E0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#C1C1C4;flex-shrink:0;}
+.dot.done{background:var(--g600);border-color:var(--g600);color:#fff;}
+.dot.active{border-color:var(--g600);color:var(--g600);animation:pulse 2.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(67,104,80,.16);}50%{box-shadow:0 0 0 9px rgba(67,104,80,.05);}}
+.step-text{padding-top:3px;}
+.step-label{font-size:14px;color:#B9B9BE;line-height:1.35;}
+.step-label.done{color:var(--g400);font-weight:600;}
+.step-label.active{color:var(--g900);font-weight:700;font-size:15px;}
+.step-en{font-size:11px;color:#A8A8AD;font-style:italic;margin-top:1px;}
+.step-sub{font-size:11px;color:var(--mut);font-style:italic;margin-top:2px;}
+
+/* ── Estado atual ── */
+.status{background:var(--sage2);border-radius:20px;padding:24px 20px;margin-bottom:24px;text-align:left;}
+.status-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);}
+.phase{font-family:'TanMemories',serif;font-style:italic;font-size:clamp(28px,8vw,32px);color:var(--g600);line-height:1.12;margin:10px 0 4px;}
+.phase-en{font-family:'TanMemories',serif;font-style:italic;font-size:24px;color:var(--g400);line-height:1.12;margin:0 0 4px;}
+.status.cancelled .phase,.status.cancelled .phase-en{color:#8E8E93;}
+.msg{font-size:15px;line-height:1.65;color:var(--ink2);margin:14px 0 10px;}
+.msg-en{font-size:14px;line-height:1.6;color:#7E7E82;margin:0 0 10px;}
+.msg a,.msg-en a{color:var(--g600);font-weight:600;text-decoration:underline;word-break:break-all;}
+.updated{display:inline-block;font-size:12px;color:#6E6E73;background:#fff;padding:8px 12px;border-radius:50px;box-shadow:0 2px 5px rgba(0,0,0,.04);margin-top:6px;}
+
+/* ── Entrega estimada ── */
+.delivery{margin:0 0 28px;}
+.orn{display:block;color:var(--g200);font-size:16px;margin-bottom:10px;}
+.delivery-label{display:block;font-size:15px;font-weight:700;color:var(--ink);}
+.delivery-label-en{display:block;font-size:13px;font-weight:500;color:var(--mut);margin-top:2px;}
+.delivery-date{font-family:'TanMemories',serif;font-style:italic;font-size:clamp(28px,8vw,32px);color:var(--g800);margin:8px 0 0;}
+
+/* ── Botões ── */
+.actions{display:flex;flex-direction:column;gap:12px;margin-bottom:14px;}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;padding:15px 16px;border-radius:16px;font-size:15px;font-weight:600;font-family:inherit;text-decoration:none;cursor:pointer;border:none;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;}
+.btn:active{transform:scale(.98);}
+@media (hover:hover){.btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(47,62,50,.18);filter:brightness(1.05);}}
+.btn-primary{background:var(--g800);color:#fff;}
+.btn-outline{background:#fff;color:var(--g800);border:2px solid var(--g800);}
+.btn-review{background:var(--cream);color:#7A6432;border:1.5px solid #E7DAB9;margin-bottom:24px;}
+
+/* ── Rodapé ── */
+.footer{margin-top:auto;border-top:1px solid #F5F5F7;padding:24px 20px 26px;}
+.socials{display:flex;justify-content:center;gap:18px;margin-bottom:16px;}
+.social{width:44px;height:44px;border-radius:50%;background:#F5F5F7;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .18s ease;}
+@media (hover:hover){.social:hover{transform:translateY(-2px);}}
+.loc{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;margin-bottom:8px;}
+.copy{font-size:11px;color:var(--mut);margin:0;}
+
+/* ── Home (pesquisa) ── */
+.home-title{font-family:'TanMemories',serif;font-weight:400;font-size:clamp(30px,8.5vw,34px);color:var(--g800);margin:0 0 4px;line-height:1.12;}
+.home-sub{font-family:'TanMemories',serif;font-style:italic;font-weight:400;font-size:24px;color:var(--mut);margin:0 0 20px;}
+.home-text{font-size:15px;line-height:1.6;color:var(--ink2);margin:0 0 8px;padding:0 6px;}
+.home-text-en{font-size:13px;line-height:1.55;color:var(--mut);font-style:italic;margin:0;padding:0 6px;}
+.search{display:flex;flex-direction:column;gap:12px;margin:26px 0 20px;}
+/* 16px no input evita o zoom automático do iOS ao focar */
+.search-input{width:100%;padding:16px;border-radius:16px;border:1px solid var(--line);font-family:inherit;font-size:16px;text-align:center;background:#F9F9F9;color:var(--ink);outline:none;transition:box-shadow .18s ease,border-color .18s ease;}
+.search-input:focus{box-shadow:0 0 0 3px rgba(67,104,80,.18);border-color:var(--g400);}
+
+/* ── Página de erro ── */
+.err{margin:6px 0 36px;}
+.err-title{font-family:'TanMemories',serif;font-weight:400;font-size:32px;color:var(--g800);margin:0 0 4px;}
+.err-sub{font-family:'TanMemories',serif;font-style:italic;font-weight:400;font-size:24px;color:var(--mut);margin:0;}
+.divider{height:1px;background:var(--line);margin:20px auto;max-width:260px;}
+.err-text{font-size:16px;margin:0;}
+.err-text-en{font-size:14px;color:var(--mut);margin:6px 0 0;}
+
+/* Acessibilidade: respeitar quem desliga animações */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;}
+}
