@@ -179,12 +179,12 @@ export default function Tracking({ encomenda }) {
             <div style={s.updateBadge}>{bi('Atualizado a', 'Updated on')}: <strong>{encomenda.ultima_atualizacao}</strong></div>
           </div>
 
-          {encomenda.data_entrega && (
+          {!encomenda.cancelada && (
             <div style={s.deliveryContainer}>
               <div style={s.deliveryContent}>
                 {showPt && <span style={s.deliveryLabel}>Entrega estimada da sua encomenda</span>}
                 {showEn && <span style={isEn ? s.deliveryLabel : s.deliveryLabelEn}>Estimated delivery of your order</span>}
-                <p style={s.deliveryDate}>{encomenda.data_entrega}</p>
+                <p style={s.deliveryDate}>{encomenda.data_entrega || bi('Em breve', 'Coming soon')}</p>
               </div>
             </div>
           )}

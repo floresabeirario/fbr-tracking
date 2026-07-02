@@ -229,6 +229,7 @@ async function getEncomendaById(id) {
     id: order.order_id,
     nome_encomenda: nomeAExibir,
     idioma: lang, // 'pt' | 'en' | 'ambos' — escolhido pela Maria na aba Status
+    cancelada: safePhase === 'cancelada',
     fase: showPt ? PUBLIC_PHASE_LABEL_PT[safePhase] : null,
     fase_en: showEn ? PUBLIC_PHASE_LABEL_EN[safePhase] : null,
     fase_numero,
