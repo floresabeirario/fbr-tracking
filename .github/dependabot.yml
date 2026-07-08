@@ -1,8 +1,9 @@
-# 1 PR mensal agrupado (npm) + 1 para as actions. Ver docs/REPOS.md no fbr-admin.
+# 1 PR mensal agrupado (npm) + 1 para as actions. O package.json vive
+# no subdirectório fbr-tracking/. Ver docs/REPOS.md no fbr-admin.
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: /
+    directory: /fbr-tracking
     schedule:
       interval: monthly
     groups:

@@ -1,7 +1,8 @@
 # ============================================================
 # CI — build do Next 13 em cada push/PR (rede de segurança).
-# Env dummy: o build só precisa que as vars existam (o cliente
-# Supabase é criado no import de utils/supabase.js).
+# ⚠️ O código vive no subdirectório fbr-tracking/ (o git root é a
+# pasta acima) — daí o working-directory em todos os passos npm.
+# Env dummy: o build só precisa que as vars existam.
 # ============================================================
 name: CI
 
@@ -12,6 +13,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fbr-tracking
     env:
       SUPABASE_URL: https://dummy-ci.supabase.co
       SUPABASE_ANON_KEY: dummy-so-o-build-passa
@@ -21,5 +25,6 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: fbr-tracking/package-lock.json
       - run: npm ci
       - run: npm run build
