@@ -1,0 +1,25 @@
+# ============================================================
+# CI — build do Next 13 em cada push/PR (rede de segurança).
+# Env dummy: o build só precisa que as vars existam (o cliente
+# Supabase é criado no import de utils/supabase.js).
+# ============================================================
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: https://dummy-ci.supabase.co
+      SUPABASE_ANON_KEY: dummy-so-o-build-passa
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
